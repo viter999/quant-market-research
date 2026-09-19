@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 470" width="880" height="470" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif">
+  <style>
+    .bx  { fill:#4b5563; fill-opacity:.10; stroke:#6b7280; stroke-width:1.5; rx:8 }
+    .gate{ fill:#b45309; fill-opacity:.14; stroke:#b45309; stroke-width:1.8; rx:8 }
+    .t   { fill:#6b7280; font-size:13px }
+    .ttl { fill:#374151; font-size:14px; font-weight:600 }
+    .h   { fill:#374151; font-size:16px; font-weight:700 }
+    .sm  { fill:#9ca3af; font-size:11.5px }
+    .ar  { stroke:#9ca3af; stroke-width:1.6; fill:none; marker-end:url(#a) }
+    .warn{ fill:#b45309; font-size:12px; font-weight:600 }
+    @media (prefers-color-scheme: dark){
+      .t{fill:#9ca3af} .ttl{fill:#d1d5db} .h{fill:#e5e7eb} .sm{fill:#6b7280}
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#9ca3af"/>
+    </marker>
+  </defs>
+
+  <text x="24" y="30" class="h">Data architecture — collection to research</text>
+  <text x="24" y="50" class="sm">Diagram (not a screenshot). Reflects the implemented pipeline.</text>
+
+  <rect x="24"  y="76" width="180" height="76" class="bx"/>
+  <text x="38" y="102" class="ttl">Public venue APIs</text>
+  <text x="38" y="121" class="t">REST + websocket</text>
+  <text x="38" y="139" class="t">public market data only</text>
+
+  <rect x="24" y="182" width="180" height="94" class="bx"/>
+  <text x="38" y="208" class="ttl">Collectors</text>
+  <text x="38" y="227" class="t">open interest, book ticker,</text>
+  <text x="38" y="245" class="t">funding, liquidation tape</text>
+  <text x="38" y="264" class="sm">watchdog-supervised</text>
+
+  <rect x="24" y="306" width="180" height="76" class="bx"/>
+  <text x="38" y="332" class="ttl">Raw archive</text>
+  <text x="38" y="351" class="t">immutable, manifest-</text>
+  <text x="38" y="369" class="t">verified, checksummed</text>
+
+  <rect x="268" y="182" width="196" height="200" class="gate"/>
+  <text x="282" y="208" class="ttl">Integrity gates</text>
+  <text x="282" y="231" class="t">schema era</text>
+  <text x="282" y="250" class="t">partition containment</text>
+  <text x="282" y="269" class="t">source-time envelope</text>
+  <text x="282" y="288" class="t">id canonicalization</text>
+  <text x="282" y="307" class="t">actor invariants</text>
+  <text x="282" y="326" class="t">null identifiers</text>
+  <text x="282" y="345" class="t">duplicate identity</text>
+  <text x="282" y="364" class="t">parent/child reconciliation</text>
+
+  <rect x="528" y="182" width="180" height="94" class="bx"/>
+  <text x="542" y="208" class="ttl">Processed layer</text>
+  <text x="542" y="227" class="t">admitted rows only,</text>
+  <text x="542" y="245" class="t">columnar, split-partitioned</text>
+  <text x="542" y="264" class="sm">one file per source object</text>
+
+  <rect x="528" y="306" width="180" height="76" class="bx"/>
+  <text x="542" y="332" class="ttl">Research</text>
+  <text x="542" y="351" class="t">preregistered studies</text>
+  <text x="542" y="369" class="t">reads processed only</text>
+
+  <rect x="528" y="76" width="180" height="76" class="bx"/>
+  <text x="542" y="102" class="ttl">Live panel</text>
+  <text x="542" y="121" class="t">read-only inspection</text>
+  <text x="542" y="139" class="t">monitoring layer</text>
+
+  <path class="ar" d="M114 152 L114 178"/>
+  <path class="ar" d="M114 276 L114 302"/>
+  <path class="ar" d="M204 344 L264 300"/>
+  <path class="ar" d="M464 282 L524 250"/>
+  <path class="ar" d="M618 276 L618 302"/>
+  <path class="ar" d="M204 214 L524 110"/>
+
+  <text x="232" y="410" class="warn">STOP on failure</text>
+  <path d="M366 386 L366 406" stroke="#b45309" stroke-width="1.6" fill="none" marker-end="url(#a)"/>
+
+  <text x="24" y="440" class="sm">Two invariants: the raw layer is never written back to, and research code never reads it directly —</text>
+  <text x="24" y="458" class="sm">only the processed layer, which contains exclusively rows the frozen rules admitted.</text>
+</svg>
