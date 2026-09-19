@@ -47,6 +47,18 @@ See [docs/oi-vol.md](docs/oi-vol.md) and [docs/whale-lab.md](docs/whale-lab.md).
 
 ---
 
+## Architecture
+
+![Data architecture: public venue APIs through supervised collectors and blocking integrity gates to a processed research layer.](assets/diagram-data-architecture.svg)
+
+Two invariants hold across the pipeline: the raw archive is never written
+back to, and research code never reads it directly — every study reads the
+processed layer, only after the integrity gates.
+
+Full detail: [docs/architecture.md](docs/architecture.md).
+
+---
+
 ## Research process
 
 ```
