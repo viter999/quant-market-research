@@ -167,6 +167,8 @@ Support would fund infrastructure, not trading capital:
 
 Roadmap and use of funds: [docs/funding-roadmap.md](docs/funding-roadmap.md).
 
+**Research funding:** [View the one-page funding brief](docs/funding-brief.pdf)
+
 ---
 
 ## License
