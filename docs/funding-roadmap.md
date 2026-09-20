@@ -77,8 +77,9 @@ than discardable.
 
 ## Use of funds
 
-Categories, not amounts. The repository does not support specific figures and
-inventing them would undermine the point of the rest of this document.
+Funding needs were originally documented as categories rather than fixed
+amounts. A provisional USD 200–500 research and development range is now
+published separately in the funding brief, for the next defined milestone.
 
 | category | what it covers | why it is the constraint |
 |---|---|---|
