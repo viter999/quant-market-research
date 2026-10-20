@@ -91,6 +91,7 @@ Full detail: [docs/research-method.md](docs/research-method.md).
 | Whale Lab E2 (v1.1) | Failed Gate F and the reconciliation gate. Recorded as failed; not repaired or re-scored. | **FAILED INTEGRITY** |
 | Whale Lab E2 (v2) | Preregistration frozen and tagged. 30-day prospective confirmation window, not yet begun. | **PROSPECTIVE** |
 | OFI Engine | Depth-normalized order-flow imbalance; measurement infrastructure past its Phase-1 gate. | **DEVELOPMENT** |
+| Kronos 24h direction forecast | Pre-registered. No edge after fees. See [`kronos-24h-forecast/`](kronos-24h-forecast/). | **DROP** |
 
 **Worked example — preregistration to null result:**
 [research/basis-dislocation/](research/basis-dislocation/) contains the
@@ -179,13 +180,17 @@ and adapt them, including commercially, with attribution and a link to the
 license, indicating if changes were made. See [LICENSE](LICENSE).
 
 The preregistration and findings documents are published as **historical
-records** and are byte-identical to their private originals. If you quote or
+records** and are byte-identical to their private originals. Exception:
+`kronos-24h-forecast/AMENDMENTS_kronos.md` is a redacted copy (private
+operator details only); its README explains this. If you quote or
 build on them, please preserve their dates and verdicts — their value is that
 they were written before the results existed.
 
-No software source code is distributed here. If code is added later it will
-be licensed separately, and the split stated explicitly — CC licenses are not
-designed for software.
+Text and reports as before; the code in
+[`kronos-24h-forecast/`](kronos-24h-forecast/) (its Python scripts and Colab
+notebook) is MIT-licensed — see
+[kronos-24h-forecast/LICENSE](kronos-24h-forecast/LICENSE). No other software
+source code is distributed here.
 
 ---
 

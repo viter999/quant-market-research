@@ -1,0 +1,189 @@
+{
+  "ranking_period_utc": [
+    "2025-06-01 00:00:00+00:00",
+    "2025-06-30 23:59:59+00:00"
+  ],
+  "completeness_span_utc": [
+    "2025-06-09 16:00:00+00:00",
+    "2026-09-30 23:00:00+00:00"
+  ],
+  "expected_1h_bars": 11480,
+  "universe": [
+    {
+      "symbol": "BTCUSDT",
+      "rank_all": 1,
+      "quote_volume_usdt_2025_06": 472260562053.87695
+    },
+    {
+      "symbol": "ETHUSDT",
+      "rank_all": 2,
+      "quote_volume_usdt_2025_06": 448074810409.11786
+    },
+    {
+      "symbol": "SOLUSDT",
+      "rank_all": 3,
+      "quote_volume_usdt_2025_06": 97538344436.82404
+    },
+    {
+      "symbol": "1000PEPEUSDT",
+      "rank_all": 4,
+      "quote_volume_usdt_2025_06": 36643163870.86389
+    },
+    {
+      "symbol": "XRPUSDT",
+      "rank_all": 5,
+      "quote_volume_usdt_2025_06": 36478634963.311226
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "rank_all": 6,
+      "quote_volume_usdt_2025_06": 27801028754.03253
+    },
+    {
+      "symbol": "SUIUSDT",
+      "rank_all": 7,
+      "quote_volume_usdt_2025_06": 19472556453.56796
+    },
+    {
+      "symbol": "FARTCOINUSDT",
+      "rank_all": 8,
+      "quote_volume_usdt_2025_06": 17655625099.30933
+    },
+    {
+      "symbol": "WIFUSDT",
+      "rank_all": 9,
+      "quote_volume_usdt_2025_06": 11009556833.329931
+    },
+    {
+      "symbol": "AAVEUSDT",
+      "rank_all": 10,
+      "quote_volume_usdt_2025_06": 10743306724.566998
+    },
+    {
+      "symbol": "HYPEUSDT",
+      "rank_all": 11,
+      "quote_volume_usdt_2025_06": 10724289906.697708
+    },
+    {
+      "symbol": "ADAUSDT",
+      "rank_all": 12,
+      "quote_volume_usdt_2025_06": 10511464436.4705
+    },
+    {
+      "symbol": "FUNUSDT",
+      "rank_all": 13,
+      "quote_volume_usdt_2025_06": 10311772404.980145
+    },
+    {
+      "symbol": "UNIUSDT",
+      "rank_all": 14,
+      "quote_volume_usdt_2025_06": 9892836887.602
+    },
+    {
+      "symbol": "ENAUSDT",
+      "rank_all": 15,
+      "quote_volume_usdt_2025_06": 9102233785.706902
+    },
+    {
+      "symbol": "TRUMPUSDT",
+      "rank_all": 16,
+      "quote_volume_usdt_2025_06": 8884826720.200779
+    },
+    {
+      "symbol": "BNBUSDT",
+      "rank_all": 17,
+      "quote_volume_usdt_2025_06": 8374417650.243502
+    },
+    {
+      "symbol": "LINKUSDT",
+      "rank_all": 18,
+      "quote_volume_usdt_2025_06": 7617527520.58253
+    },
+    {
+      "symbol": "MASKUSDT",
+      "rank_all": 19,
+      "quote_volume_usdt_2025_06": 7447139921.5727
+    },
+    {
+      "symbol": "BCHUSDT",
+      "rank_all": 20,
+      "quote_volume_usdt_2025_06": 7156855881.26068
+    },
+    {
+      "symbol": "AVAXUSDT",
+      "rank_all": 21,
+      "quote_volume_usdt_2025_06": 7054544728.139
+    },
+    {
+      "symbol": "VIRTUALUSDT",
+      "rank_all": 22,
+      "quote_volume_usdt_2025_06": 6286981946.936621
+    },
+    {
+      "symbol": "RVNUSDT",
+      "rank_all": 23,
+      "quote_volume_usdt_2025_06": 6285236913.4651
+    },
+    {
+      "symbol": "LPTUSDT",
+      "rank_all": 24,
+      "quote_volume_usdt_2025_06": 6194198641.8578005
+    },
+    {
+      "symbol": "SEIUSDT",
+      "rank_all": 26,
+      "quote_volume_usdt_2025_06": 5646695453.443
+    },
+    {
+      "symbol": "TRBUSDT",
+      "rank_all": 27,
+      "quote_volume_usdt_2025_06": 5440548780.0554
+    },
+    {
+      "symbol": "ANIMEUSDT",
+      "rank_all": 28,
+      "quote_volume_usdt_2025_06": 5250206931.6190605
+    },
+    {
+      "symbol": "OPUSDT",
+      "rank_all": 30,
+      "quote_volume_usdt_2025_06": 4609950435.67177
+    },
+    {
+      "symbol": "LTCUSDT",
+      "rank_all": 31,
+      "quote_volume_usdt_2025_06": 4527893612.86065
+    },
+    {
+      "symbol": "MOODENGUSDT",
+      "rank_all": 32,
+      "quote_volume_usdt_2025_06": 4509493910.79059
+    }
+  ],
+  "rejected_before_30_filled": [
+    {
+      "symbol": "RESOLVUSDT",
+      "rank_all": 25,
+      "reason": "21 missing 1h bars, 0 duplicates",
+      "first_missing": [
+        "2025-06-09 16:00:00+00:00",
+        "2025-06-09 17:00:00+00:00",
+        "2025-06-09 18:00:00+00:00",
+        "2025-06-09 19:00:00+00:00",
+        "2025-06-09 20:00:00+00:00"
+      ]
+    },
+    {
+      "symbol": "SAHARAUSDT",
+      "rank_all": 29,
+      "reason": "404 missing 1h bars, 0 duplicates",
+      "first_missing": [
+        "2025-06-09 16:00:00+00:00",
+        "2025-06-09 17:00:00+00:00",
+        "2025-06-09 18:00:00+00:00",
+        "2025-06-09 19:00:00+00:00",
+        "2025-06-09 20:00:00+00:00"
+      ]
+    }
+  ]
+}

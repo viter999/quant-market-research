@@ -1,0 +1,12 @@
+# Kronos test, AMENDMENT 2 Colab freeze, 2026-10-18T15:42:20Z. Written before Colab ran anything.
+# Format: sha256, two spaces, path relative to C:\kronos-test.
+deafda189e5dda16c24d82e50915b9807f8f39af6e8e75c05a0aa421eb715b0e  colab/colab_forecasts.py
+f967be10ca6283a5bc65842b3a0797e244794c2d678f16c0e2da5ae3413cb926  colab/kronos_colab_bundle.zip
+affc7fb49d6ac2d4e109b509a01f736f9047411ef1c7093c425cd54f638a0ddc  colab/kronos_colab.ipynb
+c1076040f05102d6b01a9d2952b4b76c6804418a34192a0dff6078fd5581fb8e  colab/accept_colab.py
+1179a722f41e504ea40b9f7292c0ebfd9e19b14dd85b39786af332028663dfe3  colab/make_bundle.py
+909a17f06d6cef548463d2709d5b4e5af4ee786c70c42c8c35e2aadf1f2227a7  colab/make_notebook.py
+2d000f25cbf9d848af360d5a4cfab2bae44d16860fbe39e335f9c41eece27f0b  colab/compare_plumbing.py
+0f5ace08f3099a6e37210ec53d6e176c0aa8aeb91fc064cd1162569f6181db21  colab/test_accept_sandbox.py
+da285caec1c86fb193e475b4b98ef91493008cc97454c147e7d667482ec896f9  colab/freeze_colab.py
+d1bd7ff3244676077b68fbd95bf20f39950d19b9f265bec9a5b056318a1701cd  colab/COLAB_STEPS.md
