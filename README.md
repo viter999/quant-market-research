@@ -1,7 +1,7 @@
 # Quant Market Research
 
-Independent research on crypto derivatives market microstructure and
-execution cost.
+Independent research on crypto derivatives market microstructure, execution
+cost, and DeFi liquidity.
 
 I build data infrastructure, register hypotheses before testing them, and
 publish the results — including the ones that failed. Most of my completed
@@ -92,6 +92,7 @@ Full detail: [docs/research-method.md](docs/research-method.md).
 | Whale Lab E2 (v2) | Preregistration frozen and tagged. 30-day prospective confirmation window, not yet begun. | **PROSPECTIVE** |
 | OFI Engine | Depth-normalized order-flow imbalance; measurement infrastructure past its Phase-1 gate. | **DEVELOPMENT** |
 | Kronos 24h direction forecast | Pre-registered. No edge after fees. See [`kronos-24h-forecast/`](kronos-24h-forecast/). | **DROP** |
+| Uniswap v3 liquidity recovery pilot | Pre-registered. How fast in-range depth recovers after large ETH/USDC moves, by fee tier and chain. H1 (fee tier) No, H2-Arbitrum No, H2-Base Null. See [`uniswap-liquidity-pilot/`](uniswap-liquidity-pilot/). | **NO / NULL** |
 
 **Worked example — preregistration to null result:**
 [research/basis-dislocation/](research/basis-dislocation/) contains the
@@ -186,10 +187,9 @@ operator details only); its README explains this. If you quote or
 build on them, please preserve their dates and verdicts — their value is that
 they were written before the results existed.
 
-Text and reports as before; the code in
-[`kronos-24h-forecast/`](kronos-24h-forecast/) (its Python scripts and Colab
-notebook) is MIT-licensed — see
-[kronos-24h-forecast/LICENSE](kronos-24h-forecast/LICENSE). No other software
+The code in [`kronos-24h-forecast/`](kronos-24h-forecast/) (its Python
+scripts and Colab notebook) is MIT-licensed — see
+[`kronos-24h-forecast/LICENSE`](kronos-24h-forecast/LICENSE). No other software
 source code is distributed here.
 
 ---

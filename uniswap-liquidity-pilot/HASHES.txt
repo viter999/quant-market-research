@@ -1,0 +1,8 @@
+# SHA-256 of every file in this folder (path relative to this folder). HASHES.txt itself is not listed.
+# REPORT.md is byte-identical to the private REPORT_v1.0.md; v1.0 differs from the reviewed draft v0.5 (sha256 5d7be03648033b75c7cdf62c9ff6daae5a1bc7c6ad8c2acda99e85e82301ebdb) in status lines only, plus one corrected short hash.
+# The figures/ hashes match the report's Appendix G.2.
+ec206c199cb3e39efa68c0c9ccbc851eec62962a40e99d8f2f7634a198fa775f  README.md
+a7f9f1c90ecbacfae202a05d4b8286a07e08dfa4bca1bc57d83c7bae7f093755  REPORT.md
+f12ef504041ac7e79298473de0176c716aa4f7452e7a21a1ab8fed11d26fdadc  figures/fig1_recovery_curves.svg
+c930362f6e9ba88a3cd79927a598cb0c80c89fe0bf1d68b338230a7d084cb66a  figures/fig2_log_ratios.svg
+e938385bd15e7acdb6fbea667a41a004285fed62172d86d0ac858e0600950eb5  figures/figures_data.json

@@ -401,5 +401,6 @@ Copyright (c) 2026 the repository author.
 SPDX-License-Identifier: CC-BY-4.0
 
 Scope: this repository distributes documentation and research documents
-only. No software source code is distributed here. Code added later will
+only. Code in kronos-24h-forecast/ is MIT-licensed; see its own LICENSE.
+No other software source code is distributed here. Code added later will
 be licensed separately; see README.md.

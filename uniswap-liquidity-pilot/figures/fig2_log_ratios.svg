@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="502" viewBox="0 0 960 502" font-family="Helvetica, Arial, sans-serif" font-size="12">
+<rect width="960" height="502" fill="white"/>
+<text x="480.0" y="24" text-anchor="middle" font-size="14" font-weight="bold">Figure 2. Per-episode log-ratios d_e^val, with the MEI line (log 1.5 = 0.405) and the median</text>
+<text x="480.0" y="42" text-anchor="middle" fill="#444">filled dot = in the test; hollow dot = rank-only (every valid pair one-censored); grey cross = dropped from the test (d_e^rank = 0)</text>
+<rect x="60" y="60" width="260" height="330" fill="none" stroke="#999"/>
+<line x1="60" x2="320" y1="348.8" y2="348.8" stroke="#e6e6e6"/>
+<text x="54" y="352.8" text-anchor="end" fill="#444">-6</text>
+<line x1="60" x2="320" y1="307.5" y2="307.5" stroke="#e6e6e6"/>
+<text x="54" y="311.5" text-anchor="end" fill="#444">-4</text>
+<line x1="60" x2="320" y1="266.2" y2="266.2" stroke="#e6e6e6"/>
+<text x="54" y="270.2" text-anchor="end" fill="#444">-2</text>
+<line x1="60" x2="320" y1="225.0" y2="225.0" stroke="#888"/>
+<text x="54" y="229.0" text-anchor="end" fill="#444">0</text>
+<line x1="60" x2="320" y1="183.8" y2="183.8" stroke="#e6e6e6"/>
+<text x="54" y="187.8" text-anchor="end" fill="#444">2</text>
+<line x1="60" x2="320" y1="142.5" y2="142.5" stroke="#e6e6e6"/>
+<text x="54" y="146.5" text-anchor="end" fill="#444">4</text>
+<line x1="60" x2="320" y1="101.2" y2="101.2" stroke="#e6e6e6"/>
+<text x="54" y="105.2" text-anchor="end" fill="#444">6</text>
+<line x1="60" x2="320" y1="216.6" y2="216.6" stroke="#c00" stroke-dasharray="5 3" stroke-width="1.5"/>
+<text x="64" y="212.6" fill="#c00" font-size="11">MEI 0.405</text>
+<line x1="123.0" x2="257.0" y1="233.0" y2="233.0" stroke="#1f4e96" stroke-width="2.5"/>
+<text x="316" y="246.0" text-anchor="end" fill="#1f4e96" font-size="11">median -0.39</text>
+<text x="316" y="258.0" text-anchor="end" fill="#1f4e96" font-size="11">ratio 0.679</text>
+<circle cx="191.3" cy="283.3" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 1: d_val = -2.825, valid pairs 2, uncensored 2, d_rank = -2.825</title></circle>
+<circle cx="239.6" cy="231.6" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 3: d_val = -0.322, valid pairs 3, uncensored 3, d_rank = -0.322</title></circle>
+<circle cx="150.9" cy="218.1" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 4: d_val = 0.335, valid pairs 1, uncensored 1, d_rank = 0.335</title></circle>
+<circle cx="239.4" cy="209.7" r="4" fill="white" stroke="#1f4e96" stroke-width="1.2"><title>episode 5: d_val = 0.741, valid pairs 2, uncensored 0, d_rank = 5.290 (rank-only)</title></circle>
+<circle cx="169.3" cy="252.3" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 6: d_val = -1.322, valid pairs 1, uncensored 1, d_rank = -1.322</title></circle>
+<circle cx="181.6" cy="253.8" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 7: d_val = -1.397, valid pairs 3, uncensored 1, d_rank = 0.344</title></circle>
+<circle cx="226.0" cy="238.0" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 8: d_val = -0.629, valid pairs 1, uncensored 1, d_rank = -0.629</title></circle>
+<circle cx="180.0" cy="190.6" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 10: d_val = 1.668, valid pairs 2, uncensored 1, d_rank = 1.723</title></circle>
+<circle cx="195.5" cy="195.7" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 12: d_val = 1.423, valid pairs 3, uncensored 2, d_rank = -2.051</title></circle>
+<circle cx="138.0" cy="237.4" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 13: d_val = -0.602, valid pairs 2, uncensored 2, d_rank = -0.602</title></circle>
+<circle cx="217.9" cy="268.2" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 16: d_val = -2.092, valid pairs 1, uncensored 1, d_rank = -2.092</title></circle>
+<circle cx="194.2" cy="221.1" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 17: d_val = 0.191, valid pairs 2, uncensored 2, d_rank = 0.191</title></circle>
+<g stroke="#8a8a8a" stroke-width="1.6"><line x1="167.3" x2="175.3" y1="221.0" y2="229.0"/><line x1="167.3" x2="175.3" y1="229.0" y2="221.0"/><title>episode 20: d_val = 0.000, valid pairs 3, uncensored 3, d_rank = 0.000 (dropped: d_rank = 0)</title></g>
+<circle cx="221.7" cy="275.3" r="4" fill="white" stroke="#1f4e96" stroke-width="1.2"><title>episode 21: d_val = -2.441, valid pairs 3, uncensored 0, d_rank = -5.290 (rank-only)</title></circle>
+<circle cx="168.4" cy="250.0" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 22: d_val = -1.210, valid pairs 2, uncensored 2, d_rank = -1.210</title></circle>
+<circle cx="184.9" cy="266.0" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 23: d_val = -1.986, valid pairs 3, uncensored 3, d_rank = -1.986</title></circle>
+<circle cx="149.7" cy="234.5" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 24: d_val = -0.461, valid pairs 3, uncensored 1, d_rank = -1.438</title></circle>
+<circle cx="179.3" cy="288.9" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 25: d_val = -3.100, valid pairs 3, uncensored 3, d_rank = -3.100</title></circle>
+<circle cx="157.4" cy="231.1" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 26: d_val = -0.294, valid pairs 3, uncensored 1, d_rank = -4.290</title></circle>
+<circle cx="163.9" cy="235.0" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 28: d_val = -0.485, valid pairs 3, uncensored 3, d_rank = -0.485</title></circle>
+<circle cx="217.5" cy="160.8" r="4" fill="white" stroke="#1f4e96" stroke-width="1.2"><title>episode 29: d_val = 3.114, valid pairs 1, uncensored 0, d_rank = 5.290 (rank-only)</title></circle>
+<circle cx="165.8" cy="207.7" r="4" fill="white" stroke="#1f4e96" stroke-width="1.2"><title>episode 30: d_val = 0.837, valid pairs 3, uncensored 0, d_rank = 5.290 (rank-only)</title></circle>
+<circle cx="188.4" cy="252.8" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 32: d_val = -1.346, valid pairs 2, uncensored 1, d_rank = -3.307</title></circle>
+<circle cx="242.9" cy="238.9" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 34: d_val = -0.673, valid pairs 1, uncensored 1, d_rank = -0.673</title></circle>
+<circle cx="240.8" cy="230.5" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 35: d_val = -0.269, valid pairs 3, uncensored 1, d_rank = 2.100</title></circle>
+<circle cx="214.7" cy="232.1" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 36: d_val = -0.344, valid pairs 3, uncensored 2, d_rank = -2.055</title></circle>
+<circle cx="194.5" cy="181.7" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 37: d_val = 2.102, valid pairs 2, uncensored 2, d_rank = 2.102</title></circle>
+<circle cx="165.5" cy="233.0" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 38: d_val = -0.387, valid pairs 2, uncensored 1, d_rank = -0.197</title></circle>
+<circle cx="152.7" cy="229.0" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 41: d_val = -0.192, valid pairs 1, uncensored 1, d_rank = -0.192</title></circle>
+<circle cx="241.7" cy="199.0" r="4" fill="white" stroke="#1f4e96" stroke-width="1.2"><title>episode 42: d_val = 1.263, valid pairs 3, uncensored 0, d_rank = 5.290 (rank-only)</title></circle>
+<circle cx="191.8" cy="169.8" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 43: d_val = 2.674, valid pairs 1, uncensored 1, d_rank = 2.674</title></circle>
+<g stroke="#8a8a8a" stroke-width="1.6"><line x1="143.7" x2="151.7" y1="259.5" y2="267.5"/><line x1="143.7" x2="151.7" y1="267.5" y2="259.5"/><title>episode 45: d_val = -1.866, valid pairs 3, uncensored 2, d_rank = 0.000 (dropped: d_rank = 0)</title></g>
+<circle cx="203.6" cy="219.4" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 46: d_val = 0.273, valid pairs 1, uncensored 1, d_rank = 0.273</title></circle>
+<circle cx="220.4" cy="253.7" r="4" fill="white" stroke="#1f4e96" stroke-width="1.2"><title>episode 47: d_val = -1.389, valid pairs 2, uncensored 0, d_rank = -5.290 (rank-only)</title></circle>
+<circle cx="202.4" cy="234.2" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 48: d_val = -0.448, valid pairs 2, uncensored 2, d_rank = -0.448</title></circle>
+<text x="190.0" y="410" text-anchor="middle" font-weight="bold">H1</text>
+<text x="190.0" y="426" text-anchor="middle" fill="#444">35 episodes plotted, 33 in the test</text>
+<text x="190.0" y="441" text-anchor="middle" fill="#444">(6 rank-only, 2 dropped)</text>
+<rect x="368" y="60" width="260" height="330" fill="none" stroke="#999"/>
+<line x1="368" x2="628" y1="348.8" y2="348.8" stroke="#e6e6e6"/>
+<text x="362" y="352.8" text-anchor="end" fill="#444">-6</text>
+<line x1="368" x2="628" y1="307.5" y2="307.5" stroke="#e6e6e6"/>
+<text x="362" y="311.5" text-anchor="end" fill="#444">-4</text>
+<line x1="368" x2="628" y1="266.2" y2="266.2" stroke="#e6e6e6"/>
+<text x="362" y="270.2" text-anchor="end" fill="#444">-2</text>
+<line x1="368" x2="628" y1="225.0" y2="225.0" stroke="#888"/>
+<text x="362" y="229.0" text-anchor="end" fill="#444">0</text>
+<line x1="368" x2="628" y1="183.8" y2="183.8" stroke="#e6e6e6"/>
+<text x="362" y="187.8" text-anchor="end" fill="#444">2</text>
+<line x1="368" x2="628" y1="142.5" y2="142.5" stroke="#e6e6e6"/>
+<text x="362" y="146.5" text-anchor="end" fill="#444">4</text>
+<line x1="368" x2="628" y1="101.2" y2="101.2" stroke="#e6e6e6"/>
+<text x="362" y="105.2" text-anchor="end" fill="#444">6</text>
+<line x1="368" x2="628" y1="216.6" y2="216.6" stroke="#c00" stroke-dasharray="5 3" stroke-width="1.5"/>
+<text x="372" y="212.6" fill="#c00" font-size="11">MEI 0.405</text>
+<line x1="431.0" x2="565.0" y1="226.1" y2="226.1" stroke="#1f4e96" stroke-width="2.5"/>
+<text x="624" y="239.1" text-anchor="end" fill="#1f4e96" font-size="11">median -0.05</text>
+<text x="624" y="251.1" text-anchor="end" fill="#1f4e96" font-size="11">ratio 0.947</text>
+<circle cx="543.9" cy="231.4" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 1: d_val = -0.309, valid pairs 2, uncensored 2, d_rank = -0.309</title></circle>
+<circle cx="447.4" cy="217.9" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 3: d_val = 0.347, valid pairs 2, uncensored 2, d_rank = 0.347</title></circle>
+<circle cx="501.1" cy="346.1" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 4: d_val = -5.872, valid pairs 1, uncensored 1, d_rank = -5.872</title></circle>
+<circle cx="493.5" cy="240.3" r="4" fill="white" stroke="#1f4e96" stroke-width="1.2"><title>episode 5: d_val = -0.741, valid pairs 2, uncensored 0, d_rank = -6.872 (rank-only)</title></circle>
+<circle cx="449.9" cy="210.9" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 6: d_val = 0.682, valid pairs 1, uncensored 1, d_rank = 0.682</title></circle>
+<circle cx="513.5" cy="252.4" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 7: d_val = -1.328, valid pairs 2, uncensored 1, d_rank = -0.782</title></circle>
+<circle cx="536.8" cy="300.8" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 8: d_val = -3.673, valid pairs 1, uncensored 1, d_rank = -3.673</title></circle>
+<circle cx="508.2" cy="193.4" r="4" fill="white" stroke="#1f4e96" stroke-width="1.2"><title>episode 10: d_val = 1.533, valid pairs 2, uncensored 0, d_rank = 6.872 (rank-only)</title></circle>
+<g stroke="#8a8a8a" stroke-width="1.6"><line x1="467.6" x2="475.6" y1="264.9" y2="272.9"/><line x1="467.6" x2="475.6" y1="272.9" y2="264.9"/><title>episode 12: d_val = -2.130, valid pairs 2, uncensored 1, d_rank = 0.000 (dropped: d_rank = 0)</title></g>
+<circle cx="535.4" cy="187.4" r="4" fill="white" stroke="#1f4e96" stroke-width="1.2"><title>episode 13: d_val = 1.822, valid pairs 1, uncensored 0, d_rank = 6.872 (rank-only)</title></circle>
+<circle cx="499.0" cy="278.9" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 16: d_val = -2.614, valid pairs 1, uncensored 1, d_rank = -2.614</title></circle>
+<circle cx="499.2" cy="224.7" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 17: d_val = 0.013, valid pairs 1, uncensored 1, d_rank = 0.013</title></circle>
+<g stroke="#8a8a8a" stroke-width="1.6"><line x1="521.8" x2="529.8" y1="221.0" y2="229.0"/><line x1="521.8" x2="529.8" y1="229.0" y2="221.0"/><title>episode 20: d_val = 0.000, valid pairs 2, uncensored 2, d_rank = 0.000 (dropped: d_rank = 0)</title></g>
+<circle cx="459.3" cy="226.1" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 21: d_val = -0.055, valid pairs 1, uncensored 1, d_rank = -0.055</title></circle>
+<circle cx="533.2" cy="318.1" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 23: d_val = -4.513, valid pairs 2, uncensored 2, d_rank = -4.513</title></circle>
+<circle cx="518.2" cy="225.6" r="4" fill="white" stroke="#1f4e96" stroke-width="1.2"><title>episode 24: d_val = -0.027, valid pairs 2, uncensored 0, d_rank = -6.872 (rank-only)</title></circle>
+<circle cx="529.6" cy="141.6" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 25: d_val = 4.043, valid pairs 2, uncensored 2, d_rank = 4.043</title></circle>
+<circle cx="464.1" cy="103.1" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 26: d_val = 5.912, valid pairs 2, uncensored 1, d_rank = 3.452</title></circle>
+<circle cx="531.3" cy="317.6" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 27: d_val = -4.489, valid pairs 1, uncensored 1, d_rank = -4.489</title></circle>
+<circle cx="464.0" cy="210.7" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 28: d_val = 0.695, valid pairs 2, uncensored 2, d_rank = 0.695</title></circle>
+<circle cx="452.0" cy="162.8" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 29: d_val = 3.016, valid pairs 1, uncensored 1, d_rank = 3.016</title></circle>
+<circle cx="537.1" cy="250.4" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 30: d_val = -1.230, valid pairs 1, uncensored 1, d_rank = -1.230</title></circle>
+<circle cx="537.7" cy="236.6" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 34: d_val = -0.563, valid pairs 1, uncensored 1, d_rank = -0.563</title></circle>
+<circle cx="539.4" cy="244.5" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 35: d_val = -0.947, valid pairs 2, uncensored 1, d_rank = 0.794</title></circle>
+<circle cx="494.9" cy="128.2" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 36: d_val = 4.694, valid pairs 2, uncensored 1, d_rank = 1.017</title></circle>
+<circle cx="473.1" cy="294.3" r="4" fill="white" stroke="#1f4e96" stroke-width="1.2"><title>episode 42: d_val = -3.358, valid pairs 2, uncensored 0, d_rank = -6.872 (rank-only)</title></circle>
+<circle cx="443.8" cy="215.1" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 45: d_val = 0.478, valid pairs 2, uncensored 1, d_rank = -2.321</title></circle>
+<text x="498.0" y="410" text-anchor="middle" font-weight="bold">H2-Arbitrum</text>
+<text x="498.0" y="426" text-anchor="middle" fill="#444">27 episodes plotted, 25 in the test</text>
+<text x="498.0" y="441" text-anchor="middle" fill="#444">(5 rank-only, 2 dropped)</text>
+<rect x="676" y="60" width="260" height="330" fill="none" stroke="#999"/>
+<line x1="676" x2="936" y1="348.8" y2="348.8" stroke="#e6e6e6"/>
+<text x="670" y="352.8" text-anchor="end" fill="#444">-6</text>
+<line x1="676" x2="936" y1="307.5" y2="307.5" stroke="#e6e6e6"/>
+<text x="670" y="311.5" text-anchor="end" fill="#444">-4</text>
+<line x1="676" x2="936" y1="266.2" y2="266.2" stroke="#e6e6e6"/>
+<text x="670" y="270.2" text-anchor="end" fill="#444">-2</text>
+<line x1="676" x2="936" y1="225.0" y2="225.0" stroke="#888"/>
+<text x="670" y="229.0" text-anchor="end" fill="#444">0</text>
+<line x1="676" x2="936" y1="183.8" y2="183.8" stroke="#e6e6e6"/>
+<text x="670" y="187.8" text-anchor="end" fill="#444">2</text>
+<line x1="676" x2="936" y1="142.5" y2="142.5" stroke="#e6e6e6"/>
+<text x="670" y="146.5" text-anchor="end" fill="#444">4</text>
+<line x1="676" x2="936" y1="101.2" y2="101.2" stroke="#e6e6e6"/>
+<text x="670" y="105.2" text-anchor="end" fill="#444">6</text>
+<line x1="676" x2="936" y1="216.6" y2="216.6" stroke="#c00" stroke-dasharray="5 3" stroke-width="1.5"/>
+<text x="680" y="212.6" fill="#c00" font-size="11">MEI 0.405</text>
+<line x1="739.0" x2="873.0" y1="233.6" y2="233.6" stroke="#1f4e96" stroke-width="2.5"/>
+<text x="932" y="246.6" text-anchor="end" fill="#1f4e96" font-size="11">median -0.41</text>
+<text x="932" y="258.6" text-anchor="end" fill="#1f4e96" font-size="11">ratio 0.661</text>
+<circle cx="822.0" cy="282.0" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 1: d_val = -2.762, valid pairs 1, uncensored 1, d_rank = -2.762</title></circle>
+<circle cx="830.2" cy="242.1" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 3: d_val = -0.829, valid pairs 2, uncensored 2, d_rank = -0.829</title></circle>
+<circle cx="842.9" cy="257.9" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 5: d_val = -1.596, valid pairs 1, uncensored 1, d_rank = -1.596</title></circle>
+<circle cx="782.0" cy="205.6" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 7: d_val = 0.940, valid pairs 2, uncensored 1, d_rank = 4.099</title></circle>
+<circle cx="774.7" cy="158.9" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 9: d_val = 3.203, valid pairs 1, uncensored 1, d_rank = 3.203</title></circle>
+<circle cx="821.3" cy="191.8" r="4" fill="white" stroke="#1f4e96" stroke-width="1.2"><title>episode 10: d_val = 1.612, valid pairs 1, uncensored 0, d_rank = 8.176 (rank-only)</title></circle>
+<circle cx="839.6" cy="267.3" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 12: d_val = -2.051, valid pairs 2, uncensored 2, d_rank = -2.051</title></circle>
+<circle cx="857.0" cy="187.3" r="4" fill="white" stroke="#1f4e96" stroke-width="1.2"><title>episode 13: d_val = 1.826, valid pairs 1, uncensored 0, d_rank = 8.176 (rank-only)</title></circle>
+<circle cx="767.6" cy="279.0" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 16: d_val = -2.617, valid pairs 1, uncensored 1, d_rank = -2.617</title></circle>
+<circle cx="804.0" cy="269.3" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 17: d_val = -2.147, valid pairs 1, uncensored 1, d_rank = -2.147</title></circle>
+<g stroke="#8a8a8a" stroke-width="1.6"><line x1="845.4" x2="853.4" y1="221.0" y2="229.0"/><line x1="845.4" x2="853.4" y1="229.0" y2="221.0"/><title>episode 20: d_val = 0.000, valid pairs 2, uncensored 2, d_rank = 0.000 (dropped: d_rank = 0)</title></g>
+<circle cx="797.5" cy="248.0" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 21: d_val = -1.116, valid pairs 1, uncensored 1, d_rank = -1.116</title></circle>
+<circle cx="815.8" cy="373.0" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 23: d_val = -7.176, valid pairs 2, uncensored 2, d_rank = -7.176</title></circle>
+<circle cx="753.7" cy="217.6" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 24: d_val = 0.361, valid pairs 2, uncensored 1, d_rank = -1.605</title></circle>
+<circle cx="825.1" cy="216.7" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 25: d_val = 0.402, valid pairs 2, uncensored 2, d_rank = 0.402</title></circle>
+<circle cx="852.1" cy="180.6" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 26: d_val = 2.151, valid pairs 1, uncensored 1, d_rank = 2.151</title></circle>
+<circle cx="842.0" cy="281.5" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 27: d_val = -2.741, valid pairs 1, uncensored 1, d_rank = -2.741</title></circle>
+<circle cx="848.4" cy="208.2" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 28: d_val = 0.812, valid pairs 2, uncensored 2, d_rank = 0.812</title></circle>
+<circle cx="823.6" cy="186.5" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 29: d_val = 1.865, valid pairs 1, uncensored 1, d_rank = 1.865</title></circle>
+<circle cx="778.0" cy="248.8" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 30: d_val = -1.155, valid pairs 1, uncensored 1, d_rank = -1.155</title></circle>
+<circle cx="835.5" cy="243.0" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 35: d_val = -0.875, valid pairs 2, uncensored 1, d_rank = 0.938</title></circle>
+<circle cx="774.3" cy="170.6" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 36: d_val = 2.639, valid pairs 2, uncensored 1, d_rank = 1.182</title></circle>
+<circle cx="842.4" cy="281.1" r="4" fill="white" stroke="#1f4e96" stroke-width="1.2"><title>episode 42: d_val = -2.721, valid pairs 2, uncensored 0, d_rank = -8.176 (rank-only)</title></circle>
+<circle cx="757.9" cy="215.1" r="4" fill="#1f4e96" stroke="#1f4e96" stroke-width="1.2"><title>episode 45: d_val = 0.478, valid pairs 2, uncensored 1, d_rank = -2.321</title></circle>
+<text x="806.0" y="410" text-anchor="middle" font-weight="bold">H2-Base</text>
+<text x="806.0" y="426" text-anchor="middle" fill="#444">24 episodes plotted, 23 in the test</text>
+<text x="806.0" y="441" text-anchor="middle" fill="#444">(3 rank-only, 1 dropped)</text>
+<text x="480.0" y="474" text-anchor="middle" fill="#444">y: d_e^val (natural log of the recovery-time ratio, hypothesised direction positive); axis -8 to +8, nothing clipped (range -7.18 to 5.91).</text>
+<text x="480.0" y="491" text-anchor="middle" fill="#444">Source: drafts/REPORT_DESCRIPTIVES_20261021.json (reconciled with confirmatory_tests.json); drawn read-only by tools/report_figures.py. Full caption in the report.</text>
+</svg>
