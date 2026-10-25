@@ -95,6 +95,7 @@ Full detail: [docs/research-method.md](docs/research-method.md).
 | Uniswap v3 liquidity recovery pilot | Pre-registered. How fast in-range depth recovers after large ETH/USDC moves, by fee tier and chain. H1 (fee tier) No, H2-Arbitrum No, H2-Base Null. See [`uniswap-liquidity-pilot/`](uniswap-liquidity-pilot/). | **NO / NULL** |
 | Hyperliquid vs Binance funding gap | Pre-registered. Pairs opened on a large funding gap lost 63.8 bps per pair on average after 84 bps costs (z −11.0); the gap usually closed within about a day, so pairs collected only +19.8 bps of funding. See [`funding-gap-hl-binance/`](funding-gap-hl-binance/). | **FAIL** |
 | Cross-coin momentum on Binance perps | Pre-registered. Weekly long the top third / short the bottom third of coins by 28-day return. Net −0.6 bps per week (Newey-West t −0.01): costs of about 32 bps per week ate the +31.6 bps gross return. See [`cross-coin-momentum/`](cross-coin-momentum/). | **FAIL** |
+| Volatility forecast for equal-risk sizing | Pre-registered forecast test, not a return study. A 50/50 blend of ATR10 and ATR100 forecast the next week's average daily true range better than either alone (discovery z 6.49 vs ATR10, 7.87 vs ATR100), and beat the runner-up again on held-out historical 2020–2022 data (z 6.47). See [`vol-forecast-atr-blend/`](vol-forecast-atr-blend/). | **CONFIRMED** |
 
 **Worked example — preregistration to null result:**
 [research/basis-dislocation/](research/basis-dislocation/) contains the
@@ -126,8 +127,7 @@ To be specific about what that means:
 
 - No model has been fitted in Whale Lab.
 - No prospective test has run to completion.
-- Every completed study is a null result, a killed hypothesis, or an
-  integrity failure.
+- Every completed return study is a null result, a killed hypothesis, or an integrity failure. The one confirmed primary result is a volatility forecast ([`vol-forecast-atr-blend/`](vol-forecast-atr-blend/)): it predicts the size of moves, not their direction, and claims no trading edge. (The basis-dislocation study's secondary convergence check also replicated, but its prereg fixed that reading in advance as a diagnostic, not a positive result.)
 - The forensic work on Whale Lab explains a *data-integrity* failure. It is
   not a predictive result and must not be read as one.
 
@@ -183,9 +183,10 @@ and adapt them, including commercially, with attribution and a link to the
 license, indicating if changes were made. See [LICENSE](LICENSE).
 
 The preregistration and findings documents are published as **historical
-records** and are byte-identical to their private originals. Exception:
-`kronos-24h-forecast/AMENDMENTS_kronos.md` is a redacted copy (private
-operator details only); its README explains this. If you quote or
+records** and are byte-identical to their private originals. Exceptions:
+`kronos-24h-forecast/AMENDMENTS_kronos.md`, `vol-forecast-atr-blend/PREREG_v0.1.md`
+and `vol-forecast-atr-blend/DEVIATIONS.md` are redacted copies (private
+operator details only); their READMEs explain this. If you quote or
 build on them, please preserve their dates and verdicts — their value is that
 they were written before the results existed.
 

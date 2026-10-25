@@ -1,0 +1,10 @@
+# SHA-256 of the study documents in this folder (path relative to this folder). README.md and HASHES.txt are not listed.
+# REPORT_discovery.md and REPORT_confirmation.md are byte-identical to the private originals.
+# PREREG_v0.1.md and DEVIATIONS.md are redacted copies: local paths and machine details are replaced by
+# [redacted: local path] or [redacted: machine detail]; nothing else changed. Hashes of the private originals:
+#   b97646e941795872f6001c0aa87af32a334d6df2cd8287a320e5346a5dbde5ff  PREREG_v0.1.md (frozen original)
+#   3250a5535e84c782bf8eb3c4a54f0830c41ea179790959244378b3137983e440  DEVIATIONS.md (original)
+ba75c290a0eb16263bd762786243f5287ecdf883e3d94ae6b360ab4e7dee73a1  PREREG_v0.1.md
+94e7cd28530a8f1711d1156859bd7ce570ef859c16a083ad4a50036af491963a  DEVIATIONS.md
+11cb251c7426b251e83fc6e11bca6693de844f9468973e7caa870b522a917dda  REPORT_discovery.md
+ac3d635e16af5b816c2c1a01dd99c42f162875fbfa15495ec8e4fd540c6a3207  REPORT_confirmation.md
