@@ -1,0 +1,5 @@
+# SHA-256 of the copied study documents (path relative to this folder). README.md and HASHES.txt are not listed.
+# Both files are byte-identical to the private originals.
+# PREREG_v0.2.md was frozen at 2026-10-25T18:02:09Z with this hash.
+f6f70e38fd66384657bce228683afe85c91ac2e2e62b08215cd2dba06f7e62b7  PREREG_v0.2.md
+06aa9002906af30f89264a281bd09c2fd2545f900811023ec6c4ded12e9d3d36  RESULTS_v1.0.md
