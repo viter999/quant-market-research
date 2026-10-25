@@ -94,6 +94,7 @@ Full detail: [docs/research-method.md](docs/research-method.md).
 | Kronos 24h direction forecast | Pre-registered. No edge after fees. See [`kronos-24h-forecast/`](kronos-24h-forecast/). | **DROP** |
 | Uniswap v3 liquidity recovery pilot | Pre-registered. How fast in-range depth recovers after large ETH/USDC moves, by fee tier and chain. H1 (fee tier) No, H2-Arbitrum No, H2-Base Null. See [`uniswap-liquidity-pilot/`](uniswap-liquidity-pilot/). | **NO / NULL** |
 | Hyperliquid vs Binance funding gap | Pre-registered. Pairs opened on a large funding gap lost 63.8 bps per pair on average after 84 bps costs (z −11.0); the gap usually closed within about a day, so pairs collected only +19.8 bps of funding. See [`funding-gap-hl-binance/`](funding-gap-hl-binance/). | **FAIL** |
+| Cross-coin momentum on Binance perps | Pre-registered. Weekly long the top third / short the bottom third of coins by 28-day return. Net −0.6 bps per week (Newey-West t −0.01): costs of about 32 bps per week ate the +31.6 bps gross return. See [`cross-coin-momentum/`](cross-coin-momentum/). | **FAIL** |
 
 **Worked example — preregistration to null result:**
 [research/basis-dislocation/](research/basis-dislocation/) contains the
