@@ -1,0 +1,21 @@
+{
+  "version": "0.1-draft",
+  "status": "DRAFT",
+  "note": "Hand-made from symbol names (CLARIFICATIONS §2). DRAFT: compiled offline from memory because the archive symbol listing could not be fetched (network blocked). Before any detection run it must be reviewed against the full archive symbol-directory listing, every listed name copied into reviewed_symbols, status set to FROZEN and committed. The detector refuses to run otherwise.",
+  "excluded_prefixes": ["1000", "1M"],
+  "excluded_symbols": {
+    "stablecoin": [
+      "USDCUSDT", "BUSDUSDT", "TUSDUSDT", "FDUSDUSDT", "USDPUSDT", "DAIUSDT",
+      "USDEUSDT", "USD1USDT", "PYUSDUSDT", "RLUSDUSDT", "XUSDUSDT", "AEURUSDT",
+      "EURIUSDT", "EURUSDT"
+    ],
+    "tokenized_metal": [
+      "XAUUSDT", "XAGUSDT", "XPTUSDT", "XPDUSDT", "PAXGUSDT", "XAUTUSDT", "COPPERUSDT"
+    ],
+    "tokenized_equity": [
+      "TSLAUSDT", "MSTRUSDT", "COINUSDT", "HOODUSDT", "NVDAUSDT", "AAPLUSDT",
+      "AMZNUSDT", "GOOGLUSDT", "METAUSDT", "MSFTUSDT", "CRCLUSDT", "SPYUSDT", "QQQUSDT"
+    ]
+  },
+  "reviewed_symbols": []
+}
