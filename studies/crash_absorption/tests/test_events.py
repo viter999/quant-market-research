@@ -127,3 +127,12 @@ def test_episode_gap_boundary():
 
 def test_episode_unsorted_input():
     assert list(link_episodes(_ev([100, 0, 10], ["A", "B", "C"]))) == [1, 0, 0]
+
+
+def test_no_event_before_period_start():
+    """Klines from 2023-12 are lookback only."""
+    d = dt.date(2023, 12, 31)
+    u = universe_all(["X"], d - dt.timedelta(days=1), 4)
+    kl = klines(ms(d, 12, 0), 24 * 60)
+    assert _events(crash(kl, ms(d, 18, 0), 0.02, 6), u).empty
+    assert len(_events(crash(kl, ms(dt.date(2024, 1, 1), 6, 0), 0.02, 6), u)) == 1

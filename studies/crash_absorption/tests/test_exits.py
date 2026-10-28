@@ -68,7 +68,7 @@ def test_lock_refuses_wrong_token(monkeypatch):
 
 
 def _funding(ts, rates):
-    return Funding(np.array(ts, dtype=np.int64), np.array(rates), 0, 2 ** 62)
+    return Funding.from_coverage(ts, rates, [(0, 2 ** 62)])
 
 
 def test_funding_sign_long_pays_positive_receives_negative():
@@ -85,7 +85,7 @@ def test_funding_boundaries():
 
 
 def test_funding_coverage_raises():
-    f = Funding(np.array([], dtype=np.int64), np.array([]), 0, T - 1)
+    f = Funding.from_coverage([], [], [(0, T - 1)])
     with pytest.raises(FundingCoverageError):
         f.paid(F, T)
 
@@ -123,3 +123,24 @@ def test_trade_outcome_drop_counted():
     fl = simulate_fill(trades(rows), ref, 100.0)
     assert fl.kind == "gap"
     assert trade_outcome(trades(rows), fl, _funding([], [])) == {"dropped": True, "exit_source": "drop"}
+
+
+def test_funding_coverage_spans_merge_only_when_adjacent():
+    f = Funding.from_coverage([], [], [(10, 19), (0, 9), (25, 30)])
+    assert f.cover == ((0, 19), (25, 30))
+    assert f.paid(5, 15) == 0.0
+    with pytest.raises(FundingCoverageError):
+        f.paid(18, 26)  # gap 20..24 not covered
+
+
+def test_b2_entry_and_outcome():
+    from ca.fill import b2_entry
+    ref = F - 10_000
+    rows = [(ref + 1999, 50.0, 1.0, True), (ref + 2000, 100.0, 1.0, False), (ref + 3000, 99.0, 1.0, True)]
+    b2 = b2_entry(trades(rows), ref, 100.0)
+    assert b2.filled and b2.kind == "b2" and b2.fill_ts == ref + 2000
+    assert b2.entry == pytest.approx(100.05) and b2.entry_fee == P.FEE_TAKER
+    rows += [(ref + 2000 + 900_000, 101.0, 1.0, True)]
+    out = trade_outcome(trades(rows), b2, _funding([], []), buffer_mult=2)
+    assert out["net"] == pytest.approx(101.0 / 100.05 - 1 - 0.0005 - 0.0005 - 0.0010)
+    assert not b2_entry(trades(rows[:1]), ref, 100.0).filled

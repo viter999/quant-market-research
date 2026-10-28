@@ -54,7 +54,7 @@ def _agg_csv(rows, header=True):
 def test_stream_aggtrades_keeps_windows_and_deletes_zip(tmp_path, header):
     t0 = ms(DAY, 12, 0)
     rows = [(t0 - 10 * 60_000, 1.0, 1.0, True), (t0 - 5 * 60_000, 2.0, 1.0, False), (t0, 3.0, 2.0, True),
-            (t0 + 25 * 60_000, 4.0, 1.0, False), (t0 + 25 * 60_000 + 1, 5.0, 1.0, True)]
+            (t0 + 70 * 60_000, 4.0, 1.0, False), (t0 + 70 * 60_000 + 1, 5.0, 1.0, True)]
     url = DL.aggtrades_url("SOLUSDT", DAY)
     files = {}
     _publish(files, url, _zip("SOLUSDT-aggTrades-2024-03-05.csv", _agg_csv(rows, header)))
@@ -170,7 +170,8 @@ def test_trade_windows_split_and_merge():
     w = DL.trade_windows([t, t + 60_000])
     nxt = DAY + dt.timedelta(days=1)
     assert w[DAY] == [(t - 300_000, ms(nxt) - 1)]
-    assert w[nxt] == [(ms(nxt), t + 60_000 + 25 * 60_000)]
+    assert w[nxt] == [(ms(nxt), t + 60_000 + 70 * 60_000)]
+    assert DL.trade_windows([ms(DAY, 1), ms(DAY, 3)])[DAY] == [(ms(DAY, 0, 55), ms(DAY, 2, 10)), (ms(DAY, 2, 55), ms(DAY, 4, 10))]
 
 
 def test_list_symbols(tmp_path):
@@ -199,3 +200,92 @@ def test_listing_guard():
         assert_listing_allowed("data/futures/um/monthly/klines/BTCUSDT/1m/", "/")
     with pytest.raises(HoldoutViolation):
         assert_listing_allowed("data/futures/um/monthly/klines/", None)
+
+
+# ---- v0.3.2: REST funding for 2026-03-01..13
+from ca.guard import assert_rest_allowed  # noqa: E402
+
+END_OK = ms(dt.date(2026, 3, 13), 23, 59, 59.999)
+
+
+def test_rest_span_and_guard():
+    a, b = DL.rest_funding_span()
+    assert a == ms(dt.date(2026, 3, 1)) and b == END_OK
+    assert_rest_allowed(DL.funding_rest_url("BTCUSDT", a, b))
+    for bad in (DL.funding_rest_url("BTCUSDT", a, b + 1),
+                "https://fapi.binance.com/fapi/v1/fundingRate?symbol=BTCUSDT&startTime=0",
+                "https://fapi.binance.com/fapi/v1/fundingRate?symbol=BTCUSDT",
+                DL.funding_rest_url("BTCUSDT", b, a),
+                "https://fapi.binance.com/fapi/v1/klines?symbol=BTCUSDT&startTime=0&endTime=1",
+                "https://fapi1.binance.com/fapi/v1/fundingRate?symbol=BTCUSDT&startTime=0&endTime=1"):
+        with pytest.raises(HoldoutViolation):
+            assert_rest_allowed(bad)
+
+
+class RestFetcher:
+    def __init__(self, pages=None, exc=None):
+        self.pages, self.exc, self.requested = list(pages or []), exc, []
+
+    def get(self, url):
+        self.requested.append(url)
+        if self.exc:
+            raise self.exc
+        return self.pages.pop(0) if self.pages else None
+
+
+def test_rest_funding_cached_with_coverage(tmp_path):
+    import json
+    a, b = DL.rest_funding_span()
+    page = json.dumps([{"symbol": "X", "fundingTime": a + 8 * 3600_000, "fundingRate": "0.0001", "markPrice": "1"},
+                       {"symbol": "X", "fundingTime": a + 16 * 3600_000, "fundingRate": "-0.0002", "markPrice": "1"}])
+    f = RestFetcher([page.encode()])
+    out = DL.download_funding_rest("XUSDT", tmp_path, f)
+    df = pd.read_parquet(out)
+    assert df["rate"].tolist() == [0.0001, -0.0002]
+    assert json.loads(out.with_suffix(".coverage.json").read_text()) == [[a, b]]
+    for u in f.requested:
+        assert_rest_allowed(u)
+
+
+def test_rest_funding_paginates(tmp_path):
+    import json
+    a, b = DL.rest_funding_span()
+    p1 = [{"fundingTime": a + i, "fundingRate": "0"} for i in range(1000)]
+    p2 = [{"fundingTime": a + 5000, "fundingRate": "0.1"}]
+    f = RestFetcher([json.dumps(p1).encode(), json.dumps(p2).encode()])
+    df = pd.read_parquet(DL.download_funding_rest("XUSDT", tmp_path, f))
+    assert len(df) == 1001 and "startTime=" + str(a + 1000) in f.requested[1]
+
+
+@pytest.mark.parametrize("fetch", [RestFetcher(exc=OSError("CONNECT tunnel failed, response 403")),
+                                   RestFetcher(pages=[]), RestFetcher(pages=[b'{"code": -1121}'])])
+def test_rest_funding_failure_raises(tmp_path, fetch):
+    with pytest.raises((OSError, DL.DataValidationError)):
+        DL.download_funding_rest("XUSDT", tmp_path, fetch)
+    assert not (tmp_path / "funding_rest" / "XUSDT.parquet").exists()
+
+
+def test_rest_out_of_span_rows_rejected(tmp_path):
+    import json
+    a, b = DL.rest_funding_span()
+    f = RestFetcher([json.dumps([{"fundingTime": b + 1, "fundingRate": "0"}]).encode()])
+    with pytest.raises(DL.DataValidationError):
+        DL.download_funding_rest("XUSDT", tmp_path, f)
+
+
+def test_load_funding_merges_archive_and_rest(tmp_path):
+    import json
+    from ca.exits import FundingCoverageError
+    files = {}
+    url = DL.funding_url("XUSDT", "2026-02")
+    t_feb = ms(dt.date(2026, 2, 28), 16)
+    _publish(files, url, _zip("f.csv", f"calc_time,funding_interval_hours,last_funding_rate\n{t_feb},8,0.0003\n"))
+    DL.download_funding("XUSDT", tmp_path, FakeFetcher(files), periods=[("monthly", "2026-01"), ("monthly", "2026-02")])
+    a, b = DL.rest_funding_span()
+    DL.download_funding_rest("XUSDT", tmp_path, RestFetcher([json.dumps([{"fundingTime": a, "fundingRate": "0.0001"}]).encode()]))
+    fu = DL.load_funding("XUSDT", tmp_path)
+    assert fu.cover == ((ms(dt.date(2026, 2, 1)), b),)  # Jan missing -> not covered; Feb + REST merged
+    assert fu.paid(ms(dt.date(2026, 2, 28), 23, 50), ms(dt.date(2026, 3, 1), 0, 5)) == pytest.approx(0.0001)
+    assert fu.paid(t_feb - 1, t_feb) == pytest.approx(0.0003)
+    with pytest.raises(FundingCoverageError):
+        fu.paid(ms(dt.date(2026, 1, 15)), ms(dt.date(2026, 1, 15), 0, 15))
