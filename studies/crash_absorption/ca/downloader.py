@@ -6,6 +6,7 @@ import calendar
 import contextlib
 import datetime as dt
 import hashlib
+import json
 import shutil
 import tempfile
 import urllib.error
@@ -19,9 +20,11 @@ import numpy as np
 import pandas as pd
 
 from ca import params as P
-from ca.guard import MAX_ALLOWED, SYMBOL_LISTING_PREFIX, assert_allowed, assert_listing_allowed
+from ca.guard import (MAX_ALLOWED, SYMBOL_LISTING_PREFIX, assert_allowed, assert_listing_allowed,
+                      assert_rest_allowed)
 
 ARCHIVE = "https://data.binance.vision"
+FAPI = "https://fapi.binance.com"
 UM = "data/futures/um"
 KLINE_COLS = ["open_time", "open", "high", "low", "close", "volume", "close_time", "quote_volume",
               "count", "taker_buy_volume", "taker_buy_quote_volume", "ignore"]
@@ -209,25 +212,88 @@ def download_klines(symbol: str, interval: str, out_dir: Path, fetch, periods=No
     return out
 
 
+def _write_funding(df: pd.DataFrame, coverage: list[tuple[int, int]], path: Path) -> Path:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    df.to_parquet(path, index=False)
+    path.with_suffix(".coverage.json").write_text(json.dumps(coverage))
+    return path
+
+
 def download_funding(symbol: str, out_dir: Path, fetch, periods=None) -> Path | None:
-    """Monthly archive files only. Months not fully <= MAX_ALLOWED are refused by
-    the guard, so funding coverage ends at the last full allowed month."""
-    parts, months = [], [p for f, p in (periods or file_periods()) if f == "monthly"]
+    """Monthly archive files. Months not fully <= MAX_ALLOWED are refused by the
+    guard; the remainder comes from download_funding_rest. Coverage (ms, inclusive)
+    is recorded only for months whose file exists, so a missing file can never
+    be read as zero funding."""
+    parts, cover = [], []
+    months = [p for f, p in (periods or file_periods()) if f == "monthly"]
     with tempfile.TemporaryDirectory() as td:
         for m in months:
             z = _fetch_zip(fetch, funding_url(symbol, m), Path(td))
             if z is not None:
                 df = _read_csv_member(z, ["calc_time", "funding_interval_hours", "last_funding_rate"])
-                parts.append(df[["calc_time", "last_funding_rate"]].rename(
-                    columns={"calc_time": "ts", "last_funding_rate": "rate"}))
+                df = df[["calc_time", "last_funding_rate"]].rename(columns={"calc_time": "ts", "last_funding_rate": "rate"})
+                a, b = _period_bounds("monthly", m)
+                if len(df) and (df["ts"].min() < a or df["ts"].max() >= b):
+                    raise DataValidationError(f"{symbol} funding {m}: calc_time outside month")
+                parts.append(df)
+                cover.append((a, b - 1))
                 z.unlink()
     if not parts:
         return None
     df = pd.concat(parts).sort_values("ts").drop_duplicates("ts")
-    out = Path(out_dir) / "funding" / f"{symbol}.parquet"
-    out.parent.mkdir(parents=True, exist_ok=True)
-    df.to_parquet(out, index=False)
-    return out
+    return _write_funding(df, cover, Path(out_dir) / "funding" / f"{symbol}.parquet")
+
+
+def rest_funding_span() -> tuple[int, int]:
+    """[first ms after the last full archive month, end of VERDICT] (inclusive)."""
+    last_month = [p for f, p in file_periods() if f == "monthly"][-1]
+    start = _period_bounds("monthly", last_month)[1]
+    end = P.date_to_ms(MAX_ALLOWED + dt.timedelta(days=1)) - 1
+    return start, end
+
+
+def funding_rest_url(symbol: str, start_ms: int, end_ms: int) -> str:
+    q = urllib.parse.urlencode({"symbol": symbol, "startTime": start_ms, "endTime": end_ms, "limit": 1000})
+    return f"{FAPI}/fapi/v1/fundingRate?{q}"
+
+
+def download_funding_rest(symbol: str, out_dir: Path, fetch, span=None) -> Path:
+    """fapi funding history for the partial month (v0.3.2), cached to parquet.
+    Any failure (blocked host, HTTP error, 404) raises; zero is never assumed."""
+    start, end = span or rest_funding_span()
+    rows, cur = [], start
+    while True:
+        url = funding_rest_url(symbol, cur, end)
+        assert_rest_allowed(url)
+        body = fetch.get(url)
+        if body is None:
+            raise DataValidationError(f"fapi fundingRate returned 404 for {symbol}")
+        page = json.loads(body)
+        if not isinstance(page, list):
+            raise DataValidationError(f"fapi fundingRate unexpected response for {symbol}: {page!r:.200}")
+        rows += page
+        if len(page) < 1000:
+            break
+        cur = int(page[-1]["fundingTime"]) + 1
+    df = pd.DataFrame({"ts": [int(r["fundingTime"]) for r in rows],
+                       "rate": [float(r["fundingRate"]) for r in rows]}, columns=["ts", "rate"])
+    if len(df) and (df["ts"].min() < start or df["ts"].max() > end):
+        raise DataValidationError(f"fapi fundingRate for {symbol} outside requested span")
+    df = df.sort_values("ts").drop_duplicates("ts")
+    return _write_funding(df, [(start, end)], Path(out_dir) / "funding_rest" / f"{symbol}.parquet")
+
+
+def load_funding(symbol: str, data_dir: Path):
+    """Archive + REST funding with their recorded coverage, as one Funding."""
+    from ca.exits import Funding
+    parts, cover = [], []
+    for sub in ("funding", "funding_rest"):
+        path = Path(data_dir) / sub / f"{symbol}.parquet"
+        if path.exists():
+            parts.append(pd.read_parquet(path))
+            cover += [tuple(c) for c in json.loads(path.with_suffix(".coverage.json").read_text())]
+    df = pd.concat(parts).sort_values("ts").drop_duplicates("ts") if parts else pd.DataFrame({"ts": [], "rate": []})
+    return Funding.from_coverage(df["ts"].to_numpy(np.int64), df["rate"].to_numpy(float), cover)
 
 
 # ---------------------------------------------------------------- aggTrades

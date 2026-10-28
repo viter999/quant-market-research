@@ -53,3 +53,22 @@ def assert_listing_allowed(prefix: str, delimiter: str | None) -> None:
     are addressed by constructed URLs and a 404 means "no file"."""
     if prefix != SYMBOL_LISTING_PREFIX or delimiter != "/":
         raise HoldoutViolation(f"listing {prefix!r} (delimiter={delimiter!r}) not allowed; refusing")
+
+
+REST_ALLOWED = {("fapi.binance.com", "/fapi/v1/fundingRate")}
+
+
+def assert_rest_allowed(url: str) -> None:
+    """fapi requests: only allow-listed endpoints, and endTime is mandatory and
+    must not pass the VERDICT end (without endTime fapi returns the latest data)."""
+    import urllib.parse
+    u = urllib.parse.urlsplit(url)
+    if (u.hostname, u.path) not in REST_ALLOWED:
+        raise HoldoutViolation(f"REST endpoint {u.hostname}{u.path} not allowed; refusing")
+    q = urllib.parse.parse_qs(u.query)
+    if "endTime" not in q or "startTime" not in q:
+        raise HoldoutViolation(f"REST request without startTime/endTime: {url!r}; refusing")
+    start, end = int(q["startTime"][0]), int(q["endTime"][0])
+    if start > end:
+        raise HoldoutViolation(f"startTime > endTime in {url!r}; refusing")
+    assert_ms_allowed(end)

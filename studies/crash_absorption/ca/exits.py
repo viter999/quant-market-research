@@ -43,17 +43,26 @@ def exit_price(trades: Trades, fill_ts: int, hold_min: float = P.PRIMARY_HOLD_MI
 
 @dataclass(frozen=True)
 class Funding:
-    """Settlements for one symbol. [cover_start, cover_end] is the time span the
-    loaded archive files cover; a hold outside it raises instead of silently
-    assuming zero funding."""
+    """Settlements for one symbol. `cover` = merged, inclusive [start, end] ms
+    spans that the loaded files cover; a hold outside one span raises instead
+    of silently assuming zero funding."""
     ts: np.ndarray
     rate: np.ndarray
-    cover_start: int
-    cover_end: int
+    cover: tuple[tuple[int, int], ...]
+
+    @classmethod
+    def from_coverage(cls, ts, rate, spans) -> "Funding":
+        merged: list[list[int]] = []
+        for a, b in sorted(spans):
+            if merged and a <= merged[-1][1] + 1:
+                merged[-1][1] = max(merged[-1][1], b)
+            else:
+                merged.append([a, b])
+        return cls(np.asarray(ts, np.int64), np.asarray(rate, float), tuple(map(tuple, merged)))
 
     def paid(self, fill_ts: int, exit_ts: int) -> float:
-        if fill_ts < self.cover_start or exit_ts > self.cover_end:
-            raise FundingCoverageError(f"hold ({fill_ts}, {exit_ts}] outside funding coverage")
+        if not any(a <= fill_ts and exit_ts <= b for a, b in self.cover):
+            raise FundingCoverageError(f"hold ({fill_ts}, {exit_ts}] outside funding coverage {self.cover}")
         m = (self.ts > fill_ts) & (self.ts <= exit_ts)
         return float(self.rate[m].sum())  # signed: long pays positive, receives negative
 

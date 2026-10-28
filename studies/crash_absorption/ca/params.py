@@ -66,9 +66,21 @@ N_BOOT = 10_000
 POWER_SCALE = SPLITS["verdict"]["days"] / SPLITS["dev"]["days"]  # 200/602
 MIN_FILLS, MIN_EPISODES, MIN_DAYS = 300, 100, 40
 
-# Data handling: aggTrades windows around the reference time (bar close)
+# Data handling: aggTrades windows around the reference time (bar close), v0.3.2
 WINDOW_PRE_MIN = 5
-WINDOW_POST_MIN = 25
+WINDOW_POST_MIN = 70
+
+# No event before the study period (klines from 2023-12-01 are lookback inputs only)
+PERIOD_START = dt.date.fromisoformat(SPLITS["period"]["start"])
+
+# §8 verdict thresholds (fractions, not bps)
+PASS_MEAN_1X = 0.0015
+PASS_LB_LEVEL = 0.999
+PASS_MEAN_2X = 0.0005
+PASS_PLACEBO_MARGIN = 0.0010
+PASS_PLACEBO_LB_LEVEL = 0.99
+HOLDOUT_MEAN_1X = 0.0008
+HOLDOUT_LB_LEVEL = 0.95
 
 
 def segment_of(day: dt.date) -> str | None:

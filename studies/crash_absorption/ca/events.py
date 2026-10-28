@@ -39,7 +39,8 @@ def usable_mask(f: pd.DataFrame, segment: str) -> np.ndarray:
     """Bars whose day is in `segment`, honouring the 23:30 cutoff on its last day."""
     start, end = P.SEGMENTS[segment]
     days = bar_day(f.index.to_numpy())
-    s, e = (start - dt.date(1970, 1, 1)).days, (end - dt.date(1970, 1, 1)).days
+    s = (max(start, P.PERIOD_START) - dt.date(1970, 1, 1)).days
+    e = (end - dt.date(1970, 1, 1)).days
     close_min_of_last_day = (f["close_ts"].to_numpy() - e * P.DAY_MS) // P.MINUTE_MS
     return (days >= s) & (days <= e) & ~((days == e) & (close_min_of_last_day > P.LAST_DAY_CUTOFF_MIN))
 
