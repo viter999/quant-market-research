@@ -7,7 +7,7 @@ import json
 import re
 from pathlib import Path
 
-_SPLITS = json.loads((Path(__file__).parent / "SPLITS.json").read_text())
+_SPLITS = json.loads((Path(__file__).resolve().parents[1] / "SPLITS.json").read_text())
 MAX_ALLOWED = dt.date.fromisoformat(_SPLITS["download_guard"]["max_allowed_date"])
 
 _DAILY = re.compile(r"(\d{4})-(\d{2})-(\d{2})(?=\.zip|\.csv|$|[^\d])")
@@ -42,3 +42,14 @@ def assert_ms_allowed(end_ms: int) -> None:
     limit = dt.datetime.combine(MAX_ALLOWED + dt.timedelta(days=1), dt.time(), dt.timezone.utc)
     if end_ms >= int(limit.timestamp() * 1000):
         raise HoldoutViolation(f"endTime {end_ms} is after {MAX_ALLOWED} (HOLDOUT); refusing")
+
+
+SYMBOL_LISTING_PREFIX = "data/futures/um/monthly/klines/"
+
+
+def assert_listing_allowed(prefix: str, delimiter: str | None) -> None:
+    """Only the symbol-directory listing is allowed (it returns symbol names,
+    no file names, dates or sizes). Per-file listings are never needed: files
+    are addressed by constructed URLs and a 404 means "no file"."""
+    if prefix != SYMBOL_LISTING_PREFIX or delimiter != "/":
+        raise HoldoutViolation(f"listing {prefix!r} (delimiter={delimiter!r}) not allowed; refusing")

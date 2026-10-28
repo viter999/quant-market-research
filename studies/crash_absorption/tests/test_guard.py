@@ -1,6 +1,6 @@
 import pytest
 
-from guard import HoldoutViolation, assert_allowed, assert_ms_allowed
+from ca.guard import HoldoutViolation, assert_allowed, assert_ms_allowed
 
 
 def test_allows_verdict_end_daily():
