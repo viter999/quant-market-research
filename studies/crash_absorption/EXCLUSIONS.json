@@ -1,20 +1,69 @@
 {
-  "version": "0.1-draft",
+  "version": "0.2-draft",
   "status": "DRAFT",
-  "note": "Hand-made from symbol names (CLARIFICATIONS §2). DRAFT: compiled offline from memory because the archive symbol listing could not be fetched (network blocked). Before any detection run it must be reviewed against the full archive symbol-directory listing, every listed name copied into reviewed_symbols, status set to FROZEN and committed. The detector refuses to run otherwise.",
-  "excluded_prefixes": ["1000", "1M"],
+  "note": "Hand-made from symbol names (CLARIFICATIONS §2). DRAFT: compiled offline from memory because the archive symbol listing could not be fetched (network blocked). Before any detection run it must be reviewed against the full archive symbol-directory listing, every listed name copied into reviewed_symbols, status set to FROZEN and committed. The detector refuses to run otherwise. v0.2 (CLARIFICATIONS v0.3.2): adds index contracts, USTC and fiat pairs; AEUR/EURI (euro stablecoins) moved under fiat. 'Any similar index' / 'any other fiat' must be resolved by name when reviewing the real list.",
+  "excluded_prefixes": [
+    "1000",
+    "1M"
+  ],
   "excluded_symbols": {
     "stablecoin": [
-      "USDCUSDT", "BUSDUSDT", "TUSDUSDT", "FDUSDUSDT", "USDPUSDT", "DAIUSDT",
-      "USDEUSDT", "USD1USDT", "PYUSDUSDT", "RLUSDUSDT", "XUSDUSDT", "AEURUSDT",
-      "EURIUSDT", "EURUSDT"
+      "USDCUSDT",
+      "BUSDUSDT",
+      "TUSDUSDT",
+      "FDUSDUSDT",
+      "USDPUSDT",
+      "DAIUSDT",
+      "USDEUSDT",
+      "USD1USDT",
+      "PYUSDUSDT",
+      "RLUSDUSDT",
+      "XUSDUSDT",
+      "USTCUSDT"
     ],
     "tokenized_metal": [
-      "XAUUSDT", "XAGUSDT", "XPTUSDT", "XPDUSDT", "PAXGUSDT", "XAUTUSDT", "COPPERUSDT"
+      "XAUUSDT",
+      "XAGUSDT",
+      "XPTUSDT",
+      "XPDUSDT",
+      "PAXGUSDT",
+      "XAUTUSDT",
+      "COPPERUSDT"
     ],
     "tokenized_equity": [
-      "TSLAUSDT", "MSTRUSDT", "COINUSDT", "HOODUSDT", "NVDAUSDT", "AAPLUSDT",
-      "AMZNUSDT", "GOOGLUSDT", "METAUSDT", "MSFTUSDT", "CRCLUSDT", "SPYUSDT", "QQQUSDT"
+      "TSLAUSDT",
+      "MSTRUSDT",
+      "COINUSDT",
+      "HOODUSDT",
+      "NVDAUSDT",
+      "AAPLUSDT",
+      "AMZNUSDT",
+      "GOOGLUSDT",
+      "METAUSDT",
+      "MSFTUSDT",
+      "CRCLUSDT",
+      "SPYUSDT",
+      "QQQUSDT"
+    ],
+    "fiat": [
+      "EURUSDT",
+      "AEURUSDT",
+      "EURIUSDT",
+      "GBPUSDT",
+      "AUDUSDT",
+      "JPYUSDT",
+      "CHFUSDT",
+      "CADUSDT",
+      "TRYUSDT",
+      "BRLUSDT",
+      "MXNUSDT",
+      "ZARUSDT"
+    ],
+    "index": [
+      "BTCDOMUSDT",
+      "DEFIUSDT",
+      "FOOTBALLUSDT",
+      "BLUEBIRDUSDT"
     ]
   },
   "reviewed_symbols": []
