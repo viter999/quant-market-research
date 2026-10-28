@@ -1,0 +1,14 @@
+{
+  "source": "PREREG.md §3 (commit 9a1a7bca9fc176c5a08e26eca4062a961dfc7b60)",
+  "period": {"start": "2024-01-01", "end": "2026-09-30", "calendar_days": 1004},
+  "convention": "UTC calendar days, both ends inclusive. Cut indices floor(0.6*1004)=602 and floor(0.8*1004)=803 (0-based day index). The first day of the VERDICT segment and the first day of the HOLDOUT segment are the 1-day embargo days and belong to no segment.",
+  "dev":      {"start": "2024-01-01", "end": "2025-08-24", "days": 602},
+  "embargo_1": {"date": "2025-08-25"},
+  "verdict":  {"start": "2025-08-26", "end": "2026-03-13", "days": 200},
+  "embargo_2": {"date": "2026-03-14"},
+  "holdout":  {"start": "2026-03-15", "end": "2026-09-30", "days": 200},
+  "download_guard": {
+    "max_allowed_date": "2026-03-13",
+    "rule": "No file whose covered dates extend past max_allowed_date may be requested or opened (monthly files for 2026-03 and later are therefore refused). Unlock only after the VERDICT result is committed and Shawn approves (PREREG §3, §11c)."
+  }
+}
