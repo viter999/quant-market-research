@@ -42,3 +42,38 @@
 
 Data handling
 - aggTrades are streamed: download zip → extract only the needed windows (event/placebo time −5 min … +25 min) to parquet → delete the zip. Klines kept as parquet.
+
+# CLARIFICATIONS v0.3.2 — answers to implementation questions (no outcome seen; PROPOSED, pending Shawn gate (d) together with v0.3.1)
+
+§4 event rule
+- Correction of v0.3.1 (arithmetic slip): all 242 bars t−241…t must exist (σ_t over r_{t−240}…r_{t−1} needs close_{t−241}); otherwise no event at t.
+- Klines from 2023-12-01 are downloaded as lookback inputs only (σ, volume median, 7-day ranking). No event before 2024-01-01.
+
+§2 universe / exclusions
+- Also excluded: index contracts (BTCDOM, DEFI, FOOTBALL and any similar index), USTC, EUR and any other fiat pair.
+- The exclusion list stays DRAFT until checked against the real archive symbol list, then it is frozen.
+
+§6 funding
+- VERDICT funding for 2026-03-01…2026-03-13 (the 2026-03 monthly archive file covers HOLDOUT dates) comes from fapi /fapi/v1/fundingRate with endTime ≤ 2026-03-13 23:59:59.999 UTC, cached to parquet. The guard checks endTime (a request without endTime is refused). If fapi is unreachable, raise; never assume zero funding.
+
+§7 B2 baseline
+- B2 entry = first aggTrade at or after bar close + 2 s, price × (1 + 5 bps), taker fee 5 bps; same exit and buffers as the primary.
+
+§8 bootstrap
+- Placebos count on their EVENT's day.
+- Only days with ≥ 1 primary order (event) are resampled; 7-day blocks likewise contain ≥ 1 such day.
+
+Data handling
+- aggTrades window widened to bar close −5 min … +70 min so the 30/60-min descriptive exits can be computed.
+- Network: symbol listing waits until Shawn allowlists data.binance.vision, the S3 listing host it uses, and fapi.binance.com. No other route is used.
+
+Implementation choices accepted (from the Task 2a report)
+- Event day = UTC day of the bar's open; the 23:30 cutoff uses the bar's close time and also applies to placebos.
+- "Full day" = any 1d kline except the symbol's listing day.
+- Cooldown: next event ≥ 30 min after the previous accepted event; out-of-universe/out-of-segment candidates do not start a cooldown.
+- Episodes: a gap of exactly 30 min joins.
+- Placebo hour of day: circular ±60 min on bar close time; ±3 days inclusive; σ and volume tolerances inclusive; event 60-min volume = bars t−60…t−1; draws without replacement within an event (two events may draw the same minute).
+- 7-day blocks are non-overlapping and aligned to the segment's first day.
+- Funding exposure ends at T; funding = rate × entry notional.
+- A trade exactly at T counts for both exit sources; same-millisecond trades are ordered by agg_id; a missing CHECKSUM is an error.
+- Gate (b) and "run VERDICT" use the same unlock.
