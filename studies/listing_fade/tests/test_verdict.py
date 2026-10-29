@@ -111,3 +111,13 @@ def test_episode_day_is_earliest_L_and_blocks():
     a = V.boot_means(x, np.array([0, 0, 1, 1]))
     assert np.array_equal(a, V.boot_means(x, np.array([0, 0, 1, 1])))
     assert set(np.round(np.unique(a), 6)) <= {1.5, 6.5, 4.0}   # whole blocks are drawn
+
+
+def test_fail_loud_guards():
+    la, xt, kl, fu, btc = world()
+    with pytest.raises(AssertionError):
+        V.event_result(EV, T0, la, xt, kl, fu.assign(rate=[np.nan, 0.001, -0.0004, 1.0]), btc, S)
+    r = res_from([[100.0]] * 130).assign(symbol="X")
+    r.loc[3, "net_1x_btcrel_bps"] = np.nan
+    with pytest.raises(ValueError):
+        V.verdict(r)

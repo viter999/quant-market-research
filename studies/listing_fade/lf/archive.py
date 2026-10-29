@@ -81,6 +81,8 @@ def agg_windows(sym: str, days: list[dt.date], lo: int, hi: int, fetch) -> tuple
                                                    "agg_id": c["agg_trade_id"].to_numpy(np.int64)}))
             z.unlink()
     df = pd.concat(parts) if parts else pd.DataFrame({"ts": [], "price": [], "qty": [], "ibm": [], "agg_id": []})
+    assert df["agg_id"].is_unique, f"{sym}: duplicate agg_trade_id across daily files"
+    assert (df["ts"] > 1e12).all(), f"{sym}: aggTrades ts not in ms"
     return df.sort_values(["ts", "agg_id"], kind="stable").reset_index(drop=True), missing
 
 

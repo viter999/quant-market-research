@@ -1,4 +1,4 @@
-# CLARIFICATIONS v0.2.1 — implementation rules for PREREG v0.2 (no outcome seen) — PROPOSED, pending review
+# CLARIFICATIONS v0.2.1 — implementation rules for PREREG v0.2 (no outcome seen) — APPROVED 29 Oct 2026 (research director, delegated by Shawn; LF-2)
 
 Written before any return, markout, PnL or funding sum was computed. So far only timestamps, trade sides, first-hour quote notional and file/bar presence have been looked at (§1 exclusions and §2 drops).
 
@@ -12,7 +12,7 @@ Written before any return, markout, PnL or funding sum was computed. So far only
    - This removes 17 TEST rows: 8 tokenized equities, 4 metals (PAXG, XAG, XPT, XPD), and 5 rows the list excludes for crash-absorption reasons although their bodies describe crypto tokens:
      - INXUSDT (Infinex) and ROBOUSDT (Fabric Protocol), listed as "equity_ticker_collision";
      - STBLUSDT, STABLEUSDT and USUSDT (Talus Network), listed as "not_checkable_on_dev".
-   - **Open question for review:** keep the literal list (proposed; it is what "frozen" means), or keep those 5 crypto rows.
+   - **Decided (LF-2):** the frozen list is applied literally; the 5 crypto rows stay excluded.
    - A body-based check (underlying equity / index / metal / FX) finds no non-crypto TEST row that the list misses.
 6. **Pre-market flag** = "Pre-Market" in the title or body; the two always agree (29 articles).
 7. **Episode = article.** Three TEST articles launch symbols on different days. An episode's launch day is the UTC day of its earliest usable L.
@@ -26,7 +26,7 @@ Written before any return, markout, PnL or funding sum was computed. So far only
   - any gap in this chain exceeds the larger stated `funding_interval_hours` of its two ends (+5 min tolerance): the last settlement at or before entry (else entry itself) → each settlement in the hold → the first settlement after exit (else exit itself).
   - The larger-interval rule handles interval changes, e.g. AERGOUSDT 2025-04-16 switching from 4h to 2h.
 - **Data gaps found:**
-  - **KATUSDT (L 2026-03-02):** its hold runs into March, and the 2026-03 archive file covers HOLDOUT dates, so it is excluded as funding_record_missing. REST funding for 2026-03-01…05, fetched by Shawn as in crash-absorption, would make it scorable. This is a decision for review; the exclusion is the default.
+  - **KATUSDT (L 2026-03-02):** its hold runs into March, and the 2026-03 archive file covers HOLDOUT dates, so it is excluded as funding_record_missing. REST funding for 2026-03-01…05, fetched by Shawn as in crash-absorption, would make it scorable. **Decided (LF-2):** it stays excluded; no REST fetch.
   - **AIAUSDT relaunch (L 2026-01-16):** the archive has no aggTrades files for 2026-01-16 and 01-17, although its 1m klines exist. Reported as `aggtrades_files_missing`, not as "never traded".
 - **"A delisting announced before T0+72h"** = a Delisting-catalog (161) title released in [A, T0+72h) that contains "Delist", does not start with "Binance Margin", and names the symbol or its token as a whole word.
   - Titles are copied from the delisting study's v2 raw file into `events_raw/delisting_catalog161_titles.json`, with the source sha256 recorded.

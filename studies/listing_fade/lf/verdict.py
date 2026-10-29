@@ -39,6 +39,7 @@ def vwap(tr: pd.DataFrame, seller: bool, lo: int) -> tuple[float, int] | None:
 
 
 def funding_sum(fund: pd.DataFrame, lo: int, hi: int) -> tuple[float, int]:
+    assert fund["rate"].notna().all(), "NaN funding rate in the funding file"
     f = fund[(fund["ts"] > lo) & (fund["ts"] <= hi)]
     return float(f["rate"].sum()), int(len(f))
 
@@ -140,7 +141,18 @@ def boot_means(x: np.ndarray, units: np.ndarray, n_boot: int = N_BOOT, seed: int
     return s[idx].sum(1) / c[idx].sum(1)
 
 
+REQUIRED = ["net_1x_bps", "net_2x_bps", "net_5x_bps", "net_1x_btcrel_bps"]
+
+
+def check_rows(res: pd.DataFrame) -> None:
+    """Fail loud: no usable row may carry a NaN net or BTC-relative net (raise, never drop)."""
+    bad = res[res[REQUIRED].isna().any(axis=1)]
+    if len(bad):
+        raise ValueError(f"NaN in required columns for {len(bad)} rows: {bad['symbol'].tolist()[:10]}")
+
+
 def verdict(res: pd.DataFrame) -> dict:
+    check_rows(res)
     ep = {m: episodes(res, f"net_{m}x_bps") for m in BUFFER_BPS}
     days = episode_days(res).reindex(ep[1].index)
     x1 = ep[1].to_numpy(float)
@@ -150,7 +162,7 @@ def verdict(res: pd.DataFrame) -> dict:
     r1, r7 = boot_means(x1, d1), boot_means(x1, d7)
     lb1, lb7 = float(np.percentile(r1, 1)), float(np.percentile(r7, 1))
     ub7 = float(np.percentile(r7, 99))
-    top5 = np.sort(x1)[:-5] if n_ep > 5 else np.array([])
+    rest_without_best5 = np.sort(x1)[:-5] if n_ep > 5 else np.array([])
     btc = episodes(res, "net_1x_btcrel_bps")
     items = {
         "1_sample": {"episodes": n_ep, "launch_days": n_days, "pass": n_ep >= 120 and n_days >= 70},
@@ -159,8 +171,9 @@ def verdict(res: pd.DataFrame) -> dict:
         "3_mean_2x": {"mean_bps": float(ep[2].mean()), "pass": bool(ep[2].mean() > 0)},
         "4_median_1x": {"median_bps": float(np.median(x1)), "pass": bool(np.median(x1) > 0)},
         "5_btc_relative_mean_1x": {"mean_bps": float(btc.mean()), "pass": bool(btc.mean() > 0)},
-        "6_mean_1x_without_top5": {"mean_bps": float(top5.mean()) if len(top5) else float("nan"),
-                                   "pass": bool(len(top5) and top5.mean() > 0)},
+        "6_mean_1x_without_top5": {"mean_bps": float(rest_without_best5.mean()) if len(rest_without_best5)
+                                   else float("nan"),
+                                   "pass": bool(len(rest_without_best5) and rest_without_best5.mean() > 0)},
     }
     if not items["1_sample"]["pass"]:
         status = "NOT EVALUABLE"
