@@ -1,7 +1,14 @@
-# PREREG — Extreme-funding carry, hedged (idea #5) — v0.2
+# PREREG — Extreme-funding carry, hedged (idea #5) — v0.3
 
-Owner: Natthaphong (Shawn) Suebsri. 29 Oct 2026. Status: revised after review round 1 (ChatGPT, Grok, Gemini). Nothing run.
+Owner: Natthaphong (Shawn) Suebsri. 29 Oct 2026. Status: v0.2 revised after review round 1 (ChatGPT, Grok, Gemini); v0.3 = pre-outcome amendment below. No outcome computed.
 Time cap: ≤ 7 calendar days from approval. A feasibility stop applies on day 3.
+
+## Amendment v0.3 — 29 Oct 2026, before any outcome: power check failed at 37 DEV trades
+- Why: the EF-1 DEV count under v0.2 gave 37 trades on 24 symbols and 30 entry days, projecting to 12.3 / 8.0 / 10.0 on VERDICT (× 200/602) against the required 60 / 15 / 30. No price, return or P&L had been computed on any segment. Decided by Shawn.
+- §2: the cap is 10 open positions (was 5); same ordering by highest h_S at the same S.
+- §4: the "top 80 by 7-day perp quote volume" universe is replaced by: perp 24h quote volume ≥ $20M at S, from its 1m bars in [S−24h, S). The frozen EXCLUSIONS and the spot rules (pair present; spot 24h quote volume ≥ $5M; median spot 1-min quote volume ≥ $50,000) are unchanged.
+- §6: no change to the statistics, PASS items or seeds; the power check is re-run under the amended §2/§4.
+- Everything else is unchanged: the threshold, OI +5 % in contracts, exits, execution, costs, splits, PASS items and seeds.
 
 ## 0. What is different from what already failed (read first)
 - The carry study (Oct 2026) held coins UNHEDGED for weeks and died on price direction.
@@ -19,7 +26,7 @@ H1: On Binance USDT-M perps that have a liquid Binance spot USDT pair, opening l
   - h_S ≥ 0.0125% per hour (equal to 0.10% per 8h);
   - OI in contracts (from metrics `sum_open_interest`, the last 5-min row timestamped ≤ S − 5 min) is ≥ 5% above the same field 24h earlier;
   - the symbol is in the universe (§4) at S;
-  - fewer than 5 positions are open (cap). If several signals arrive at the same S, take them in order of highest h_S;
+  - fewer than 10 positions are open (cap; v0.3, was 5). If several signals arrive at the same S, take them in order of highest h_S;
   - no position is already open in that symbol.
 - Positive funding only.
 
@@ -39,7 +46,7 @@ H1: On Binance USDT-M perps that have a liquid Binance spot USDT pair, opening l
 - If spot or perp data ends before the exit (delisting), close both legs at the last common minute using worst-of-bar prices plus the 5× buffer, and count it.
 
 ## 4. Universe and data
-- The point-in-time universe rules are those frozen in crash-absorption: top 80 by 7-day perp quote volume, the same exclusions.
+- Universe (v0.3): at S the perp's 24h quote volume, summed from its 1m bars in [S−24h, S), is ≥ $20M (point-in-time, data before S only). The frozen crash-absorption EXCLUSIONS still apply (prefixes 1000/1M, stablecoins, tokenized metals and equities, index contracts, and the other v1.0 entries). The former "top 80 by 7-day perp quote volume" rule is dropped.
 - In addition, at S: a Binance spot `<BASE>USDT` pair with 1m klines in the 24h before S; spot 24h quote volume ≥ $5M; and median spot 1-min quote volume over the prior 24h ≥ $50,000. Spot availability is judged only with data up to S.
 - Pipeline:
   - Scan the fundingRate monthly files first (tiny) to list candidate (symbol, S) pairs.
