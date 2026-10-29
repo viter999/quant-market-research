@@ -222,5 +222,34 @@ def report() -> None:
     print(json.dumps({"decision_at_2s": dec, "primary": {k: p[k] for k in ("evaluated", "real_full", "proxy_fills")}}, indent=1))
 
 
+def diagnostics() -> None:
+    """DESCRIPTIVE ONLY, not part of the frozen decision: what the proxy's false fills
+    are, how much size was at the ask on REAL partials, and how stale quotes (archive
+    gaps in bookTicker) affect the exit-bias check. Prices/quantities only."""
+    E = pd.read_parquet(DATA / "entries.parquet")
+    X = pd.read_parquet(DATA / "exit_check.parquet")
+    out = {}
+    for lat in C.LATENCIES_S:
+        e = E[E["latency_s"] == lat]
+        fp = e[e["proxy_filled"] & (e["real"] != "full")]
+        part = e[e["real"] == "partial"]
+        x = X[(X["latency_s"] == lat) & (X["status"] == "ok")]
+        fresh = x[x["bid_quote_age_ms"] <= 1000]
+        out[f"{lat}s"] = {
+            "proxy_false_fills_by_real_status": fp["real"].value_counts().to_dict(),
+            "real_partial_ask_qty_over_order_qty": C.stats(part["real_ask_qty"] / part["order_qty"]),
+            "quote_age_at_tau_gt_1s": int((e["quote_age_ms"] > 1000).sum()),
+            "real_full_with_quote_age_at_tau_gt_1s": int(((e["real"] == "full") & (e["quote_age_ms"] > 1000)).sum()),
+            "exit_check_bid_quote_age_at_T_gt_1s": int((x["bid_quote_age_ms"] > 1000).sum()),
+            "exit_bias_bps_bid_quote_age_le_1s": C.stats(fresh["exit_bias_bps"]),
+            "exit_bias_bps_all": C.stats(x["exit_bias_bps"]),
+        }
+    OUT.mkdir(exist_ok=True)
+    (OUT / "PHASE0_DIAGNOSTICS.json").write_text(json.dumps({"label": "DESCRIPTIVE ONLY - not part of the frozen decision",
+                                                            "by_latency": out}, indent=1, default=str))
+    print(json.dumps(out, indent=1, default=str))
+
+
 if __name__ == "__main__":
-    {"verify": verify, "download": download, "measure": measure, "report": report}[sys.argv[1]]()
+    {"verify": verify, "download": download, "measure": measure, "report": report,
+     "diagnostics": diagnostics}[sys.argv[1]]()

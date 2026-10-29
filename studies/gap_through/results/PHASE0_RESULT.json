@@ -1,0 +1,246 @@
+{
+ "spec": "studies/gap_through/PHASE0_FILL_CHECK.md (frozen at c393e89)",
+ "code_head": "a9714f8c70f8bea160b42ac41d391240c78ecdfd",
+ "sample": "crash-absorption DEV events with bar t closing 2024-01-01 00:00 .. 2024-03-30 23:30 UTC",
+ "events_in_sample": 4117,
+ "steps": {
+  "verify": {
+   "redetected": 27255,
+   "stored": 27255,
+   "identical": true,
+   "only_new": 0,
+   "only_stored": 0,
+   "ca_code_last_commit": "a516b7794311f89f3922e94aa7ca539139c1ca6b",
+   "sample_events": 4117
+  },
+  "download": {
+   "symbol_days": 2500,
+   "ok": 2500,
+   "404": [],
+   "errors": {},
+   "parquet_bytes": 461944823,
+   "seconds": 3310
+  },
+  "measure": {
+   "entry_rows": 12351,
+   "exit_rows": 390,
+   "seconds": 181
+  }
+ },
+ "decision_at_2s": {
+  "a_real_fills_ge_30": true,
+  "b_precision_recall_ge_0.85": false,
+  "c_mean_entry_bias_ge_-5bps": true,
+  "d_mean_exit_bias_le_5bps": false,
+  "decision": "NOT ACCEPTED"
+ },
+ "by_latency": {
+  "2s": {
+   "events": 4117,
+   "aggtrades_missing": 0,
+   "bookticker_missing": 0,
+   "no_quote_at_tau": 0,
+   "evaluated": 4117,
+   "real_full": 36,
+   "real_partial": 22,
+   "real_partial_with_proxy_fill": 21,
+   "real_partial_with_old_fill": 21,
+   "proxy_fills": 58,
+   "old_fills": 62,
+   "confusion_real_vs_proxy": {
+    "tp": 34,
+    "fp": 24,
+    "fn": 2,
+    "tn": 4057,
+    "precision": 0.5862068965517241,
+    "recall": 0.9444444444444444
+   },
+   "confusion_real_vs_old": {
+    "tp": 34,
+    "fp": 28,
+    "fn": 2,
+    "tn": 4053,
+    "precision": 0.5483870967741935,
+    "recall": 0.9444444444444444
+   },
+   "entry_bias_bps_proxy_minus_real": {
+    "n": 34,
+    "mean": 2.9504593522691946,
+    "median": 4.999999999999053,
+    "p10": -2.9766763942024337,
+    "p90": 5.000000000000015
+   },
+   "entry_bias_bps_old_minus_real": {
+    "n": 34,
+    "mean": -2.310725671880559,
+    "median": 2.96226984378427,
+    "p10": -11.52810349925292,
+    "p90": 4.999999999999092
+   },
+   "exit_bias_bps_proxy_minus_real_bid": {
+    "n": 36,
+    "mean": 61.49820547889741,
+    "median": -3.7227645308206903,
+    "p10": -15.215996569120577,
+    "p90": 225.3244383014601
+   },
+   "exit_check_status": {
+    "ok": 36
+   },
+   "spread_bps_at_tau_on_real_fills": {
+    "n": 36,
+    "mean": 13.027270487067085,
+    "median": 6.652818975666774,
+    "p10": 0.87251869455374,
+    "p90": 38.59040657849569
+   },
+   "quote_age_ms_at_tau": {
+    "n": 4117,
+    "mean": 405.7192130191887,
+    "median": 11.0,
+    "p10": 0.0,
+    "p90": 83.40000000000009
+   }
+  },
+  "5s": {
+   "events": 4117,
+   "aggtrades_missing": 0,
+   "bookticker_missing": 0,
+   "no_quote_at_tau": 0,
+   "evaluated": 4117,
+   "real_full": 116,
+   "real_partial": 80,
+   "real_partial_with_proxy_fill": 78,
+   "real_partial_with_old_fill": 78,
+   "proxy_fills": 209,
+   "old_fills": 216,
+   "confusion_real_vs_proxy": {
+    "tp": 114,
+    "fp": 95,
+    "fn": 2,
+    "tn": 3906,
+    "precision": 0.5454545454545454,
+    "recall": 0.9827586206896551
+   },
+   "confusion_real_vs_old": {
+    "tp": 114,
+    "fp": 102,
+    "fn": 2,
+    "tn": 3899,
+    "precision": 0.5277777777777778,
+    "recall": 0.9827586206896551
+   },
+   "entry_bias_bps_proxy_minus_real": {
+    "n": 114,
+    "mean": 2.8820589991653307,
+    "median": 4.999999999999213,
+    "p10": -0.3912845102876496,
+    "p90": 5.000000000000134
+   },
+   "entry_bias_bps_old_minus_real": {
+    "n": 114,
+    "mean": 1.4147325299121254,
+    "median": 3.5187593032422897,
+    "p10": -3.0600160787830717,
+    "p90": 4.9999999999999725
+   },
+   "exit_bias_bps_proxy_minus_real_bid": {
+    "n": 116,
+    "mean": -49.527083931733316,
+    "median": -2.6120101618633678,
+    "p10": -148.38025778824715,
+    "p90": 3.1472765712960253
+   },
+   "exit_check_status": {
+    "ok": 116
+   },
+   "spread_bps_at_tau_on_real_fills": {
+    "n": 116,
+    "mean": 8.261087438859299,
+    "median": 4.3635143498967395,
+    "p10": 1.1042563090580977,
+    "p90": 18.058523033497927
+   },
+   "quote_age_ms_at_tau": {
+    "n": 4117,
+    "mean": 408.8967694923488,
+    "median": 12.0,
+    "p10": 0.0,
+    "p90": 93.0
+   }
+  },
+  "10s": {
+   "events": 4117,
+   "aggtrades_missing": 0,
+   "bookticker_missing": 0,
+   "no_quote_at_tau": 0,
+   "evaluated": 4117,
+   "real_full": 238,
+   "real_partial": 177,
+   "real_partial_with_proxy_fill": 177,
+   "real_partial_with_old_fill": 177,
+   "proxy_fills": 432,
+   "old_fills": 439,
+   "confusion_real_vs_proxy": {
+    "tp": 236,
+    "fp": 196,
+    "fn": 2,
+    "tn": 3683,
+    "precision": 0.5462962962962963,
+    "recall": 0.9915966386554622
+   },
+   "confusion_real_vs_old": {
+    "tp": 236,
+    "fp": 203,
+    "fn": 2,
+    "tn": 3676,
+    "precision": 0.5375854214123007,
+    "recall": 0.9915966386554622
+   },
+   "entry_bias_bps_proxy_minus_real": {
+    "n": 236,
+    "mean": 3.2642052848030336,
+    "median": 4.999999999999089,
+    "p10": -1.110687713506001,
+    "p90": 5.000000000000243
+   },
+   "entry_bias_bps_old_minus_real": {
+    "n": 236,
+    "mean": 0.5899831147873281,
+    "median": 2.8318066236700927,
+    "p10": -8.289557977540731,
+    "p90": 4.9999999999999805
+   },
+   "exit_bias_bps_proxy_minus_real_bid": {
+    "n": 238,
+    "mean": 9.138935575678106,
+    "median": -1.6455903141440555,
+    "p10": -19.438563993665312,
+    "p90": 67.55426604338194
+   },
+   "exit_check_status": {
+    "ok": 238
+   },
+   "spread_bps_at_tau_on_real_fills": {
+    "n": 238,
+    "mean": 9.085180603506164,
+    "median": 4.47556453428032,
+    "p10": 1.377537228762055,
+    "p90": 19.827491191715083
+   },
+   "quote_age_ms_at_tau": {
+    "n": 4117,
+    "mean": 418.4058780665533,
+    "median": 13.0,
+    "p10": 1.0,
+    "p90": 104.40000000000009
+   }
+  }
+ },
+ "notes": [
+  "quote in force at t = last bookTicker update with transaction_time <= t (ties: highest update_id)",
+  "spread = (ask - bid) / mid",
+  "bias values are price differences at the same moment, not returns",
+  "no return, markout or PnL computed; entry and exit tables are never joined"
+ ]
+}

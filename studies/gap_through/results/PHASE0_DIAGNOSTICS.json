@@ -1,0 +1,95 @@
+{
+ "label": "DESCRIPTIVE ONLY - not part of the frozen decision",
+ "by_latency": {
+  "2s": {
+   "proxy_false_fills_by_real_status": {
+    "partial": 21,
+    "none": 3
+   },
+   "real_partial_ask_qty_over_order_qty": {
+    "n": 22,
+    "mean": 0.4336152131523636,
+    "median": 0.3609335635,
+    "p10": 0.0690798858552,
+    "p90": 0.9034463665100002
+   },
+   "quote_age_at_tau_gt_1s": 5,
+   "real_full_with_quote_age_at_tau_gt_1s": 2,
+   "exit_check_bid_quote_age_at_T_gt_1s": 6,
+   "exit_bias_bps_bid_quote_age_le_1s": {
+    "n": 30,
+    "mean": -5.96938207623013,
+    "median": -4.209698358634226,
+    "p10": -14.055762822541494,
+    "p90": 0.032320620555983344
+   },
+   "exit_bias_bps_all": {
+    "n": 36,
+    "mean": 61.49820547889741,
+    "median": -3.7227645308206903,
+    "p10": -15.215996569120577,
+    "p90": 225.3244383014601
+   }
+  },
+  "5s": {
+   "proxy_false_fills_by_real_status": {
+    "partial": 78,
+    "none": 17
+   },
+   "real_partial_ask_qty_over_order_qty": {
+    "n": 80,
+    "mean": 0.33207033099935,
+    "median": 0.28734611965,
+    "p10": 0.04183417800000001,
+    "p90": 0.6754358102000001
+   },
+   "quote_age_at_tau_gt_1s": 4,
+   "real_full_with_quote_age_at_tau_gt_1s": 2,
+   "exit_check_bid_quote_age_at_T_gt_1s": 27,
+   "exit_bias_bps_bid_quote_age_le_1s": {
+    "n": 89,
+    "mean": -4.915019185476268,
+    "median": -2.232871731128584,
+    "p10": -15.4653620237885,
+    "p90": 0.0
+   },
+   "exit_bias_bps_all": {
+    "n": 116,
+    "mean": -49.527083931733316,
+    "median": -2.6120101618633678,
+    "p10": -148.38025778824715,
+    "p90": 3.1472765712960253
+   }
+  },
+  "10s": {
+   "proxy_false_fills_by_real_status": {
+    "partial": 177,
+    "none": 19
+   },
+   "real_partial_ask_qty_over_order_qty": {
+    "n": 177,
+    "mean": 0.3626305309968926,
+    "median": 0.301205604,
+    "p10": 0.040121428779999996,
+    "p90": 0.8116074705000001
+   },
+   "quote_age_at_tau_gt_1s": 4,
+   "real_full_with_quote_age_at_tau_gt_1s": 2,
+   "exit_check_bid_quote_age_at_T_gt_1s": 53,
+   "exit_bias_bps_bid_quote_age_le_1s": {
+    "n": 185,
+    "mean": -4.632964566828235,
+    "median": -2.2657669302691366,
+    "p10": -13.68342301215687,
+    "p90": 0.7539918453911626
+   },
+   "exit_bias_bps_all": {
+    "n": 238,
+    "mean": 9.138935575678106,
+    "median": -1.6455903141440555,
+    "p10": -19.438563993665312,
+    "p90": 67.55426604338194
+   }
+  }
+ }
+}
