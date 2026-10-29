@@ -68,13 +68,21 @@ def test_ranking_uses_previous_days_only(monkeypatch):
     assert U.build_universe(_daily(rows), EX, [nxt], D0)[nxt] == {"BBUSDT"}
 
 
-def test_draft_exclusions_refused_and_review_check():
+def test_draft_exclusions_refused_and_review_check(tmp_path, monkeypatch):
+    draft = tmp_path / "EXCLUSIONS.json"
+    draft.write_text(json.dumps(dict(EX, status="DRAFT")))
+    monkeypatch.setattr(U, "EXCLUSIONS_PATH", draft)
     with pytest.raises(U.ExclusionsNotFrozen):
         U.load_exclusions(require_frozen=True)
-    assert json.loads(U.EXCLUSIONS_PATH.read_text())["status"] == "DRAFT"
     with pytest.raises(U.ExclusionsNotFrozen):
         U.check_reviewed(["BTCUSDT", "NEWUSDT"], EX)
     U.check_reviewed(["BTCUSDT"], EX)
+
+
+def test_committed_exclusions_are_frozen():
+    ex = U.load_exclusions(require_frozen=True)
+    assert ex["status"] == "FROZEN" and "USDTSETTLED" in ex["perp_suffixes"]
+    assert U.is_candidate_symbol("AERGOUSDTSETTLED", ex) and not U.is_candidate_symbol("ALLUSDT", ex)
 
 
 def test_settled_suffix_and_excluded_days():

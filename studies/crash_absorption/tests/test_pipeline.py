@@ -45,7 +45,12 @@ def test_end_to_end_synthetic():
     assert pw["projected_verdict"]["fills"] == pytest.approx(2 * 200 / 602) and not pw["meets_minimum"]
 
 
-def test_real_detection_refuses_draft_exclusions(tmp_path):
+def test_real_detection_refuses_draft_exclusions(tmp_path, monkeypatch):
+    import json
+    import ca.universe as U
+    draft = tmp_path / "EXCLUSIONS.json"
+    draft.write_text(json.dumps({"status": "DRAFT"}))
+    monkeypatch.setattr(U, "EXCLUSIONS_PATH", draft)
     d = tmp_path / "klines" / "1d"
     d.mkdir(parents=True)
     pd.DataFrame({"open_time": [ms(D)], "quote_volume": [1.0]}).to_parquet(d / "BTCUSDT.parquet")
