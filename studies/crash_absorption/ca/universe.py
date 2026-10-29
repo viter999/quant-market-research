@@ -23,7 +23,8 @@ def load_exclusions(require_frozen: bool = True) -> dict:
 
 
 def is_candidate_symbol(symbol: str, exclusions: dict) -> bool:
-    if not symbol.endswith("USDT") or "_" in symbol:  # USDT-margined perpetuals only (no quarterlies)
+    suffixes = tuple(exclusions.get("perp_suffixes", ["USDT"]))
+    if not symbol.endswith(suffixes) or "_" in symbol:  # USDT-margined perpetuals only (no quarterlies)
         return False
     if any(symbol.startswith(p) for p in exclusions["excluded_prefixes"]):
         return False
@@ -42,6 +43,9 @@ def build_universe(daily: pd.DataFrame, exclusions: dict, days, first_archive_da
     A symbol's first archive day is a partial (listing) day unless it equals
     first_archive_day (the start of what was downloaded). Returns {day: frozenset}."""
     daily = daily[daily["symbol"].map(lambda s: is_candidate_symbol(s, exclusions))]
+    for sym, bad_days in exclusions.get("excluded_days", {}).items():  # e.g. SETTLED/base overlap
+        bad = {dt.date.fromisoformat(d) for d in bad_days}
+        daily = daily[~((daily["symbol"] == sym) & daily["day"].isin(bad))]
     wide = daily.pivot_table(index="day", columns="symbol", values="quote_volume", aggfunc="sum")
     cal = pd.Index([min(wide.index) + dt.timedelta(days=i)
                     for i in range((max(max(days), max(wide.index)) - min(wide.index)).days + 1)], name="day")

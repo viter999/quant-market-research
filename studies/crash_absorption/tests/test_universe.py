@@ -75,3 +75,14 @@ def test_draft_exclusions_refused_and_review_check():
     with pytest.raises(U.ExclusionsNotFrozen):
         U.check_reviewed(["BTCUSDT", "NEWUSDT"], EX)
     U.check_reviewed(["BTCUSDT"], EX)
+
+
+def test_settled_suffix_and_excluded_days():
+    ex = dict(EX, perp_suffixes=["USDT", "USDTSETTLED"],
+              excluded_days={"OLDUSDTSETTLED": [str(D0 + dt.timedelta(days=12))]})
+    assert U.is_candidate_symbol("OLDUSDTSETTLED", ex) and not U.is_candidate_symbol("OLDUSDTSETTLED", EX)
+    rows = _span("OLDUSDTSETTLED", D0, 30, 5.0)
+    day = D0 + dt.timedelta(days=15)
+    assert "OLDUSDTSETTLED" not in U.build_universe(_daily(rows), ex, [day], D0)[day]  # excluded day in its window
+    later = D0 + dt.timedelta(days=21)
+    assert "OLDUSDTSETTLED" in U.build_universe(_daily(rows), ex, [later], D0)[later]
