@@ -152,3 +152,38 @@ def test_trade_pnl_split_and_delisting_buffer():
     assert r["net"] == pytest.approx(5.0 - 3.5 + 2.0 - fees - buf)
     d = N.trade_pnl(100, 100.5, 101, 101.2, 5.0, 2.0, 1, delisting=True)
     assert d["buffer"] == pytest.approx(0.0005 * (500 + 502.5) + 0.0025 * (505 + 506))
+
+
+# ---------------- slices: spot microsecond timestamps, data end
+def test_spot_open_time_ms_or_us_detected_and_validated():
+    from ca import downloader as DL
+    from ef.slices import to_ms
+    d = dt.date(2025, 1, 2)
+    ms = P.date_to_ms(d) + np.arange(3) * P.MINUTE_MS
+    assert (to_ms(pd.Series(ms), d) == ms).all()
+    assert (to_ms(pd.Series(ms * 1000), d) == ms).all()
+    with pytest.raises(DL.DataValidationError):
+        to_ms(pd.Series(ms + 2 * C.DAY), d)
+
+
+def test_last_common_minute():
+    import importlib.util
+    from pathlib import Path
+    spec = importlib.util.spec_from_file_location("ev", Path(__file__).resolve().parents[1] / "scripts" / "ef1_events.py")
+    ev = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(ev)
+    a, b = T0, T0 + 10 * P.MINUTE_MS
+    full = pd.DataFrame({"open_time": a + np.arange(10) * P.MINUTE_MS, "quote_volume": 1.0})
+    cut = full.iloc[:6].copy()
+    assert ev.last_common_minute(full, full, a, b) is None
+    assert ev.last_common_minute(cut, full, a, b) == a + 5 * P.MINUTE_MS
+    flat = full.copy()
+    flat.loc[4:, "quote_volume"] = 0.0
+    assert ev.last_common_minute(flat, full, a, b) is None and ev.last_common_minute(flat, full, a, b, traded_only=True) == a + 3 * P.MINUTE_MS
+    assert ev.spot_symbol("SOLUSDT") == "SOLUSDT" and ev.spot_symbol("CTKUSDTSETTLED") == "CTKUSDT"
+
+
+def test_metrics_create_time_to_ms():
+    from ef.slices import create_time_ms
+    got = create_time_ms(pd.Series(["2024-01-02 00:00:00", "2024-01-02 00:05:00"]))
+    assert got.tolist() == [1704153600000, 1704153900000]
