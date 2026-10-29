@@ -95,3 +95,18 @@ Implementation choices accepted (from the Task 2a report)
 
 §2 exclusions
 - Frozen only after the research director's review of the real archive list.
+
+# CLARIFICATIONS v0.3.4 — exclusion review against the real archive list (no outcome seen; PROPOSED, pending Shawn gate (d) together with v0.3.1–v0.3.3)
+
+§2 universe / exclusions (research director's review of EXCLUSIONS v0.3-draft, 2026-10-29)
+1. All earlier exclusions are kept (prefixes 1000/1M; USDC, USTC; the 6 tokenized metals; the 8 tokenized equities; the 4 index contracts). Delivery contracts (_YYMMDD), BUSD/USDC quotes and ETHBTC stay out through the USDT-perp filter.
+2. Pegged check, every USDT perp, 1d klines, DEV only (≤ 2025-08-24), computed only on traded days (quote volume > 0 on that day AND the previous day): exclude if the median |daily close-to-close return| < 0.5 % (stablecoin-like), or if daily-return correlation with BTCUSDT > 0.98 and median |ret − BTC ret| < 0.3 % (BTC-pegged). Reason: delisted contracts continue in the archive as flat zero-volume bars, which would otherwise read as "stablecoin-like".
+   - FRAX, US, STABLE and STBL cannot be checked on DEV (no DEV data) and are excluded to be conservative. USUAL and PUMPBTC failed the pegged test and are kept as crypto.
+3. Equity-ticker collisions (ON, T, ROBO, INX): excluded only if the symbol's first data is on or after the first tokenized-equity listing day in the archive; otherwise kept as crypto.
+4. ALLUSDT is excluded as a possible index.
+5. …USDTSETTLED contracts are included as separate USDT-margined perps. Where one overlaps in time with the same-base …USDT symbol and the 1m closes are identical during the overlap, only the …USDT name is kept for the overlap.
+6. Non-ASCII memecoins are kept (URL-encoded).
+- After these rules the list is FROZEN.
+
+§6 funding
+- fapi.binance.com answers HTTP 451 (restricted location) from the study container. The REST funding (2026-02 seam check and 2026-03-01…13, all universe members of those days) is fetched later by Shawn from an eligible location with scripts/fetch_funding_rest.py (guarded, writes parquet + sha256). Until then any hold that needs it raises.
