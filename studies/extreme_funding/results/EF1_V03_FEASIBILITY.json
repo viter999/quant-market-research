@@ -1,0 +1,79 @@
+{
+ "prereg": "v0.3",
+ "dev": {
+  "trades": 58,
+  "symbols": 38,
+  "distinct_entry_days": 41,
+  "entry_months_spanned": 9,
+  "trades_by_month": {
+   "2024-01": 1,
+   "2024-02": 8,
+   "2024-03": 37,
+   "2024-04": 3,
+   "2024-06": 1,
+   "2024-09": 1,
+   "2024-11": 4,
+   "2025-01": 1,
+   "2025-04": 2
+  },
+  "top_symbols": {
+   "WIFUSDT": 7,
+   "BOMEUSDT": 5,
+   "AIUSDT": 3,
+   "STRKUSDT": 3,
+   "WLDUSDT": 2,
+   "MEMEUSDT": 2,
+   "FILUSDT": 2,
+   "JUPUSDT": 2,
+   "ETHFIUSDT": 2,
+   "PNUTUSDT": 2
+  },
+  "exit_reasons": {
+   "funding": 54,
+   "max_hold": 4
+  },
+  "delisting_exits_if_only_traded_bars_count": 1,
+  "hold_hours": {
+   "min": 3.9999997222222223,
+   "p10": 8.0,
+   "median": 52.0,
+   "p90": 146.3999999166667,
+   "max": 168.0,
+   "mean": 64.82758634578543
+  },
+  "hold_hours_hist": {
+   "(0.0, 8.0]": 7,
+   "(8.0, 24.0]": 13,
+   "(24.0, 72.0]": 16,
+   "(72.0, 168.0]": 22,
+   "(168.0, 1000000000.0]": 0
+  },
+  "max_concurrent_positions": 10,
+  "drops_in_order": {
+   "candidates_ok": 10432,
+   "after_entry_cutoff": 182,
+   "excluded_symbol": 1054,
+   "perp_qv24h_lt_20M": 3001,
+   "no_spot_pair_files_24h_before_S": 3518,
+   "spot_no_bars_24h": 9,
+   "spot_qv24h_lt_5M": 55,
+   "spot_median_1m_qv_lt_50k": 2248,
+   "oi_missing": 9,
+   "oi_rise_lt_5pct": 201,
+   "signals_after_entry_filters": 155,
+   "symbol_open": 70,
+   "cap": 27
+  }
+ },
+ "power_projection_verdict_x_200_602": {
+  "trades": 19.269102990033222,
+  "symbols": 12.624584717607974,
+  "entry_days": 13.621262458471762
+ },
+ "power_minimums": {
+  "trades": 60,
+  "symbols": 15,
+  "entry_days": 30
+ },
+ "power_meets": false
+}
