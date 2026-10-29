@@ -1,0 +1,156 @@
+{
+ "head": "764b614f424c07303e66935ec00b2cc6300d2c8e",
+ "started_utc": "2026-10-29T16:24:34.425494+00:00",
+ "finished_utc": "2026-10-29T16:25:23.901927+00:00",
+ "events_csv_sha256": "8c326101c1d29f994cd51cec44d5e9fef3e4f43e1b25854a19c7c606b2167292",
+ "exclusions_csv_sha256": "8b395450f79e24a67e099936fcd8eb8096b9a6d9485ba77b34f0a5336a79710b",
+ "data_manifest_sha256": "60f16fb3f4a471812b742e06ba378ab2e754bbc308c9197612402963eb7b87bf",
+ "verdict": {
+  "status": "KILL",
+  "items": {
+   "1_sample": {
+    "episodes": 157,
+    "launch_days": 143,
+    "pass": true
+   },
+   "2_mean_1x": {
+    "mean_bps": -201.07995611083692,
+    "lb99_1day_bps": -918.2798020754454,
+    "lb99_7day_bps": -940.392678860277,
+    "pass": false
+   },
+   "3_mean_2x": {
+    "mean_bps": -231.07995611083695,
+    "pass": false
+   },
+   "4_median_1x": {
+    "median_bps": 705.5910673280986,
+    "pass": true
+   },
+   "5_btc_relative_mean_1x": {
+    "mean_bps": -195.05092523032386,
+    "pass": false
+   },
+   "6_mean_1x_without_top5": {
+    "mean_bps": -411.1724327293096,
+    "pass": false
+   }
+  },
+  "ub99_7day_bps": 414.09666638868975,
+  "significantly_negative": false,
+  "mean_5x_bps": -321.0799561108369,
+  "n_boot": 10000,
+  "seed": 20261104
+ },
+ "dropped": {},
+ "descriptive": {
+  "x_entry_L5m_net_1x_bps": {
+   "episodes": 157,
+   "mean_bps": -264.748977669274,
+   "median_bps": 597.4877766815962
+  },
+  "x_entry_L24h_net_1x_bps": {
+   "episodes": 157,
+   "mean_bps": -90.90721213784414,
+   "median_bps": 189.91428257168272
+  },
+  "x_hold_4h_net_1x_bps": {
+   "episodes": 157,
+   "mean_bps": -42.52405993751402,
+   "median_bps": 49.6480872192443
+  },
+  "x_hold_24h_net_1x_bps": {
+   "episodes": 157,
+   "mean_bps": -122.17638249615877,
+   "median_bps": 526.5735299894808
+  },
+  "x_hold_7d_net_1x_bps": {
+   "episodes": 0,
+   "mean_bps": null,
+   "median_bps": null
+  },
+  "x_long_net_1x_bps": {
+   "episodes": 157,
+   "mean_bps": 105.94834166916115,
+   "median_bps": -824.262035912036
+  },
+  "x_max_adverse_bps": {
+   "episodes": 157,
+   "mean_bps": 3369.0147339823993,
+   "median_bps": 1935.8701452273297
+  },
+  "x_stop20_net_1x_bps": {
+   "episodes": 157,
+   "mean_bps": -6.8465386808450654,
+   "median_bps": -184.31904577616706
+  },
+  "gross_bps": {
+   "episodes": 157,
+   "mean_bps": -26.325296238225363,
+   "median_bps": 869.9393789906534
+  },
+  "funding_bps": {
+   "episodes": 157,
+   "mean_bps": -134.75465987261148,
+   "median_bps": 8.5
+  },
+  "btc_ret_bps": {
+   "episodes": 157,
+   "mean_bps": 6.029030880513064,
+   "median_bps": 28.984778397491695
+  },
+  "net_5x_bps": {
+   "episodes": 157,
+   "mean_bps": -321.0799561108369,
+   "median_bps": 585.5910673280986
+  },
+  "x_max_adverse_p95_bps": 12619.482068106063,
+  "by_year": {
+   "2024": {
+    "episodes": 51,
+    "mean_bps": -390.69405658208325
+   },
+   "2025": {
+    "episodes": 93,
+    "mean_bps": -336.5808305233303
+   },
+   "2026": {
+    "episodes": 13,
+    "mean_bps": 1512.1431549965046
+   }
+  },
+  "by_premarket_flag": {
+   "0": {
+    "episodes": 136,
+    "mean_bps": -283.3353208791664
+   },
+   "1": {
+    "episodes": 21,
+    "mean_bps": 331.62145381739225
+   }
+  },
+  "funding_share_of_abs_pnl": 0.06313634220614765,
+  "funding_path": {
+   "settlements": 3849,
+   "rate_p1": -0.0182103304,
+   "rate_p50": 5e-05,
+   "rate_p99": 0.0021316875999999995
+  },
+  "funding_stress": {
+   "adverse_rate_p5": -0.004332951999999999,
+   "mean_net_1x_stress_bps": -867.2774530959749,
+   "episodes": 157
+  },
+  "fallbacks": {
+   "entry": 0,
+   "exit": 0
+  },
+  "spot_pair_at_L": "not computed: no spot-listing data in the event list",
+  "sensitivity_incl_thin": {
+   "episodes": 180,
+   "mean_net_1x_bps": -72.31598562688401,
+   "median_net_1x_bps": 600.3885989198683,
+   "dropped": {}
+  }
+ }
+}
