@@ -110,3 +110,10 @@ Implementation choices accepted (from the Task 2a report)
 
 §6 funding
 - fapi.binance.com answers HTTP 451 (restricted location) from the study container. The REST funding (2026-02 seam check and 2026-03-01…13, all universe members of those days) is fetched later by Shawn from an eligible location with scripts/fetch_funding_rest.py (guarded, writes parquet + sha256). Until then any hold that needs it raises.
+
+# CLARIFICATIONS v0.3.5 — missing aggTrades handled symmetrically (independent code review; no outcome seen; PROPOSED, to Shawn for gate (d) together with gate (b))
+
+§5/§8 data availability
+- An order (event or placebo) whose aggTrades symbol-day file is missing is excluded from its arm and counted: event_orders_data_missing and placebo_orders_data_missing, both shown in the VERDICT report. An event excluded this way is not counted as unfilled (it is not a 0 per order).
+- The placebos of an excluded event are also removed from the placebo arm (so both arms are built from the same set of events) and counted as placebos_removed_with_their_event.
+- Unchanged (v0.3.3): dropped fills (no exit price) are excluded from both per-fill and per-order statistics, including item 4's per-order arm; the dropped-as-0 per-order mean is descriptive only.
