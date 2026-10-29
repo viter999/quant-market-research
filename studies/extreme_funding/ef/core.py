@@ -16,7 +16,8 @@ OI_LAG_MS = 5 * P.MINUTE_MS
 DAY = P.DAY_MS
 HOUR = 3_600_000
 MAX_HOLD_MS = 7 * DAY
-CAP = 5
+CAP = 10  # v0.3 (was 5)
+PERP_24H_QV_MIN = 20_000_000.0  # v0.3 universe: perp 24h quote volume from 1m bars in [S-24h, S)
 SPOT_24H_QV_MIN = 5_000_000.0
 SPOT_MED_1M_QV_MIN = 50_000.0
 
@@ -60,6 +61,12 @@ def oi_rise(metrics: pd.DataFrame, S: int) -> tuple[float | None, float | None]:
     return oi_at(metrics, S - OI_LAG_MS), oi_at(metrics, S - OI_LAG_MS - DAY)
 
 
+def perp_qv_24h(perp: pd.DataFrame, S: int) -> float:
+    """v0.3 universe input: perp quote volume summed over its 1m bars in [S-24h, S)."""
+    m = (perp["open_time"] >= S - DAY) & (perp["open_time"] < S)
+    return float(perp.loc[m, "quote_volume"].sum())
+
+
 def spot_liquidity(spot: pd.DataFrame, S: int) -> dict:
     """Spot 1m bars in [S-24h, S): count, 24h quote volume, median 1-min quote volume
     (missing minutes count as 0 in the median)."""
@@ -95,13 +102,13 @@ class Book:
     max_open: int = 0
 
 
-def simulate(signals: pd.DataFrame, exit_for) -> tuple[pd.DataFrame, pd.DataFrame]:
+def simulate(signals: pd.DataFrame, exit_for, cap: int = CAP) -> tuple[pd.DataFrame, pd.DataFrame]:
     """signals: symbol, S, h_S (all non-portfolio filters already passed).
     Processed by S; at each S, positions whose exit time is <= S are closed first, then
     the signals at S are taken in order of highest h_S (ties: symbol name). A signal is
-    dropped if its symbol already has an open position or if 5 positions are open.
+    dropped if its symbol already has an open position or if `cap` positions are open.
     exit_for(symbol, S) -> (exit_time, reason). Returns (trades, drops)."""
-    book, trades, drops = Book(), [], []
+    book, trades, drops = Book(cap=cap), [], []
     for S, g in signals.sort_values(["S"]).groupby("S", sort=True):
         for sym in [s for s, e in book.open.items() if e <= S]:
             del book.open[sym]

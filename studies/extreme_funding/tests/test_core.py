@@ -84,28 +84,42 @@ def test_cap_ordering_by_h_and_symbol_open():
     S1, S2 = T0, T0 + 8 * H
     sig = pd.DataFrame({"symbol": ["A", "B", "C", "D", "E", "F", "G", "A"],
                         "S": [S1] * 7 + [S2], "h_S": [1, 7, 3, 6, 5, 4, 2, 9]})
-    tr, dr = C.simulate(sig, lambda s, S: (S + 24 * H, "funding"))
+    tr, dr = C.simulate(sig, lambda s, S: (S + 24 * H, "funding"), cap=5)
     assert tr["symbol"].tolist() == ["B", "D", "E", "F", "C"]               # top 5 by h_S at S1
     caps = dr[dr["reason"] == "cap"]
     assert sorted(caps.loc[caps["S"] == S1, "symbol"]) == ["A", "G"]
     assert caps.loc[caps["S"] == S2, "symbol"].tolist() == ["A"]  # still 5 open at S2 (A was never entered)
     assert tr.attrs["max_open"] == 5
     sig2 = pd.DataFrame({"symbol": ["A", "A", "B"], "S": [S1, S2, S2], "h_S": [5, 5, 5]})
-    tr2, dr2 = C.simulate(sig2, lambda s, S: (S + 24 * H, "funding"))
+    tr2, dr2 = C.simulate(sig2, lambda s, S: (S + 24 * H, "funding"), cap=5)
     assert dr2.to_dict("records") == [{"symbol": "A", "S": S2, "reason": "symbol_open"}]
 
 
 def test_exits_free_slots_before_entries_at_same_settlement():
     S1, S2 = T0, T0 + 8 * H
     sig = pd.DataFrame({"symbol": list("ABCDE") + ["F"], "S": [S1] * 5 + [S2], "h_S": [1] * 6})
-    tr, dr = C.simulate(sig, lambda s, S: (S2, "funding") if s == "A" else (S + 100 * H, "funding"))
+    tr, dr = C.simulate(sig, lambda s, S: (S2, "funding") if s == "A" else (S + 100 * H, "funding"), cap=5)
     assert "F" in tr["symbol"].tolist() and dr.empty and C.max_concurrent(tr) == 5
 
 
 def test_tie_on_h_broken_by_symbol_name():
     sig = pd.DataFrame({"symbol": list("FEDCBA"), "S": [T0] * 6, "h_S": [1.0] * 6})
-    tr, _ = C.simulate(sig, lambda s, S: (S + H, "funding"))
+    tr, _ = C.simulate(sig, lambda s, S: (S + H, "funding"), cap=5)
     assert tr["symbol"].tolist() == list("ABCDE")
+
+
+def test_cap_10_default_v03():
+    assert C.CAP == 10
+    sig = pd.DataFrame({"symbol": [f"S{i:02d}" for i in range(12)], "S": [T0] * 12, "h_S": list(range(12))})
+    tr, dr = C.simulate(sig, lambda s, S: (S + H, "funding"))
+    assert len(tr) == 10 and sorted(dr["symbol"]) == ["S00", "S01"] and (dr["reason"] == "cap").all()
+
+
+def test_perp_qv_24h_window():
+    S = T0 + 2 * C.DAY
+    ot = S - C.DAY - P.MINUTE_MS + np.arange(1442) * P.MINUTE_MS  # one bar before the window, 1440 inside, one at S
+    perp = pd.DataFrame({"open_time": ot, "quote_volume": np.full(1442, 1.0)})
+    assert C.perp_qv_24h(perp, S) == 1440.0
 
 
 # ---------------- worst-of-bar prices and funding sum (locked; synthetic only)

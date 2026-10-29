@@ -23,6 +23,7 @@ from ca import params as P  # noqa: E402
 from ef import archive as A  # noqa: E402
 from ef import core as C  # noqa: E402
 from ef import slices as SL  # noqa: E402
+from ca.universe import check_reviewed, is_candidate_symbol, load_exclusions  # noqa: E402
 
 DATA = EF / "data"
 CA_DATA = CA / "data"
@@ -90,16 +91,13 @@ def universe(seg: str) -> dict:
     return {dt.date.fromisoformat(k): set(v) for k, v in u.items()}
 
 
-_PERP_CACHE: dict = {}
-
-
 def perp_minutes(fetch, sym: str, days: list[dt.date]) -> pd.DataFrame:
-    """Perp 1m for the given days: crash-absorption DEV parquet where it has the day, else the daily archive file."""
-    if sym not in _PERP_CACHE:
-        p = CA_DATA / "klines" / "1m" / f"{sym}.parquet"
-        _PERP_CACHE[sym] = pd.read_parquet(p) if p.exists() else pd.DataFrame(columns=["open_time", "close", "quote_volume"])
-    base = _PERP_CACHE[sym]
-    have = set(int(x) for x in np.unique(base["open_time"].to_numpy(np.int64) // P.DAY_MS)) if len(base) else set()
+    """Perp 1m for the given days: the crash-absorption DEV parquet where it has the day
+    (read with a row filter, not loaded whole), else the daily archive file."""
+    p = CA_DATA / "klines" / "1m" / f"{sym}.parquet"
+    a, b = P.date_to_ms(days[0]), P.date_to_ms(days[-1] + dt.timedelta(days=1))
+    base = pd.read_parquet(p, filters=[("open_time", ">=", a), ("open_time", "<", b)]) if p.exists() else None
+    have = set(int(x) for x in np.unique(base["open_time"].to_numpy(np.int64) // P.DAY_MS)) if base is not None and len(base) else set()
     parts = []
     for d in days:
         k = (d - dt.date(1970, 1, 1)).days
@@ -239,5 +237,110 @@ def report() -> None:
     print(json.dumps(out, indent=1, default=str))
 
 
+# ------------------------------------------------------------------ DEV filters, PREREG v0.3
+def filters_v03() -> None:
+    """v0.3 (pre-outcome amendment): frozen EXCLUSIONS + perp 24h quote volume >= $20M from its
+    1m bars in [S-24h, S) replace the top-80 universe; cap 10. Everything else as v0.2."""
+    t0 = time.time()
+    fetch = DL.HttpFetcher()
+    ex = load_exclusions(require_frozen=True)
+    ev = pd.read_parquet(DATA / "candidates.parquet")
+    c = ev[(ev["segment"] == "dev") & (ev["status"] == "ok")].sort_values(["S", "symbol"]).reset_index(drop=True)
+    check_reviewed(c["symbol"].unique(), ex)
+    drops = {"candidates_ok": len(c)}
+
+    def step(name, bad):
+        nonlocal c
+        drops[name] = int(bad.sum())
+        c = c[~bad.to_numpy()].reset_index(drop=True)
+
+    step("after_entry_cutoff", c["S"] > C.segment_cutoff_ms("dev"))
+    step("excluded_symbol", ~c["symbol"].map(lambda s: is_candidate_symbol(s, ex)))
+
+    def pqv(r):
+        S = int(r.S)
+        return C.perp_qv_24h(perp_minutes(fetch, r.symbol, SL.days_between(S - C.DAY, S - 1)), S)
+    with cf.ThreadPoolExecutor(16) as pool:
+        c["perp_qv_24h"] = list(pool.map(pqv, c.itertuples()))
+    step("perp_qv24h_lt_20M", c["perp_qv_24h"] < C.PERP_24H_QV_MIN)
+    c["spot"] = c["symbol"].map(spot_symbol)
+    lst = spot_listing(fetch, set(c["spot"]))
+    step("no_spot_pair_files_24h_before_S",
+         pd.Series([not ({str(d) for d in SL.days_between(int(r.S) - C.DAY, int(r.S) - 1)} & lst[r.spot]) for r in c.itertuples()]))
+
+    def pre(r):
+        S = int(r.S)
+        liq = C.spot_liquidity(spot_minutes(fetch, r.spot, SL.days_between(S - C.DAY, S - 1)), S)
+        ms = [m for d in SL.days_between(S - C.OI_LAG_MS - C.DAY, S - C.OI_LAG_MS)
+              if (m := SL.get_metrics(fetch, DATA / "metrics", r.symbol, d)) is not None]
+        oi_now, oi_prev = C.oi_rise(pd.concat(ms).sort_values("ts"), S) if ms else (None, None)
+        return {**liq, "oi_now": oi_now, "oi_prev": oi_prev}
+    with cf.ThreadPoolExecutor(16) as pool:
+        feats = pd.DataFrame(list(pool.map(pre, c.itertuples())))
+    c = pd.concat([c, feats], axis=1)
+    step("spot_no_bars_24h", c["bars"] == 0)
+    step("spot_qv24h_lt_5M", c["qv_24h"] < C.SPOT_24H_QV_MIN)
+    step("spot_median_1m_qv_lt_50k", c["median_1m_qv"] < C.SPOT_MED_1M_QV_MIN)
+    step("oi_missing", c["oi_now"].isna() | c["oi_prev"].isna() | (c["oi_prev"] <= 0))
+    step("oi_rise_lt_5pct", c["oi_now"] < C.OI_RISE * c["oi_prev"])
+    drops["signals_after_entry_filters"] = len(c)
+    c.to_parquet(DATA / "dev_signals_v03.parquet", index=False)
+
+    def ends(r):
+        S = int(r.S)
+        days = SL.days_between(S - C.DAY, S + SLICE_AFTER)
+        sp, pp = spot_minutes(fetch, r.spot, days), perp_minutes(fetch, r.symbol, days)
+        return (r.symbol, S), (last_common_minute(sp, pp, S, S + SLICE_AFTER),
+                               last_common_minute(sp, pp, S, S + SLICE_AFTER, traded_only=True))
+    with cf.ThreadPoolExecutor(8) as pool:
+        data_end = dict(pool.map(ends, c.itertuples()))
+    fts = {s: C.funding_table(load_funding(s)[["ts", "rate"]]) for s in set(c["symbol"])}
+    beyond = []
+
+    def exit_for(sym, S):
+        try:
+            t, why = C.exit_time(fts[sym], S, data_end[(sym, S)][0])
+        except ValueError:
+            return S + SLICE_AFTER, "unresolved"
+        if t > S + SLICE_AFTER:
+            beyond.append((sym, S))
+        return t, why
+    trades, pdrops = C.simulate(c[["symbol", "S", "h_S"]], exit_for, cap=C.CAP)
+    for k in ("symbol_open", "cap"):
+        drops[k] = int((pdrops["reason"] == k).sum())
+    assert drops["signals_after_entry_filters"] == len(trades) + drops["symbol_open"] + drops["cap"]
+    trades["entry_day"] = [str(P.ms_to_date(int(s))) for s in trades["S"]]
+    trades["delisting_if_traded_bars_only"] = [data_end[(r.symbol, int(r.S))][1] is not None and data_end[(r.symbol, int(r.S))][1] < r.exit_ts
+                                              for r in trades.itertuples()]
+    trades.to_parquet(DATA / "dev_trades_times_v03.parquet", index=False)
+    log("filters_dev_v03", {"prereg": "v0.3", "cap": C.CAP, "drops_in_order": drops, "trades": len(trades),
+                            "exit_settlement_beyond_slice": len(beyond), "seconds": round(time.time() - t0)})
+
+
+def report_v03() -> None:
+    steps = json.loads((DATA / "steps.json").read_text())
+    tr = pd.read_parquet(DATA / "dev_trades_times_v03.parquet")
+    hold = tr["hold_h"]
+    n, syms, days = len(tr), int(tr["symbol"].nunique()), int(tr["entry_day"].nunique())
+    months = pd.Series([d[:7] for d in tr["entry_day"]]).value_counts().sort_index()
+    proj = {"trades": n * P.POWER_SCALE, "symbols": syms * P.POWER_SCALE, "entry_days": days * P.POWER_SCALE}
+    out = {"prereg": "v0.3",
+           "dev": {"trades": n, "symbols": syms, "distinct_entry_days": days, "entry_months_spanned": int(len(months)),
+                   "trades_by_month": months.to_dict(), "top_symbols": tr["symbol"].value_counts().head(10).to_dict(),
+                   "exit_reasons": tr["exit_reason"].value_counts().to_dict(),
+                   "delisting_exits_if_only_traded_bars_count": int(tr["delisting_if_traded_bars_only"].sum()),
+                   "hold_hours": {"min": float(hold.min()), "p10": float(hold.quantile(.1)), "median": float(hold.median()),
+                                  "p90": float(hold.quantile(.9)), "max": float(hold.max()), "mean": float(hold.mean())},
+                   "hold_hours_hist": {str(k): int(v) for k, v in pd.cut(hold, [0, 8, 24, 72, 168, 1e9]).value_counts().sort_index().items()},
+                   "max_concurrent_positions": int(C.max_concurrent(tr)),
+                   "drops_in_order": steps["filters_dev_v03"]["drops_in_order"]},
+           "power_projection_verdict_x_200_602": proj, "power_minimums": {"trades": 60, "symbols": 15, "entry_days": 30},
+           "power_meets": bool(proj["trades"] >= 60 and proj["symbols"] >= 15 and proj["entry_days"] >= 30)}
+    (EF / "results").mkdir(exist_ok=True)
+    (EF / "results" / "EF1_V03_FEASIBILITY.json").write_text(json.dumps(out, indent=1, default=str))
+    print(json.dumps(out, indent=1, default=str))
+
+
 if __name__ == "__main__":
-    {"candidates": candidates, "filters": filters, "report": report}[sys.argv[1]]()
+    {"candidates": candidates, "filters": filters, "report": report, "filters_v03": filters_v03,
+     "report_v03": report_v03}[sys.argv[1]]()
