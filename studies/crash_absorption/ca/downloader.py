@@ -46,16 +46,23 @@ class DataValidationError(RuntimeError):
 class HttpFetcher:
     """get(url) -> bytes | None (404); download(url, path) -> bool (False on 404)."""
 
-    def __init__(self, timeout: int = 120):
-        self.timeout = timeout
+    def __init__(self, timeout: int = 120, retries: int = 4):
+        self.timeout, self.retries = timeout, retries
 
     def _open(self, url):
-        try:
-            return urllib.request.urlopen(url, timeout=self.timeout)
-        except urllib.error.HTTPError as e:
-            if e.code == 404:
-                return None
-            raise
+        import time
+        for attempt in range(self.retries + 1):
+            try:
+                return urllib.request.urlopen(url, timeout=self.timeout)
+            except urllib.error.HTTPError as e:
+                if e.code == 404:
+                    return None
+                if e.code < 500 or attempt == self.retries:
+                    raise
+            except (urllib.error.URLError, TimeoutError, ConnectionError):
+                if attempt == self.retries:
+                    raise
+            time.sleep(2 ** (attempt + 1))
 
     def get(self, url: str) -> bytes | None:
         r = self._open(url)
