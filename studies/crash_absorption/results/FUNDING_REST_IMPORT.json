@@ -1,0 +1,36 @@
+{
+ "raw_file": "funding_raw/funding_2026-02-01_03-13.json",
+ "raw_sha256": "006e11f6c1e4cbcefa177e0722a978b98c9ad54f45c66a72915fce40aaddb3f2",
+ "raw_commit": "339c051 (branch data/funding-rest, fast-forwarded into study/crash-absorption)",
+ "validation": {
+  "symbols": 177,
+  "rows": 40678,
+  "symbol_set_equals_funding_rest_symbols": true,
+  "spans_equal": true,
+  "rows_outside_span": 0,
+  "duplicates": 0,
+  "rateType": {
+   "Regular": 40678
+  },
+  "max_rest_ts_utc": "2026-03-13T23:00:00",
+  "traded_days_without_settlement": 0,
+  "gaps_gt_8h_on_traded_days": 0
+ },
+ "converted_layout": "data/funding_rest|funding_seam/<SYMBOL>.parquet + .coverage.json, data/funding_rest_manifest.json (708 files)",
+ "manifest_sha256": "8c0dc5c099fc69cf6656abe16076bd29ac78d25202376e675b6e173b7ed5a858",
+ "conversion_deterministic": true,
+ "seam_2026_02_archive_vs_rest": {
+  "symbols_compared": 176,
+  "max_abs_dts_ms": 0,
+  "max_abs_drate": 0.0,
+  "count_mismatch": {},
+  "not_compared": {
+   "MANTRAUSDT": "no archive file (first listed 2026-03-04), 0 seam rows"
+  }
+ },
+ "funding_coverage_precheck": {
+  "member_days": 16000,
+  "zero_volume_member_days_skipped": 23,
+  "gaps": 0
+ }
+}

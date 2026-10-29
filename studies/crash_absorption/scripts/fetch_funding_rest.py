@@ -65,6 +65,15 @@ def get(params: dict) -> list:
     return page
 
 
+def rows_to_frame(symbol: str, rows: list, start: int, end: int) -> pd.DataFrame:
+    """Raw fundingRate rows -> (ts, rate), checked to lie inside [start, end]."""
+    df = pd.DataFrame({"ts": [int(r["fundingTime"]) for r in rows],
+                       "rate": [float(r["fundingRate"]) for r in rows]}, columns=["ts", "rate"])
+    if len(df) and (df["ts"].min() < start or df["ts"].max() > end):
+        raise SystemExit(f"ABORT: {symbol} rows outside the requested span")
+    return df.sort_values("ts").drop_duplicates("ts").reset_index(drop=True)
+
+
 def fetch(symbol: str, start: int, end: int) -> pd.DataFrame:
     rows, cur = [], start
     while True:
@@ -74,33 +83,41 @@ def fetch(symbol: str, start: int, end: int) -> pd.DataFrame:
         if len(page) < 1000:
             break
         cur = int(page[-1]["fundingTime"]) + 1
-    df = pd.DataFrame({"ts": [int(r["fundingTime"]) for r in rows],
-                       "rate": [float(r["fundingRate"]) for r in rows]}, columns=["ts", "rate"])
-    if len(df) and (df["ts"].min() < start or df["ts"].max() > end):
-        raise SystemExit(f"ABORT: {symbol} rows outside the requested span")
-    return df.sort_values("ts").drop_duplicates("ts").reset_index(drop=True)
+    return rows_to_frame(symbol, rows, start, end)
 
 
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def main(out: Path) -> None:
-    symbols = json.loads((STUDY / "funding_rest_symbols.json").read_text())["symbols"]
+def write_outputs(out: Path, frames: dict) -> Path:
+    """frames[(symbol, sub)] = DataFrame -> <out>/<sub>/<SYMBOL>.parquet + .coverage.json
+    + <out>/funding_rest_manifest.json (sha256 of every file)."""
+    symbols = sorted({s for s, _ in frames})
     manifest = {"spans_ms": SPANS, "symbols": len(symbols), "files": {}}
-    for i, sym in enumerate(symbols, 1):
+    for sym in symbols:
         for sub, (a, b) in SPANS.items():
-            df = fetch(sym, a, b)
             d = out / sub
             d.mkdir(parents=True, exist_ok=True)
             pq, cov = d / f"{sym}.parquet", d / f"{sym}.coverage.json"
-            df.to_parquet(pq, index=False)
+            frames[(sym, sub)].to_parquet(pq, index=False)
             cov.write_text(json.dumps([[a, b]]))
             for f in (pq, cov):
                 manifest["files"][f"{sub}/{f.name}"] = sha256(f)
-            print(f"[{i}/{len(symbols)}] {sym} {sub}: {len(df)} settlements")
-    (out / "funding_rest_manifest.json").write_text(json.dumps(manifest, indent=1, ensure_ascii=False))
-    print(f"done: {len(manifest['files'])} files, manifest {out / 'funding_rest_manifest.json'}")
+    path = out / "funding_rest_manifest.json"
+    path.write_text(json.dumps(manifest, indent=1, ensure_ascii=False))
+    return path
+
+
+def main(out: Path) -> None:
+    symbols = json.loads((STUDY / "funding_rest_symbols.json").read_text())["symbols"]
+    frames = {}
+    for i, sym in enumerate(symbols, 1):
+        for sub, (a, b) in SPANS.items():
+            frames[(sym, sub)] = fetch(sym, a, b)
+            print(f"[{i}/{len(symbols)}] {sym} {sub}: {len(frames[(sym, sub)])} settlements")
+    path = write_outputs(out, frames)
+    print(f"done: manifest {path} sha256 {sha256(path)}")
 
 
 if __name__ == "__main__":
