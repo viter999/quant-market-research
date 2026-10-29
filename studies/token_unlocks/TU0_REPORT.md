@@ -19,3 +19,14 @@ Option 1 is the only one that answers all four TU-0 questions.
 
 ## Not done
 Steps 1–4 (schedule extraction, point-in-time history check, event list and counts, matching to Binance USDT-M perps). The Binance archive listing needed for the matching is already available from crash-absorption.
+
+## Update — 29 Oct 2026: revised source (public DefiLlama unlock pages) — still BLOCKED
+- The emissions-adapters route is dropped (the repo is no longer public).
+- `defillama.com` is now allowed by the network policy (the proxy connects), but `GET https://defillama.com/unlocks` with a descriptive User-Agent returns **HTTP 403 from Cloudflare** with `cf-mitigated: challenge` — a managed "Just a moment… Enable JavaScript and cookies to continue" challenge. The `/_next/data/<buildId>/unlocks/<slug>.json` route needs the buildId from that page and is served by the same Cloudflare zone.
+- Not attempted: solving or bypassing the challenge (e.g. with a headless browser). The site deliberately blocks non-browser clients; getting around that would be bot-detection evasion.
+- Nothing was fetched, cached or computed; no event list exists.
+
+### Ways forward (Shawn's choice)
+1. **Shawn exports the data from his own browser** (as with the REST funding): save the `/unlocks` page's `__NEXT_DATA__` JSON and each protocol's JSON, commit them raw with their sha256 and fetch time on a separate data branch; I then verify the hashes and run the extraction offline.
+2. **Allow `defillama-datasets.llama.fi`** (the static dataset host the site reads from; still refused by the proxy here) and check whether it serves the emissions files without a challenge.
+3. **DefiLlama Pro API** (paid; would need an API key stored as an environment secret).
