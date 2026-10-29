@@ -177,36 +177,50 @@ def aggtrades(d: Path) -> None:
 
 
 # ------------------------------------------------------------------ fills
-def _trades_for(d: Path, s: str, ref: int):
+def _trades_for(d: Path, s: str, ref: int, cache: dict):
     a, b = ref - P.WINDOW_PRE_MIN * P.MINUTE_MS, ref + P.WINDOW_POST_MIN * P.MINUTE_MS
-    parts = []
-    for day in sorted({P.ms_to_date(a), P.ms_to_date(b)}):
-        p = d / "aggtrades" / s / f"{day.isoformat()}.parquet"
-        if not p.exists():
-            return None
-        parts.append(pd.read_parquet(p))
-    return Trades.from_frame(pd.concat(parts, ignore_index=True), ARCHIVE)
+    days = tuple(sorted({P.ms_to_date(a), P.ms_to_date(b)}))
+    if days not in cache:
+        parts = []
+        for day in days:
+            p = d / "aggtrades" / s / f"{day.isoformat()}.parquet"
+            if not p.exists():
+                cache[days] = None
+                break
+            parts.append(pd.read_parquet(p))
+        else:
+            cache[days] = Trades.from_frame(pd.concat(parts, ignore_index=True), ARCHIVE)
+    return cache[days]
+
+
+def _fills_symbol(args):
+    d, s, g = args
+    rows, cache = [], {}
+    for i, o in g.iterrows():
+        tr = _trades_for(d, s, int(o["close_ts"]), cache)
+        base = {"order": i, "kind_order": o["kind"], "event_id": o["event_id"], "symbol": s}
+        if tr is None:
+            rows.append({**base, "data_missing": True})
+            continue
+        for lat in P.LATENCIES_S:
+            for q in P.QUEUE_MULTS:
+                f = simulate_fill(tr, int(o["close_ts"]), float(o["close"]), P.PRIMARY_DEPTH, lat, q)
+                r = {**base, "data_missing": False, "latency_s": lat, "queue": q, "filled": f.filled,
+                     "fill_kind": f.kind, "fill_ts": f.fill_ts}
+                if f.filled:
+                    r.update(exit_data_available(tr.ts, tr.is_buyer_maker, f.fill_ts))
+                rows.append(r)
+    return rows
 
 
 def fills(d: Path) -> None:
     t0 = time.time()
     orders = _orders(d)
+    jobs = [(d, s, g.sort_values("close_ts")) for s, g in orders.groupby("symbol")]
     rows = []
-    for s, g in orders.groupby("symbol"):
-        for i, o in g.iterrows():
-            tr = _trades_for(d, s, int(o["close_ts"]))
-            base = {"order": i, "kind_order": o["kind"], "event_id": o["event_id"], "symbol": s}
-            if tr is None:
-                rows.append({**base, "data_missing": True})
-                continue
-            for lat in P.LATENCIES_S:
-                for q in P.QUEUE_MULTS:
-                    f = simulate_fill(tr, int(o["close_ts"]), float(o["close"]), P.PRIMARY_DEPTH, lat, q)
-                    r = {**base, "data_missing": False, "latency_s": lat, "queue": q, "filled": f.filled,
-                         "fill_kind": f.kind, "fill_ts": f.fill_ts}
-                    if f.filled:
-                        r.update(exit_data_available(tr.ts, tr.is_buyer_maker, f.fill_ts))
-                    rows.append(r)
+    with cf.ProcessPoolExecutor(4) as ex:
+        for r in ex.map(_fills_symbol, jobs):
+            rows += r
     ft = pd.DataFrame(rows)
     ft.to_parquet(_dev(d) / "fills.parquet", index=False)
     _log(d, "fills", {"rows": len(ft), "seconds": round(time.time() - t0)})
