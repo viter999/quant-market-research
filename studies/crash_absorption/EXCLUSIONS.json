@@ -1,5 +1,5 @@
 {
-  "version": "0.3-draft",
+  "version": "0.4-draft",
   "status": "DRAFT",
   "note": "Hand-made from symbol names (CLARIFICATIONS §2, v0.3.2, v0.3.3). v0.3: checked against the real archive list; guessed names not present in the list were removed. Rule-based prefixes 1000*/1M* also apply. DRAFT until the research director's review; then status FROZEN is committed. The detector refuses to run otherwise.",
   "excluded_prefixes": [
@@ -35,7 +35,15 @@
       "FOOTBALLUSDT",
       "BLUEBIRDUSDT"
     ],
-    "fiat": []
+    "fiat": [],
+    "equity_ticker_collision": [
+      "ROBOUSDT",
+      "INXUSDT"
+    ],
+    "possible_index": [
+      "ALLUSDT"
+    ],
+    "pegged_rule2": []
   },
   "reviewed_symbols": [
     "0GUSDT",
@@ -808,43 +816,18 @@
     "我踏马来了USDT",
     "龙虾USDT"
   ],
-  "borderline_for_review": {
-    "USDTSETTLED_contracts (dropped by the USDT-suffix filter; old contracts renamed at settlement?)": [
-      "AERGOUSDTSETTLED",
-      "AIAUSDTSETTLED",
-      "CTKUSDTSETTLED",
-      "CVCUSDTSETTLED",
-      "CVXUSDTSETTLED",
-      "LITUSDTSETTLED",
-      "MAVIAUSDTSETTLED",
-      "PUMPUSDTSETTLED",
-      "SLPUSDTSETTLED"
-    ],
-    "possible_stablecoin_or_pegged": [
-      "FRAXUSDT",
-      "USUSDT",
-      "STABLEUSDT",
-      "STBLUSDT",
-      "USUALUSDT",
-      "PUMPBTCUSDT"
-    ],
-    "possible_index": [
-      "ALLUSDT"
-    ],
-    "ticker_collides_with_equity_or_ETF": [
-      "ONUSDT",
-      "TUSDT",
-      "ROBOUSDT",
-      "INXUSDT"
-    ],
-    "non_ascii_names": [
-      "币安人生USDT",
-      "我踏马来了USDT",
-      "龙虾USDT"
-    ],
-    "other_quote_or_type (not USDT perps; already dropped by the filter)": [
-      "ETHBTC"
-    ]
-  },
-  "review_source": "archive listing (S3 bucket behind data.binance.vision, um/monthly/klines/ symbol dirs = 1056; with any 1m file 2023-12-01..2026-03-13 = 769), listed 2026-10-29"
+  "review_source": "archive listing (S3 bucket behind data.binance.vision, um/monthly/klines/ symbol dirs = 1056; with any 1m file 2023-12-01..2026-03-13 = 769), listed 2026-10-29",
+  "perp_suffixes": [
+    "USDT",
+    "USDTSETTLED"
+  ],
+  "excluded_days": {},
+  "review_decisions_2026-10-29": {
+    "rule1": "kept all earlier exclusions; delivery contracts, BUSD/USDC quotes and ETHBTC stay out via the perp-suffix filter",
+    "rule2": "PENDING: literal rule hits 27 symbols, 26 of them zero-volume flat filler after delisting (see report); only USDCUSDT is a real stablecoin and is already excluded. FRAX/US/STABLE/STBL have no DEV data (not evaluable); USUAL and PUMPBTC evaluated, not excluded.",
+    "rule3": "first tokenized-equity 1d day in archive = 2026-01-28 (TSLAUSDT); ROBOUSDT 2026-02-27 and INXUSDT 2026-01-30 excluded; ONUSDT 2025-10-24 and TUSDT (<= 2023-12-01) kept",
+    "rule4": "ALLUSDT excluded as possible index",
+    "rule5": "9 USDTSETTLED contracts included via perp_suffixes; each has exactly one day of data, overlapping its base symbol, with differing 1d closes -> both kept (1m comparison not run: no 1m downloads allowed; a one-day contract can never have 7 full days, so it is never eligible). AERGO/AIA/CTK/CVC/CVX/LIT/MAVIA/PUMP/SLP",
+    "rule6": "non-ASCII memecoins kept (URL-encoded)"
+  }
 }

@@ -27,7 +27,7 @@ def daily_returns(d):
     """Close-to-close returns between consecutive calendar days only."""
     c = d["close"]
     ordinal = np.array([x.toordinal() for x in c.index])
-    consecutive = np.r_[False, np.diff(ordinal) == 1]
+    consecutive = np.r_[False, np.diff(ordinal) == 1][: len(c)]
     return (c / c.shift(1) - 1)[consecutive]
 
 
