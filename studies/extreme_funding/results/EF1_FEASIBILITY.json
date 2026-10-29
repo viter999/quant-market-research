@@ -1,0 +1,113 @@
+{
+ "dev": {
+  "trades": 37,
+  "symbols": 24,
+  "distinct_entry_days": 30,
+  "exit_reasons": {
+   "funding": 34,
+   "max_hold": 3
+  },
+  "delisting_exits_if_only_traded_bars_count": 1,
+  "hold_hours": {
+   "min": 3.9999997222222223,
+   "p10": 7.999999888888889,
+   "median": 48.0,
+   "p90": 151.99999983333333,
+   "max": 168.0,
+   "mean": 64.21621635885886
+  },
+  "hold_hours_hist": {
+   "(0.0, 8.0]": 6,
+   "(8.0, 24.0]": 4,
+   "(24.0, 72.0]": 15,
+   "(72.0, 168.0]": 12,
+   "(168.0, 1000000000.0]": 0
+  },
+  "max_concurrent_positions": 5,
+  "max_open_in_sim": 5,
+  "drops_in_order": {
+   "candidates_ok": 10432,
+   "after_entry_cutoff": 182,
+   "not_in_universe": 7574,
+   "no_spot_pair_files_24h_before_S": 1617,
+   "spot_no_bars_24h": 3,
+   "spot_qv24h_lt_5M": 10,
+   "spot_median_1m_qv_lt_50k": 721,
+   "oi_missing": 0,
+   "oi_rise_lt_5pct": 197,
+   "signals_after_entry_filters": 128,
+   "symbol_open": 37,
+   "cap": 54
+  }
+ },
+ "power_projection_verdict_x_200_602": {
+  "trades": 12.292358803986712,
+  "symbols": 7.9734219269103,
+  "entry_days": 9.966777408637874
+ },
+ "power_minimums": {
+  "trades": 60,
+  "symbols": 15,
+  "entry_days": 30
+ },
+ "power_meets": false,
+ "candidates": {
+  "dev": {
+   "settlements": 948226,
+   "symbols": 533,
+   "status_counts_all": {
+    "ok": 947561,
+    "no_history": 560,
+    "interval_change": 105
+   },
+   "h_ge_threshold": 10481,
+   "h_ge_threshold_by_status": {
+    "ok": 10432,
+    "no_history": 45,
+    "interval_change": 4
+   },
+   "events_ok": 10432,
+   "event_symbols_ok": 390,
+   "interval_change_skips_h_ge_threshold": 4,
+   "I_S_vs_archive_interval_mismatch": 324,
+   "I_S_values": {
+    "4.0": 590243,
+    "8.0": 333527,
+    "1.0": 20959,
+    "2.0": 3213,
+    "816.0": 2,
+    "504.0": 1,
+    "6.0": 1
+   }
+  },
+  "verdict": {
+   "settlements": 560860,
+   "symbols": 604,
+   "status_counts_all": {
+    "ok": 560353,
+    "interval_change": 261,
+    "no_history": 246
+   },
+   "h_ge_threshold": 10504,
+   "h_ge_threshold_by_status": {
+    "ok": 10470,
+    "no_history": 25,
+    "interval_change": 9
+   },
+   "events_ok": 10470,
+   "event_symbols_ok": 209,
+   "interval_change_skips_h_ge_threshold": 9,
+   "I_S_vs_archive_interval_mismatch": 187,
+   "I_S_values": {
+    "4.0": 431032,
+    "8.0": 83387,
+    "1.0": 46272,
+    "3.0": 23,
+    "2.0": 21,
+    "955.0": 1,
+    "4500.0": 1
+   }
+  },
+  "seconds": 12
+ }
+}

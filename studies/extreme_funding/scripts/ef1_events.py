@@ -168,12 +168,16 @@ def filters() -> None:
     with cf.ThreadPoolExecutor(16) as ex:
         feats = list(ex.map(pre, c.itertuples()))
     c = pd.concat([c.reset_index(drop=True), pd.DataFrame(feats)], axis=1)
-    for name, bad in [("spot_no_bars_24h", c["bars"] == 0), ("spot_qv24h_lt_5M", c["qv_24h"] < C.SPOT_24H_QV_MIN),
-                      ("spot_median_1m_qv_lt_50k", c["median_1m_qv"] < C.SPOT_MED_1M_QV_MIN),
-                      ("oi_missing", c["oi_now"].isna() | c["oi_prev"].isna() | (c["oi_prev"] <= 0)),
-                      ("oi_rise_lt_5pct", c["oi_now"] < C.OI_RISE * c["oi_prev"])]:
+    sequential = [("spot_no_bars_24h", lambda d: d["bars"] == 0),
+                  ("spot_qv24h_lt_5M", lambda d: d["qv_24h"] < C.SPOT_24H_QV_MIN),
+                  ("spot_median_1m_qv_lt_50k", lambda d: d["median_1m_qv"] < C.SPOT_MED_1M_QV_MIN),
+                  ("oi_missing", lambda d: d["oi_now"].isna() | d["oi_prev"].isna() | (d["oi_prev"] <= 0)),
+                  ("oi_rise_lt_5pct", lambda d: d["oi_now"] < C.OI_RISE * d["oi_prev"])]
+    for name, rule in sequential:  # each filter is evaluated on the rows that are still in
+        bad = rule(c)
         drops[name] = int(bad.sum())
         c = c[~bad]
+    drops["signals_after_entry_filters"] = len(c)
     c.to_parquet(DATA / "dev_signals.parquet", index=False)
 
     # slices S-24h .. S+7d+1h for the survivors: data ends (times only) for the delisting exit
@@ -197,8 +201,9 @@ def filters() -> None:
             beyond.append((sym, S))
         return t, why
     trades, pdrops = C.simulate(c[["symbol", "S", "h_S"]], exit_for)
-    for k, v in pdrops["reason"].value_counts().items():
-        drops[k] = int(v)
+    for k in ("symbol_open", "cap"):
+        drops[k] = int((pdrops["reason"] == k).sum())
+    assert drops["signals_after_entry_filters"] == len(trades) + drops["symbol_open"] + drops["cap"]
     trades["entry_day"] = [str(P.ms_to_date(int(s))) for s in trades["S"]]
     trades["delisting_if_traded_bars_only"] = [data_end[(r.symbol, int(r.S))][1] is not None and data_end[(r.symbol, int(r.S))][1] < r.exit_ts
                                               for r in trades.itertuples()]
@@ -221,7 +226,7 @@ def report() -> None:
                 "delisting_exits_if_only_traded_bars_count": int(tr["delisting_if_traded_bars_only"].sum()),
                 "hold_hours": {"min": float(hold.min()), "p10": float(hold.quantile(.1)), "median": float(hold.median()),
                                "p90": float(hold.quantile(.9)), "max": float(hold.max()), "mean": float(hold.mean())},
-                "hold_hours_hist": pd.cut(hold, [0, 8, 24, 72, 168, 1e9], right=True).value_counts().sort_index().astype(int).to_dict(),
+                "hold_hours_hist": {str(k): int(v) for k, v in pd.cut(hold, [0, 8, 24, 72, 168, 1e9], right=True).value_counts().sort_index().items()},
                 "max_concurrent_positions": int(C.max_concurrent(tr)), "max_open_in_sim": int(tr["open_after_entry"].max()),
                 "drops_in_order": steps["filters_dev"]["drops_in_order"]},
         "power_projection_verdict_x_200_602": proj,
