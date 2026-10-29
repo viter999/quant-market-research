@@ -299,3 +299,21 @@ def test_seam_span_and_compare():
     rest = pd.DataFrame({"ts": [101, 200, 296], "rate": [0.0001, 0.00025, -0.0001]})
     r = DL.compare_funding_seam(arch, rest)
     assert r["max_abs_dts_ms"] == 4 and r["max_abs_drate"] == pytest.approx(0.00005) and r["rest_matched_twice"] == 0
+
+
+def test_http_fetcher_percent_encodes_non_ascii(monkeypatch):
+    seen = []
+
+    class R:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+        def read(self):
+            return b"x"
+
+    monkeypatch.setattr(DL.urllib.request, "urlopen", lambda url, timeout: seen.append(url) or R())
+    assert DL.HttpFetcher().get(DL.kline_url("龙虾USDT", "1d", "daily", "2026-03-12")) == b"x"
+    assert seen[0].isascii() and "%E9%BE%99%E8%99%BEUSDT" in seen[0] and "2026-03-12.zip" in seen[0]

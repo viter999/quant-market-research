@@ -51,6 +51,7 @@ class HttpFetcher:
 
     def _open(self, url):
         import time
+        url = urllib.parse.quote(url, safe=":/?&=%-._~")  # non-ASCII symbol names (e.g. 龙虾USDT)
         for attempt in range(self.retries + 1):
             try:
                 return urllib.request.urlopen(url, timeout=self.timeout)
