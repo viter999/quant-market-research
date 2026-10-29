@@ -1,0 +1,53 @@
+{
+ "klines": {
+  "symbols": 376,
+  "files": 2985,
+  "zip_bytes_listed": 2249695487,
+  "parquet_bytes": 1430412265,
+  "latest_period": "2026-03-13",
+  "errors": {},
+  "seconds": 434
+ },
+ "funding": {
+  "symbols": 376,
+  "no_archive_file_any_month": [
+   "MANTRAUSDT"
+  ],
+  "errors": {},
+  "seconds": 210
+ },
+ "coverage_archive_part": {
+  "symbols_with_gaps": 1,
+  "gaps": {
+   "UXLINKUSDT": [
+    "2025-09-30",
+    "2025-10-01"
+   ]
+  }
+ },
+ "coverage_archive_part_traded_days": {
+  "spans_checked": 14937,
+  "gaps": {}
+ },
+ "universe_zero_volume_member_days": {
+  "dev": {
+   "member_days": 48160,
+   "zero_volume": 53
+  },
+  "verdict": {
+   "member_days": 16000,
+   "zero_volume": 23,
+   "symbols": [
+    "AI16ZUSDT",
+    "ALPHAUSDT",
+    "BSWUSDT",
+    "HIFIUSDT",
+    "MKRUSDT",
+    "OMUSDT",
+    "SLERFUSDT",
+    "UXLINKUSDT"
+   ]
+  }
+ },
+ "_note": "Task 3 prep: inputs only (VERDICT 1m klines, archive funding, coverage pre-check). No VERDICT detection or outcome."
+}

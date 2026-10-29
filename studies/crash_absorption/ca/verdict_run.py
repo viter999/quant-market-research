@@ -34,6 +34,7 @@ from ca.universe import build_universe, check_reviewed, load_exclusions
 from ca.verdict import evaluate_verdict
 
 SEG = "verdict"
+LIMIT_MS = P.date_to_ms(P.SEGMENTS[SEG][1] + dt.timedelta(days=1)) - 1  # 2026-03-13 23:59:59.999 (guard)
 HOLDS = (15, 30, 60)
 GRID = [(d, l, q) for d in P.DEPTHS for l in P.LATENCIES_S for q in P.QUEUE_MULTS]
 PRIMARY = (P.PRIMARY_DEPTH, P.PRIMARY_LATENCY_S, P.PRIMARY_QUEUE_MULT)
@@ -106,20 +107,24 @@ def check_funding_manifest(data_dir: Path, expected_sha: str | None, symbols: li
     return {"manifest_sha256": got, "files": len(files)}
 
 
-def member_spans(uni: dict) -> dict[str, list[tuple[int, int]]]:
-    limit = P.date_to_ms(P.SEGMENTS[SEG][1] + dt.timedelta(days=1)) - 1
+def member_spans(uni: dict, traded: set | None = None) -> dict[str, list[tuple[int, int]]]:
+    """[day start, min(next day 02:00, VERDICT end)] per member day; with `traded`,
+    only member days on which the symbol has 1d quote volume > 0 (no order can
+    fill, and so no funding is needed, on a zero-volume day)."""
     spans: dict[str, list] = {}
     for day, syms in uni.items():
         a = P.date_to_ms(day)
-        b = min(a + P.DAY_MS + 2 * 3600_000, limit)
+        b = min(a + P.DAY_MS + 2 * 3600_000, LIMIT_MS)
         for s in syms:
-            spans.setdefault(s, []).append((a, b))
+            if traded is None or (s, day) in traded:
+                spans.setdefault(s, []).append((a, b))
     return spans
 
 
-def check_funding_coverage(src: Source, uni: dict) -> None:
+def check_funding_coverage(src: Source, uni: dict, daily: pd.DataFrame) -> dict:
+    traded = {(r.symbol, r.day) for r in daily.itertuples() if r.quote_volume > 0}
     gaps = {}
-    for s, spans in member_spans(uni).items():
+    for s, spans in member_spans(uni, traded).items():
         cover = DL.load_funding(s, src.data_dir).cover
         bad = [str(P.ms_to_date(a)) for a, b in spans if not any(ca <= a and b <= cb for ca, cb in cover)]
         if bad:
@@ -127,6 +132,8 @@ def check_funding_coverage(src: Source, uni: dict) -> None:
     if gaps:
         raise RefuseToRun(f"funding coverage gaps for {len(gaps)} symbols: "
                           f"{dict(list(gaps.items())[:3])}")
+    n_all = sum(len(v) for v in uni.values())
+    return {"member_days": n_all, "zero_volume_member_days_skipped": n_all - sum(map(len, member_spans(uni, traded).values()))}
 
 
 def preconditions(src: Source, out_dir: Path, expected_funding_sha: str | None) -> dict:
@@ -188,9 +195,24 @@ def detect(src: Source, uni: dict):
 
 
 # ----------------------------------------------------------------- aggTrades
+def clip_windows(windows: dict) -> dict:
+    """Drop/clip trade windows past the VERDICT end (the guard refuses those files)."""
+    out = {}
+    for day, win in windows.items():
+        kept = [(a, min(b, LIMIT_MS)) for a, b in win if a <= LIMIT_MS]
+        if kept:
+            out[day] = kept
+    return out
+
+
+def beyond_end(fill_ts: int, hold_min: float) -> bool:
+    """Exit window [T, T+10 s] would reach past the VERDICT end (exploratory long holds only)."""
+    return fill_ts + hold_min * P.MINUTE_MS + P.EXIT_VWAP_S * 1000 > LIMIT_MS
+
+
 def fetch_trades(src: Source, orders: pd.DataFrame) -> dict:
     jobs = [(s, day, win) for s, g in orders.groupby("symbol")
-            for day, win in DL.trade_windows(g["close_ts"].to_numpy()).items()]
+            for day, win in clip_windows(DL.trade_windows(g["close_ts"].to_numpy())).items()]
     fetch = src.fetcher or DL.HttpFetcher()
     missing, errors = [], {}
 
@@ -215,7 +237,7 @@ def fetch_trades(src: Source, orders: pd.DataFrame) -> dict:
 
 
 def _trades(vdir: Path, s: str, ref: int, origin: str, cache: dict):
-    a, b = ref - P.WINDOW_PRE_MIN * P.MINUTE_MS, ref + P.WINDOW_POST_MIN * P.MINUTE_MS
+    a, b = ref - P.WINDOW_PRE_MIN * P.MINUTE_MS, min(ref + P.WINDOW_POST_MIN * P.MINUTE_MS, LIMIT_MS)
     days = tuple(sorted({P.ms_to_date(a), P.ms_to_date(b)}))
     if days not in cache:
         parts = [vdir / "aggtrades" / s / f"{d.isoformat()}.parquet" for d in days]
@@ -226,6 +248,8 @@ def _trades(vdir: Path, s: str, ref: int, origin: str, cache: dict):
 
 # ----------------------------------------------------------------- fills + exits
 def _outcome_row(tr, fill, funding, hold, mult):
+    if beyond_end(fill.fill_ts, hold):
+        return {"dropped": True, "exit_source": "beyond_verdict_end", "gross": None, "net": None, "funding": None}
     out = trade_outcome(tr, fill, funding, buffer_mult=mult, hold_min=hold)
     return {"dropped": out["dropped"], "exit_source": out["exit_source"], "gross": out.get("gross"),
             "net": out.get("net"), "funding": out.get("funding")}
@@ -393,7 +417,7 @@ def run(src: Source, out_dir: Path, expected_funding_sha: str | None) -> dict:
     daily = src.daily()
     from ca.pipeline import segment_days
     uni = build_universe(daily, src.get_exclusions(daily), segment_days(SEG), DL.DOWNLOAD_START)
-    check_funding_coverage(src, uni)
+    meta["funding_coverage"] = check_funding_coverage(src, uni, daily)
     meta["started"] = dt.datetime.now(dt.timezone.utc).isoformat()
     with open(out_dir / "VERDICT_RUN_STARTED.json", "x") as f:  # run-once lock, written before any VERDICT detection
         json.dump(meta, f, indent=1, default=str)

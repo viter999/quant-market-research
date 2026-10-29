@@ -101,3 +101,56 @@ def test_refuses_funding_coverage_gap_before_detection(world, tmp_path):
     with pytest.raises(RefuseToRun, match="coverage gaps"):
         run(_src(r, w), tmp_path / "out", w["expected_funding_sha"])
     assert not (tmp_path / "out" / "VERDICT_RUN_STARTED.json").exists()  # refused before the lock / detection
+
+
+def test_clip_windows_and_beyond_end():
+    from ca.verdict_run import LIMIT_MS, beyond_end, clip_windows
+    import datetime as dt
+    d13, d14 = dt.date(2026, 3, 13), dt.date(2026, 3, 14)
+    w = {d13: [(LIMIT_MS - 3600_000, LIMIT_MS)], d14: [(LIMIT_MS + 1, LIMIT_MS + 1800_000)]}
+    assert clip_windows(w) == {d13: [(LIMIT_MS - 3600_000, LIMIT_MS)]}
+    last_fill = LIMIT_MS + 1 - (24 * 60 - (23 * 60 + 35)) * 60_000 + 10_000  # 23:35:10 on 2026-03-13
+    assert not beyond_end(last_fill, 15)  # primary exit always inside VERDICT (23:30 cutoff)
+    assert beyond_end(last_fill, 30) and beyond_end(last_fill, 60)
+
+
+def test_archive_origin_path_with_unlock(world, tmp_path, monkeypatch):
+    """Same run with origin=ARCHIVE and the unlock patched to True: exercises the
+    real-data branches (segment + outcome locks, code_head) without real data."""
+    import ca.lock as L
+    import ca.verdict_run as VR
+    root, w = world
+    monkeypatch.setattr(L, "verdict_unlocked", lambda: True)
+    monkeypatch.setattr(VR, "verdict_unlocked", lambda: True)
+    res = run(_src(root, w, ARCHIVE), tmp_path / "run", w["expected_funding_sha"])
+    assert res["meta"]["origin"] == ARCHIVE and len(res["meta"]["code_head"]) == 40
+    assert res["verdict"]["verdict"] in ("PASS", "KILL", "NOT EVALUABLE")
+
+
+def test_coverage_check_skips_zero_volume_member_days(world, tmp_path):
+    """A coverage gap on a member day with zero 1d quote volume (delisted, flat
+    filler bars) is skipped; the same gap on a traded day refuses."""
+    import datetime as dt
+    from ca import params as P
+    from ca.pipeline import segment_days
+    from ca.universe import build_universe
+    from ca.verdict_run import check_funding_coverage
+    from ca import downloader as DL
+    root, w = world
+    r = _copy(root, tmp_path)
+    s = w["symbols"][2]
+    gap_day = dt.date(2025, 9, 10)
+    cov = r / "data" / "funding" / f"{s}.coverage.json"
+    a, b = json.loads(cov.read_text())[0]
+    g0, g1 = P.date_to_ms(gap_day), P.date_to_ms(gap_day + dt.timedelta(days=2))
+    cov.write_text(json.dumps([[a, g0 - 1], [g1, b]]))
+    src = _src(r, w)
+    daily = src.daily()
+    uni = build_universe(daily, w["exclusions"], segment_days("verdict"), DL.DOWNLOAD_START)
+    with pytest.raises(RefuseToRun, match="coverage gaps"):
+        check_funding_coverage(src, uni, daily)
+    flat = daily.copy()
+    flat.loc[(flat["symbol"] == s) & flat["day"].isin([gap_day, gap_day - dt.timedelta(days=1), gap_day + dt.timedelta(days=1)]),
+             "quote_volume"] = 0.0
+    info = check_funding_coverage(src, uni, flat)
+    assert info["zero_volume_member_days_skipped"] >= 1
