@@ -1,0 +1,565 @@
+{
+ "meta": {
+  "origin": "archive",
+  "code_head": "a516b7794311f89f3922e94aa7ca539139c1ca6b",
+  "funding": {
+   "manifest_sha256": "8c0dc5c099fc69cf6656abe16076bd29ac78d25202376e675b6e173b7ed5a858",
+   "files": 708
+  },
+  "funding_coverage": {
+   "member_days": 16000,
+   "zero_volume_member_days_skipped": 23
+  },
+  "started": "2026-10-29T07:08:39.103644+00:00",
+  "finished": "2026-10-29T08:07:27.822332+00:00",
+  "seconds": 3535,
+  "end_check": "HEAD and tree verified unchanged"
+ },
+ "verdict": {
+  "counts": {
+   "orders": 15820,
+   "fills": 8150,
+   "gap_fills": 667,
+   "dropped": 0,
+   "unfilled": 7670,
+   "order_days": 200
+  },
+  "descriptive": {
+   "per_order_mean_dropped_as_0": -0.0009707646419669036,
+   "per_order_mean_dropped_excluded": -0.0009707646419669036
+  },
+  "verdict": "KILL",
+  "items": {
+   "1_sample_size": {
+    "fills": 8150,
+    "episodes": 2486,
+    "days": 200,
+    "pass": true
+   },
+   "2_mean_net_1x": {
+    "mean_net_1x": -0.0018843554154498673,
+    "lb999_block1": -0.004104121907388877,
+    "nan_reps_block1": 0,
+    "lb999_block7": -0.003948703455371608,
+    "nan_reps_block7": 0,
+    "pass": false
+   },
+   "3_mean_net_2x": {
+    "mean_net_2x": -0.002384355415449867,
+    "pass": false
+   },
+   "4_beats_placebo": {
+    "events_compared": 11074,
+    "events_without_placebo": 4746,
+    "placebo_orders": 54690,
+    "placebo_fills": 14740,
+    "per_fill_diff": -0.0004774402002848323,
+    "per_fill_lb99": -0.0029702312292495254,
+    "per_fill_nan_reps": 0,
+    "per_order_diff": -0.0005193653188852057,
+    "per_order_lb99": -0.0017075862393555084,
+    "per_order_nan_reps": 0,
+    "pass": false
+   }
+  }
+ },
+ "counts": {
+  "events": 15820,
+  "episodes": 3179,
+  "event_days": 200,
+  "symbols_with_events": 372,
+  "placebos": 54692,
+  "events_with_5_placebos": 10799,
+  "events_in_verdict_arms": 15820,
+  "event_orders_data_missing": 0,
+  "placebo_orders_data_missing": 0,
+  "placebos_removed_with_their_event": 0,
+  "events_with_0_placebos_in_item4": 4746,
+  "primary_fills": 8150,
+  "primary_gap_fills": 667,
+  "primary_maker_fills": 7483,
+  "primary_dropped": 0,
+  "aggtrades": {
+   "symbol_days": 11114,
+   "missing_404": []
+  }
+ },
+ "seam": {
+  "symbols_compared": 176,
+  "max_abs_dts_ms": 0,
+  "max_abs_drate": 0.0,
+  "count_mismatch": {}
+ },
+ "exploratory": {
+  "E1_grid_depth_latency_queue_15min_1x": {
+   "d0.0025_lat2.0s_q5.0x": {
+    "orders": 15820,
+    "fills": 10765,
+    "fill_rate": 0.6804677623261695,
+    "dropped": 0,
+    "mean_gross_per_fill": -6.404987112016686e-05,
+    "mean_net_per_fill": -0.001262450413619006,
+    "mean_net_per_order": -0.0008590568080030721
+   },
+   "d0.0025_lat2.0s_q10.0x": {
+    "orders": 15820,
+    "fills": 10582,
+    "fill_rate": 0.6689001264222503,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.00024068070919687124,
+    "mean_net_per_fill": -0.0014392692236553863,
+    "mean_net_per_order": -0.0009627273656587418
+   },
+   "d0.0025_lat2.0s_q20.0x": {
+    "orders": 15820,
+    "fills": 10317,
+    "fill_rate": 0.652149178255373,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.0004871529707669126,
+    "mean_net_per_fill": -0.0016859876494525778,
+    "mean_net_per_order": -0.0010995154601392064
+   },
+   "d0.0025_lat5.0s_q5.0x": {
+    "orders": 15820,
+    "fills": 10430,
+    "fill_rate": 0.6592920353982301,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.0005826395339935924,
+    "mean_net_per_fill": -0.0017945083729197671,
+    "mean_net_per_order": -0.0011831050777214396
+   },
+   "d0.0025_lat5.0s_q10.0x": {
+    "orders": 15820,
+    "fills": 10260,
+    "fill_rate": 0.6485461441213654,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.0007185984821964129,
+    "mean_net_per_fill": -0.0019308969948669784,
+    "mean_net_per_order": -0.0012522758007165106
+   },
+   "d0.0025_lat5.0s_q20.0x": {
+    "orders": 15820,
+    "fills": 10017,
+    "fill_rate": 0.6331858407079646,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.0009390130942804819,
+    "mean_net_per_fill": -0.0021521006803841064,
+    "mean_net_per_order": -0.0013626796785971929
+   },
+   "d0.0025_lat10.0s_q5.0x": {
+    "orders": 15820,
+    "fills": 10166,
+    "fill_rate": 0.6426042983565108,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.0006371649366934093,
+    "mean_net_per_fill": -0.0018595202445824519,
+    "mean_net_per_order": -0.0011949357020496335
+   },
+   "d0.0025_lat10.0s_q10.0x": {
+    "orders": 15820,
+    "fills": 10008,
+    "fill_rate": 0.6326169405815424,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.0007354545650955785,
+    "mean_net_per_fill": -0.001958069321290623,
+    "mean_net_per_order": -0.001238707823481451
+   },
+   "d0.0025_lat10.0s_q20.0x": {
+    "orders": 15820,
+    "fills": 9772,
+    "fill_rate": 0.6176991150442478,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.0010348721524822248,
+    "mean_net_per_fill": -0.0022585040548563557,
+    "mean_net_per_order": -0.001395075956008616
+   },
+   "d0.005_lat2.0s_q5.0x": {
+    "orders": 15820,
+    "fills": 8536,
+    "fill_rate": 0.5395701643489255,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.00020051716734847207,
+    "mean_net_per_fill": -0.0013617609021188569,
+    "mean_net_per_order": -0.0007347655537602123
+   },
+   "d0.005_lat2.0s_q10.0x": {
+    "orders": 15820,
+    "fills": 8372,
+    "fill_rate": 0.5292035398230088,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.00042001824089371614,
+    "mean_net_per_fill": -0.0015803743732396315,
+    "mean_net_per_order": -0.000836339712563982
+   },
+   "d0.005_lat2.0s_q20.0x": {
+    "orders": 15820,
+    "fills": 8150,
+    "fill_rate": 0.5151706700379267,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.0007246648718915845,
+    "mean_net_per_fill": -0.0018843554154498673,
+    "mean_net_per_order": -0.0009707646419669036
+   },
+   "d0.005_lat5.0s_q5.0x": {
+    "orders": 15820,
+    "fills": 8408,
+    "fill_rate": 0.5314791403286978,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.00046009192760000075,
+    "mean_net_per_fill": -0.0016346645822146537,
+    "mean_net_per_order": -0.0008687901268812141
+   },
+   "d0.005_lat5.0s_q10.0x": {
+    "orders": 15820,
+    "fills": 8258,
+    "fill_rate": 0.5219974715549937,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.0007103648862850748,
+    "mean_net_per_fill": -0.0018843528313080833,
+    "mean_net_per_order": -0.0009836274134603128
+   },
+   "d0.005_lat5.0s_q20.0x": {
+    "orders": 15820,
+    "fills": 8032,
+    "fill_rate": 0.5077117572692794,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.001038918613856311,
+    "mean_net_per_fill": -0.002212283189304518,
+    "mean_net_per_order": -0.0011232021856190828
+   },
+   "d0.005_lat10.0s_q5.0x": {
+    "orders": 15820,
+    "fills": 8238,
+    "fill_rate": 0.5207332490518332,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.0006088187272691023,
+    "mean_net_per_fill": -0.0017950815386310838,
+    "mean_net_per_order": -0.0009347586419243278
+   },
+   "d0.005_lat10.0s_q10.0x": {
+    "orders": 15820,
+    "fills": 8098,
+    "fill_rate": 0.5118836915297093,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.0008136098420308078,
+    "mean_net_per_fill": -0.001999125210022905,
+    "mean_net_per_order": -0.0010233195923366298
+   },
+   "d0.005_lat10.0s_q20.0x": {
+    "orders": 15820,
+    "fills": 7882,
+    "fill_rate": 0.4982300884955752,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.0011163521419915374,
+    "mean_net_per_fill": -0.002301537882920236,
+    "mean_net_per_order": -0.0011466954230832682
+   },
+   "d0.01_lat2.0s_q5.0x": {
+    "orders": 15820,
+    "fills": 5631,
+    "fill_rate": 0.3559418457648546,
+    "dropped": 0,
+    "mean_gross_per_fill": 0.00023357088153564448,
+    "mean_net_per_fill": -0.0008950534853618872,
+    "mean_net_per_order": -0.0003185869896379765
+   },
+   "d0.01_lat2.0s_q10.0x": {
+    "orders": 15820,
+    "fills": 5527,
+    "fill_rate": 0.34936788874841973,
+    "dropped": 0,
+    "mean_gross_per_fill": 2.9570916315330792e-05,
+    "mean_net_per_fill": -0.0010975502380179427,
+    "mean_net_per_order": -0.00038344880945165413
+   },
+   "d0.01_lat2.0s_q20.0x": {
+    "orders": 15820,
+    "fills": 5381,
+    "fill_rate": 0.34013906447534764,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.0002792318665508817,
+    "mean_net_per_fill": -0.001404223115389388,
+    "mean_net_per_order": -0.00047763113678320467
+   },
+   "d0.01_lat5.0s_q5.0x": {
+    "orders": 15820,
+    "fills": 5599,
+    "fill_rate": 0.35391908975979774,
+    "dropped": 0,
+    "mean_gross_per_fill": 0.00013376824844641924,
+    "mean_net_per_fill": -0.0010041358272813898,
+    "mean_net_per_order": -0.000355382837986631
+   },
+   "d0.01_lat5.0s_q10.0x": {
+    "orders": 15820,
+    "fills": 5498,
+    "fill_rate": 0.34753476611883694,
+    "dropped": 0,
+    "mean_gross_per_fill": -6.476660960829095e-05,
+    "mean_net_per_fill": -0.001201294226923679,
+    "mean_net_per_order": -0.00041749150819382966
+   },
+   "d0.01_lat5.0s_q20.0x": {
+    "orders": 15820,
+    "fills": 5350,
+    "fill_rate": 0.3381795195954488,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.0006065014558462667,
+    "mean_net_per_fill": -0.0017446724147247717,
+    "mean_net_per_order": -0.0005900124790630549
+   },
+   "d0.01_lat10.0s_q5.0x": {
+    "orders": 15820,
+    "fills": 5551,
+    "fill_rate": 0.3508849557522124,
+    "dropped": 0,
+    "mean_gross_per_fill": 0.00016958572590078873,
+    "mean_net_per_fill": -0.000980977473522739,
+    "mean_net_per_order": -0.00034421023739094334
+   },
+   "d0.01_lat10.0s_q10.0x": {
+    "orders": 15820,
+    "fills": 5454,
+    "fill_rate": 0.3447534766118837,
+    "dropped": 0,
+    "mean_gross_per_fill": -2.4002396976876835e-05,
+    "mean_net_per_fill": -0.0011735859888360627,
+    "mean_net_per_order": -0.00040459784975422806
+   },
+   "d0.01_lat10.0s_q20.0x": {
+    "orders": 15820,
+    "fills": 5313,
+    "fill_rate": 0.33584070796460175,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.0003340724459611595,
+    "mean_net_per_fill": -0.0014855080830776665,
+    "mean_net_per_order": -0.000498894086307942
+   }
+  },
+  "E2_primary_hold_x_buffer": {
+   "hold15_buf1x": {
+    "orders": 15820,
+    "fills": 8150,
+    "fill_rate": 0.5151706700379267,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.0007246648718915845,
+    "mean_net_per_fill": -0.0018843554154498673,
+    "mean_net_per_order": -0.0009707646419669036
+   },
+   "hold15_buf2x": {
+    "orders": 15820,
+    "fills": 8150,
+    "fill_rate": 0.5151706700379267,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.0007246648718915845,
+    "mean_net_per_fill": -0.002384355415449867,
+    "mean_net_per_order": -0.0012283499769858669
+   },
+   "hold15_buf5x": {
+    "orders": 15820,
+    "fills": 8150,
+    "fill_rate": 0.5151706700379267,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.0007246648718915845,
+    "mean_net_per_fill": -0.0038843554154498667,
+    "mean_net_per_order": -0.002001105982042757
+   },
+   "hold30_buf1x": {
+    "orders": 15820,
+    "fills": 8150,
+    "fill_rate": 0.5151706700379267,
+    "dropped": 2,
+    "mean_gross_per_fill": -0.002310198359517006,
+    "mean_net_per_fill": -0.0034228426550496523,
+    "mean_net_per_order": -0.0017629154205653964
+   },
+   "hold30_buf2x": {
+    "orders": 15820,
+    "fills": 8150,
+    "fill_rate": 0.5151706700379267,
+    "dropped": 2,
+    "mean_gross_per_fill": -0.002310198359517006,
+    "mean_net_per_fill": -0.003922842655049653,
+    "mean_net_per_order": -0.002020437544459202
+   },
+   "hold30_buf5x": {
+    "orders": 15820,
+    "fills": 8150,
+    "fill_rate": 0.5151706700379267,
+    "dropped": 2,
+    "mean_gross_per_fill": -0.002310198359517006,
+    "mean_net_per_fill": -0.0054228426550496514,
+    "mean_net_per_order": -0.0027930039161406174
+   },
+   "hold60_buf1x": {
+    "orders": 15820,
+    "fills": 8150,
+    "fill_rate": 0.5151706700379267,
+    "dropped": 4,
+    "mean_gross_per_fill": 0.00011255547954742022,
+    "mean_net_per_fill": -0.0008122342589745547,
+    "mean_net_per_order": -0.0004182338984580733
+   },
+   "hold60_buf2x": {
+    "orders": 15820,
+    "fills": 8150,
+    "fill_rate": 0.5151706700379267,
+    "dropped": 4,
+    "mean_gross_per_fill": 0.00011255547954742022,
+    "mean_net_per_fill": -0.0013122342589745543,
+    "mean_net_per_order": -0.0006756928112267209
+   },
+   "hold60_buf5x": {
+    "orders": 15820,
+    "fills": 8150,
+    "fill_rate": 0.5151706700379267,
+    "dropped": 4,
+    "mean_gross_per_fill": 0.00011255547954742022,
+    "mean_net_per_fill": -0.0028122342589745543,
+    "mean_net_per_order": -0.0014480695495326626
+   }
+  },
+  "E3_primary_gap_vs_maker_1x": {
+   "gap": {
+    "orders": 667,
+    "fills": 667,
+    "fill_rate": 1.0,
+    "dropped": 0,
+    "mean_gross_per_fill": 0.00812648429398079,
+    "mean_net_per_fill": 0.006769221040607477,
+    "mean_net_per_order": 0.006769221040607477
+   },
+   "maker": {
+    "orders": 7483,
+    "fills": 7483,
+    "fill_rate": 1.0,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.0015136153588135243,
+    "mean_net_per_fill": -0.00265569518508641,
+    "mean_net_per_order": -0.00265569518508641
+   }
+  },
+  "E4_B2_taker_at_close": {
+   "buf1x": {
+    "orders": 15820,
+    "fills": 15820,
+    "fill_rate": 1.0,
+    "dropped": 1,
+    "mean_gross_per_fill": 0.0006806300234189519,
+    "mean_net_per_fill": -0.0007758085536086739,
+    "mean_net_per_order": -0.0007757595138770931
+   },
+   "buf2x": {
+    "orders": 15820,
+    "fills": 15820,
+    "fill_rate": 1.0,
+    "dropped": 1,
+    "mean_gross_per_fill": 0.0006806300234189519,
+    "mean_net_per_fill": -0.0012758085536086737,
+    "mean_net_per_order": -0.0012757279083145138
+   },
+   "buf5x": {
+    "orders": 15820,
+    "fills": 15820,
+    "fill_rate": 1.0,
+    "dropped": 1,
+    "mean_gross_per_fill": 0.0006806300234189519,
+    "mean_net_per_fill": -0.002775808553608674,
+    "mean_net_per_order": -0.002775633091626777
+   }
+  },
+  "E5_placebo_primary_1x": {
+   "orders": 54692,
+   "fills": 14742,
+   "fill_rate": 0.2695458202296497,
+   "dropped": 2,
+   "mean_gross_per_fill": -0.00024937789096140595,
+   "mean_net_per_fill": -0.001405801844828435,
+   "mean_net_per_order": -0.0003788766033930215
+  },
+  "E6_exit_source_primary": {
+   "min": 8052,
+   "last": 98
+  },
+  "E7_by_month_primary_1x": {
+   "2025-08": {
+    "orders": 290,
+    "fills": 121,
+    "fill_rate": 0.41724137931034483,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.0016892103661514714,
+    "mean_net_per_fill": -0.002898483176068828,
+    "mean_net_per_order": -0.0012093671182907867
+   },
+   "2025-09": {
+    "orders": 2194,
+    "fills": 1135,
+    "fill_rate": 0.5173199635369189,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.003496914673532709,
+    "mean_net_per_fill": -0.004720244382783811,
+    "mean_net_per_order": -0.002441876651987067
+   },
+   "2025-10": {
+    "orders": 3056,
+    "fills": 1489,
+    "fill_rate": 0.487238219895288,
+    "dropped": 0,
+    "mean_gross_per_fill": 0.004126202256246356,
+    "mean_net_per_fill": 0.002970518031934738,
+    "mean_net_per_order": 0.0014473499180467358
+   },
+   "2025-11": {
+    "orders": 2325,
+    "fills": 1306,
+    "fill_rate": 0.5617204301075269,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.0008570375048303775,
+    "mean_net_per_fill": -0.0020235183164689684,
+    "mean_net_per_order": -0.001136651579057408
+   },
+   "2025-12": {
+    "orders": 2434,
+    "fills": 1242,
+    "fill_rate": 0.5102711585866886,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.0019521944158282,
+    "mean_net_per_fill": -0.0030814536589844,
+    "mean_net_per_order": -0.0015723769287011608
+   },
+   "2026-01": {
+    "orders": 2459,
+    "fills": 1262,
+    "fill_rate": 0.5132167547783651,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.00010394329216311643,
+    "mean_net_per_fill": -0.001264435764429361,
+    "mean_net_per_order": -0.0006489296196461377
+   },
+   "2026-02": {
+    "orders": 2231,
+    "fills": 1165,
+    "fill_rate": 0.5221873599282832,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.0031025130569391182,
+    "mean_net_per_fill": -0.004245587254364011,
+    "mean_net_per_order": -0.0022169919997015123
+   },
+   "2026-03": {
+    "orders": 831,
+    "fills": 430,
+    "fill_rate": 0.5174488567990373,
+    "dropped": 0,
+    "mean_gross_per_fill": -0.0013651643369587533,
+    "mean_net_per_fill": -0.0024667364997494508,
+    "mean_net_per_order": -0.0012764099818198124
+   }
+  },
+  "not_implemented_no_spec": [
+   "maker take-profit",
+   "pump mirror",
+   "regime splits",
+   "BTC-relative"
+  ]
+ }
+}

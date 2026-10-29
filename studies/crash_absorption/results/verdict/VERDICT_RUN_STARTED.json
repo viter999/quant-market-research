@@ -1,0 +1,13 @@
+{
+ "origin": "archive",
+ "code_head": "a516b7794311f89f3922e94aa7ca539139c1ca6b",
+ "funding": {
+  "manifest_sha256": "8c0dc5c099fc69cf6656abe16076bd29ac78d25202376e675b6e173b7ed5a858",
+  "files": 708
+ },
+ "funding_coverage": {
+  "member_days": 16000,
+  "zero_volume_member_days_skipped": 23
+ },
+ "started": "2026-10-29T07:08:39.103644+00:00"
+}
