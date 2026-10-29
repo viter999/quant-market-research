@@ -79,6 +79,13 @@ def get_klines(fetch, base: Path, market: str, symbol: str, day: dt.date) -> pd.
     return out
 
 
+def check_metrics_day(ts: np.ndarray, day: dt.date) -> None:
+    lo, hi = P.date_to_ms(day), P.date_to_ms(day + dt.timedelta(days=1))
+    tol = 5 * P.MINUTE_MS
+    if len(ts) and (ts.min() < lo - tol or ts.max() > hi + tol):
+        raise DL.DataValidationError(f"metrics {day}: create_time outside its day")
+
+
 def get_metrics(fetch, base: Path, symbol: str, day: dt.date) -> pd.DataFrame | None:
     p = _cache(base, symbol, day)
     absent = p.with_suffix(".absent")
@@ -93,9 +100,7 @@ def get_metrics(fetch, base: Path, symbol: str, day: dt.date) -> pd.DataFrame | 
         absent.touch()
         return None
     ts = create_time_ms(df["create_time"])
-    lo, hi = P.date_to_ms(day), P.date_to_ms(day + dt.timedelta(days=1))
-    if len(ts) and (ts.min() < lo or ts.max() > hi):
-        raise DL.DataValidationError(f"metrics {symbol} {day}: create_time outside its day")
+    check_metrics_day(ts, day)  # tolerance one 5-min period: end-of-day rows are stamped e.g. 00:00:01 next day
     out = pd.DataFrame({"ts": ts, "sum_open_interest": df["sum_open_interest"].astype(float)}).sort_values("ts")
     _write(out, p)
     return out

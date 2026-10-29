@@ -201,3 +201,15 @@ def test_metrics_create_time_to_ms():
     from ef.slices import create_time_ms
     got = create_time_ms(pd.Series(["2024-01-02 00:00:00", "2024-01-02 00:05:00"]))
     assert got.tolist() == [1704153600000, 1704153900000]
+
+
+def test_metrics_day_check_tolerates_end_of_day_jitter_only():
+    from ca import downloader as DL
+    from ef.slices import check_metrics_day
+    d = dt.date(2024, 12, 5)
+    lo, hi = P.date_to_ms(d), P.date_to_ms(d + dt.timedelta(days=1))
+    check_metrics_day(np.array([lo + 5 * P.MINUTE_MS, hi + 1000]), d)  # 00:00:01 next day: ok
+    with pytest.raises(DL.DataValidationError):
+        check_metrics_day(np.array([lo, hi + 3600_000]), d)
+    with pytest.raises(DL.DataValidationError):
+        check_metrics_day(np.array([lo * 1000]), d)  # wrong units
