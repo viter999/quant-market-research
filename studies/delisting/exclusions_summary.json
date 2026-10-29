@@ -1,0 +1,16 @@
+{
+ "test_symbol_events": 78,
+ "test_episodes": 38,
+ "by_reason_first_failing": {
+  "kept": 36,
+  "D_minus_A_lt_12h": 4,
+  "vol24_lt_5M": 35,
+  "window_past_data_limit": 3
+ },
+ "kept_symbol_events": 36,
+ "kept_episodes": 22,
+ "kept_with_data_missing": 2,
+ "usable_symbol_events": 34,
+ "usable_episodes": 21,
+ "item1_met": false
+}
