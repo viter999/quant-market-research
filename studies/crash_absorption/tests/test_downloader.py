@@ -317,3 +317,31 @@ def test_http_fetcher_percent_encodes_non_ascii(monkeypatch):
     monkeypatch.setattr(DL.urllib.request, "urlopen", lambda url, timeout: seen.append(url) or R())
     assert DL.HttpFetcher().get(DL.kline_url("龙虾USDT", "1d", "daily", "2026-03-12")) == b"x"
     assert seen[0].isascii() and "%E9%BE%99%E8%99%BEUSDT" in seen[0] and "2026-03-12.zip" in seen[0]
+
+
+def test_http_fetcher_retries_reset_mid_body(monkeypatch):
+    calls = []
+
+    class R:
+        def __init__(self, fail):
+            self.fail = fail
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+        def read(self):
+            if self.fail:
+                raise ConnectionResetError(104, "Connection reset by peer")
+            return b"ok"
+
+    monkeypatch.setattr(DL.urllib.request, "urlopen", lambda url, timeout: calls.append(1) or R(len(calls) < 3))
+    monkeypatch.setattr("time.sleep", lambda s: None)
+    assert DL.HttpFetcher().get("https://data.binance.vision/x-2024-01-01.zip") == b"ok" and len(calls) == 3
+    calls.clear()
+    monkeypatch.setattr(DL.urllib.request, "urlopen", lambda url, timeout: calls.append(1) or R(True))
+    with pytest.raises(ConnectionResetError):
+        DL.HttpFetcher(retries=2).get("https://data.binance.vision/x-2024-01-01.zip")
+    assert len(calls) == 3

@@ -6,6 +6,7 @@ import calendar
 import contextlib
 import datetime as dt
 import hashlib
+import http.client
 import json
 import shutil
 import tempfile
@@ -44,41 +45,39 @@ class DataValidationError(RuntimeError):
 
 # ---------------------------------------------------------------- fetching
 class HttpFetcher:
-    """get(url) -> bytes | None (404); download(url, path) -> bool (False on 404)."""
+    """get(url) -> bytes | None (404); download(url, path) -> bool (False on 404).
+    Transient failures (5xx, connection errors, resets mid-body) are retried
+    with backoff 2, 4, 8, 16 s; anything else raises."""
 
     def __init__(self, timeout: int = 120, retries: int = 4):
         self.timeout, self.retries = timeout, retries
 
-    def _open(self, url):
+    def _with_retry(self, url, consume):
         import time
         url = urllib.parse.quote(url, safe=":/?&=%-._~")  # non-ASCII symbol names (e.g. 龙虾USDT)
         for attempt in range(self.retries + 1):
             try:
-                return urllib.request.urlopen(url, timeout=self.timeout)
+                with urllib.request.urlopen(url, timeout=self.timeout) as r:
+                    return consume(r)
             except urllib.error.HTTPError as e:
                 if e.code == 404:
                     return None
                 if e.code < 500 or attempt == self.retries:
                     raise
-            except (urllib.error.URLError, TimeoutError, ConnectionError):
+            except (urllib.error.URLError, TimeoutError, ConnectionError, http.client.IncompleteRead):
                 if attempt == self.retries:
                     raise
             time.sleep(2 ** (attempt + 1))
 
     def get(self, url: str) -> bytes | None:
-        r = self._open(url)
-        if r is None:
-            return None
-        with r:
-            return r.read()
+        return self._with_retry(url, lambda r: r.read())
 
     def download(self, url: str, path: Path) -> bool:
-        r = self._open(url)
-        if r is None:
-            return False
-        with r, open(path, "wb") as out:
-            shutil.copyfileobj(r, out, 1 << 20)
-        return True
+        def consume(r):
+            with open(path, "wb") as out:
+                shutil.copyfileobj(r, out, 1 << 20)
+            return True
+        return bool(self._with_retry(url, consume))
 
 
 def _guarded(url: str) -> str:
