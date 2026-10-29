@@ -77,3 +77,21 @@ Implementation choices accepted (from the Task 2a report)
 - Funding exposure ends at T; funding = rate × entry notional.
 - A trade exactly at T counts for both exit sources; same-millisecond trades are ordered by agg_id; a missing CHECKSUM is an error.
 - Gate (b) and "run VERDICT" use the same unlock.
+
+# CLARIFICATIONS v0.3.3 — answers to the Task 2a/v0.3.2 open points (no outcome seen; PROPOSED, pending Shawn gate (d) together with v0.3.1 and v0.3.2)
+
+§8 verdict inputs
+- Dropped fills (no exit price) are excluded from per-fill means, per-order means and the item-1 fill count, and reported as a count. Additionally (descriptive) the per-order mean is reported with dropped fills counted as 0.
+- Item 1 counts episodes and days that contain ≥ 1 fill.
+- Item 4 uses the 1× buffer on both sides; its event side is restricted to events with ≥ 1 placebo (items 1–3 use all events).
+- A bootstrap replicate with no rows makes the lower bound NaN, which fails "> 0"; the NaN count is reported.
+- Every bootstrap uses seed 20261030.
+
+§7 B2 baseline
+- B2 is capped at 5 min after bar close: if no aggTrade occurs in [bar close + 2 s, bar close + 300 s], there is no B2 entry, and it is counted.
+
+§6 funding
+- Archive (calc_time, last_funding_rate) and REST (fundingTime, fundingRate) are treated as one settlement series. At the seam, 2026-02 is also fetched via REST and compared with the archive file; the maximum timestamp and rate differences are reported.
+
+§2 exclusions
+- Frozen only after the research director's review of the real archive list.
