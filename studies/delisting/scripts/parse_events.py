@@ -1,17 +1,24 @@
 """DL-1 step 1: parse the raw Binance Futures delisting announcements into the
 event list (PREREG v0.2 §1). Reads only events_raw/*.json; no price data.
 
+Usage: parse_events.py RAW_JSON   (RAW_JSON.sha256 must sit next to it)
+
 Outputs (studies/delisting/):
-  events.csv    one row per (article, USDT-margined perp symbol)
-  articles.csv  one row per selected article (77), with its parse status
+  events.csv      one row per (article, USDT-margined perp symbol)
+  articles.csv    one row per selected article, with its parse status
+  unselected.csv  catalog titles about futures contracts that fail the frozen
+                  §1 title filter (excluded by rule, listed for the record)
 
 Rules (PREREG §1):
   A = release_ms of the article; D = settlement time stated in the body for that
   symbol; N = no-new-orders time stated in the body for that symbol, else D - 1h.
   Episode = all USDT symbols in one article. USDT-margined only (COIN-M ...USD,
   BUSD- and USDC-margined contracts are dropped). Postponement notices are not
-  episodes; the later date is recorded in D_postponed_utc and D stays the date
-  in the episode's own article (see the DL-1 report).
+  episodes; D and N stay as stated in the episode's own article (what a trader
+  knew at A) and the later date is recorded in D_postponed_utc.
+  Time-only exclusions known before any price data are marked in
+  excluded_by_time_rule: D - A < 12h, and window_past_data_limit (a TEST event
+  whose exit window needs data after 2026-03-13).
 """
 import csv
 import datetime as dt
@@ -22,8 +29,8 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parents[1]
-RAW = HERE / "events_raw" / "binance_futures_delistings_2022-2026.json"
-RAW_SHA = "81750bb0afe6121507c5208904e02f3908914258e35ee6ec4fb1f3a5a2f04eff"
+TITLE_FILTER = re.compile(r"Futures Will Delist|Perpetual Contract", re.I)  # frozen §1 selection
+FUTURES_WORDS = re.compile(r"Futures|Perpetual", re.I)
 
 TEST = (dt.datetime(2022, 2, 17, tzinfo=dt.timezone.utc), dt.datetime(2026, 3, 14, tzinfo=dt.timezone.utc))
 HOLDOUT = (dt.datetime(2026, 3, 15, tzinfo=dt.timezone.utc), dt.datetime(2026, 10, 1, tzinfo=dt.timezone.utc))
@@ -146,11 +153,13 @@ def parse_article(a: dict) -> dict:
     return res
 
 
-def main() -> int:
-    raw = RAW.read_bytes()
+def main(raw_path: str) -> int:
+    path = Path(raw_path)
+    raw = path.read_bytes()
     sha = hashlib.sha256(raw).hexdigest()
-    if sha != RAW_SHA:
-        print(f"raw sha256 mismatch: {sha}", file=sys.stderr)
+    want = Path(str(path) + ".sha256").read_text().split()[0]
+    if sha != want:
+        print(f"raw sha256 mismatch: {sha} != {want}", file=sys.stderr)
         return 1
     r = json.loads(raw)
     titles = {x["code"]: x for x in r["all_titles"]}
@@ -179,24 +188,35 @@ def main() -> int:
                             "N_utc": utc(v["N_ms"]), "N_source": v["N_source"],
                             "D_minus_A_h": round((v["D_ms"] - rel) / 3600_000, 3),
                             "restriction_flag": v["restriction_flag"], "D_postponed_utc": "",
-                            "window_past_data_limit": int(segment(rel) == "TEST" and v["D_ms"] >= DATA_LIMIT_MS),
+                            "excluded_by_time_rule": ("D_minus_A_lt_12h" if v["D_ms"] - rel < 12 * 3600_000 else
+                                                      "window_past_data_limit"
+                                                      if segment(rel) == "TEST" and v["D_ms"] >= DATA_LIMIT_MS else ""),
                             "notes": ";".join(notes), "restriction_text": v["restriction_text"]})
     for e in ev_rows:  # postponement notices published after A and before the original D
         for rel, new in postpone.get(e["symbol"], []):
             if e["A_ms"] < rel < e["D_ms"] and new:
                 e["D_postponed_utc"] = new + ":00"
-                e["notes"] = ";".join(x for x in (e["notes"], f"postponed_by_notice_{utc(rel)[:10]}") if x)
+                e["notes"] = ";".join(x for x in (e["notes"], f"postponed_by_notice_{utc(rel)[:10]}_trade_uses_original_D_N") if x)
             elif e["A_ms"] < rel and new and e["D_postponed_utc"] and rel < ms(e["D_postponed_utc"][:16]):
                 e["D_postponed_utc"] = new + ":00"
                 e["notes"] += f";further_postponed_{utc(rel)[:10]}"
-    for name, rows in (("events.csv", ev_rows), ("articles.csv", art_rows)):
+    selected = {a["code"] for a in r["articles"]}
+    assert all(TITLE_FILTER.search(clean(titles[c]["title"])) for c in selected), "selected title fails filter"
+    unsel = [{"code": x["code"], "A_ms": int(x["release"]), "A_utc": utc(int(x["release"])),
+              "segment": segment(int(x["release"])), "title": clean(x["title"]),
+              "reason": "title fails frozen §1 filter"}
+             for x in sorted(r["all_titles"], key=lambda x: int(x["release"]))
+             if x["code"] not in selected and FUTURES_WORDS.search(x["title"])
+             and not TITLE_FILTER.search(clean(x["title"]))]
+    for name, rows in (("events.csv", ev_rows), ("articles.csv", art_rows), ("unselected.csv", unsel)):
         with open(HERE / name, "w", newline="") as f:
             w = csv.DictWriter(f, fieldnames=list(rows[0]), lineterminator="\n")
             w.writeheader()
             w.writerows(rows)
-    print(f"raw sha256 ok; {len(art_rows)} articles; {len(ev_rows)} symbol-events written")
+    print(f"raw {path.name} sha256 ok; {len(art_rows)} articles; {len(ev_rows)} symbol-events; "
+          f"{len(unsel)} unselected futures titles")
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(main(sys.argv[1]))
