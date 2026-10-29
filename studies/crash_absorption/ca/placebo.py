@@ -29,24 +29,32 @@ def _minute_of_day(ts: np.ndarray) -> np.ndarray:
 
 
 def match(event: pd.Series, cands: pd.DataFrame) -> pd.DataFrame:
-    ts = cands["close_ts"].to_numpy()
-    near = np.abs(ts - event["close_ts"]) <= P.PLACEBO_MAX_DAYS * P.DAY_MS
+    """Candidates matching one event (±3 days, hour ±60 min circular, σ ±25 %,
+    60-min quote volume ±50 %), sorted by close_ts. cands must be sorted by close_ts."""
+    ts_all = cands["close_ts"].to_numpy()
+    lo = np.searchsorted(ts_all, event["close_ts"] - P.PLACEBO_MAX_DAYS * P.DAY_MS, side="left")
+    hi = np.searchsorted(ts_all, event["close_ts"] + P.PLACEBO_MAX_DAYS * P.DAY_MS, side="right")
+    c = cands.iloc[lo:hi]
+    ts = c["close_ts"].to_numpy()
     d = np.abs(_minute_of_day(ts) - _minute_of_day(np.array([event["close_ts"]]))[0])
     hour = np.minimum(d, 1440 - d) <= P.PLACEBO_HOUR_TOL_MIN
-    sig = np.abs(cands["sigma"].to_numpy() - event["sigma"]) <= P.PLACEBO_SIGMA_TOL * event["sigma"]
-    qv = np.abs(cands["qv60"].to_numpy() - event["qv60"]) <= P.PLACEBO_QV_TOL * event["qv60"]
-    return cands[near & hour & sig & qv]
+    sig = np.abs(c["sigma"].to_numpy() - event["sigma"]) <= P.PLACEBO_SIGMA_TOL * event["sigma"]
+    qv = np.abs(c["qv60"].to_numpy() - event["qv60"]) <= P.PLACEBO_QV_TOL * event["qv60"]
+    return c[hour & sig & qv]
 
 
-def draw_placebos(events: pd.DataFrame, candidates: dict[tuple[str, str], pd.DataFrame],
-                  seed: int = P.SEED_PLACEBO) -> pd.DataFrame:
-    """events: detector output with an `event_id` column. candidates[(symbol, segment)]
-    from candidate_bars. Events are processed in (close_ts, symbol) order with one
-    generator, so the draw is a deterministic function of the seed and the events."""
+PLACEBO_COLS = ["event_id", "symbol", "segment", "open_time", "close_ts", "close", "sigma", "qv60",
+                "day", "event_day", "n_candidates"]
+
+
+def draw_from_matches(events: pd.DataFrame, matches: dict, seed: int = P.SEED_PLACEBO) -> pd.DataFrame:
+    """matches[event_id] = match(...) result. Events are processed in
+    (close_ts, symbol) order with one generator: the draw is a deterministic
+    function of the seed and the events."""
     rng = np.random.default_rng(seed)
     rows = []
     for _, ev in events.sort_values(["close_ts", "symbol"], kind="stable").iterrows():
-        m = match(ev, candidates[(ev["symbol"], ev["segment"])]).sort_values("close_ts")
+        m = matches[ev["event_id"]]
         k = min(P.N_PLACEBO, len(m))
         if k:
             pick = m.iloc[np.sort(rng.choice(len(m), size=k, replace=False))]
@@ -55,9 +63,16 @@ def draw_placebos(events: pd.DataFrame, candidates: dict[tuple[str, str], pd.Dat
                              "open_time": p["open_time"], "close_ts": p["close_ts"], "close": p["close"],
                              "sigma": p["sigma"], "qv60": p["qv60"], "day": p["day"],
                              "event_day": ev["day"], "n_candidates": len(m)})
-    cols = ["event_id", "symbol", "segment", "open_time", "close_ts", "close", "sigma", "qv60",
-            "day", "event_day", "n_candidates"]
-    return pd.DataFrame(rows, columns=cols)
+    return pd.DataFrame(rows, columns=PLACEBO_COLS)
+
+
+def draw_placebos(events: pd.DataFrame, candidates: dict[tuple[str, str], pd.DataFrame],
+                  seed: int = P.SEED_PLACEBO) -> pd.DataFrame:
+    """events: detector output with an `event_id` column. candidates[(symbol, segment)]
+    from candidate_bars."""
+    matches = {ev["event_id"]: match(ev, candidates[(ev["symbol"], ev["segment"])].sort_values("close_ts"))
+               for _, ev in events.iterrows()}
+    return draw_from_matches(events, matches, seed)
 
 
 def placebo_counts(events: pd.DataFrame, placebos: pd.DataFrame) -> pd.Series:

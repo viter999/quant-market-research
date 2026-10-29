@@ -110,3 +110,10 @@ def test_sanity_sample():
     a, b = sanity_sample(ev), sanity_sample(ev)
     assert len(a) == 50 and a.equals(b) and a["close_ts"].is_unique
     assert len(sanity_sample(ev.head(10))) == 10
+
+
+def test_draw_from_matches_equals_draw_placebos(setup):
+    _, _, events, cands, _ = setup
+    from ca.placebo import draw_from_matches
+    m = {0: match(events.iloc[0], cands.sort_values("close_ts"))}
+    assert draw_from_matches(events, m).equals(draw_placebos(events, {("X", "dev"): cands}))

@@ -199,14 +199,15 @@ def parse_klines(zpath: Path, freq: str, period: str) -> pd.DataFrame:
     return df
 
 
-def download_klines(symbol: str, interval: str, out_dir: Path, fetch, periods=None) -> Path | None:
-    """All allowed periods for one symbol/interval -> one parquet."""
+def download_klines(symbol: str, interval: str, out_dir: Path, fetch, periods=None, columns=None) -> Path | None:
+    """All allowed periods for one symbol/interval -> one parquet (optionally only `columns`)."""
     parts = []
     with tempfile.TemporaryDirectory() as td:
         for freq, period in periods or file_periods():
             z = _fetch_zip(fetch, kline_url(symbol, interval, freq, period), Path(td))
             if z is not None:
-                parts.append(parse_klines(z, freq, period))
+                k = parse_klines(z, freq, period)
+                parts.append(k[columns] if columns else k)
                 z.unlink()
     if not parts:
         return None
