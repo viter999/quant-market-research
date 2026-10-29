@@ -70,6 +70,7 @@ class SyntheticArchive:
 
     def __init__(self, minutes: dict[str, pd.DataFrame]):
         self.minutes, self.cache, self.requested = minutes, {}, []
+        self.missing: set[tuple[str, str]] = set()  # (symbol, 'YYYY-MM-DD') served as 404 (tests)
 
     def _zip(self, sym, day):
         key = (sym, day)
@@ -88,7 +89,7 @@ class SyntheticArchive:
     def get(self, url):
         self.requested.append(url)
         m = self.PAT.search(url)
-        if not m or m.group(1) not in self.minutes:
+        if not m or m.group(1) not in self.minutes or (m.group(1), m.group(2)) in self.missing:
             return None
         z = self._zip(m.group(1), m.group(2))
         if m.group(3):

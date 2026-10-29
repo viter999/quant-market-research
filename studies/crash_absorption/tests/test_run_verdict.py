@@ -114,17 +114,81 @@ def test_clip_windows_and_beyond_end():
     assert beyond_end(last_fill, 30) and beyond_end(last_fill, 60)
 
 
-def test_archive_origin_path_with_unlock(world, tmp_path, monkeypatch):
-    """Same run with origin=ARCHIVE and the unlock patched to True: exercises the
-    real-data branches (segment + outcome locks, code_head) without real data."""
+class FakeGit:
+    """Stands in for git in ca.lock: counts calls; status turns dirty after `dirty_after` calls."""
+    def __init__(self, head="a" * 40, dirty_after=None):
+        self.head, self.dirty_after, self.calls = head, dirty_after, []
+
+    def __call__(self, *args):
+        self.calls.append(args)
+        if args[0] == "rev-parse":
+            return self.head
+        return " M ca/fill.py" if self.dirty_after is not None and len(self.calls) > self.dirty_after else ""
+
+
+def test_archive_origin_run_checks_unlock_once_at_start_and_once_at_end(world, tmp_path, monkeypatch):
+    """origin=ARCHIVE through the whole runner: git is called only for the start
+    check and the end check (2 + 2 calls), not per outcome row."""
     import ca.lock as L
-    import ca.verdict_run as VR
     root, w = world
-    monkeypatch.setattr(L, "verdict_unlocked", lambda: True)
-    monkeypatch.setattr(VR, "verdict_unlocked", lambda: True)
+    fake = FakeGit()
+    monkeypatch.setattr(L, "_git", fake)
+    monkeypatch.setenv("CA_RUN_VERDICT", fake.head)
     res = run(_src(root, w, ARCHIVE), tmp_path / "run", w["expected_funding_sha"])
-    assert res["meta"]["origin"] == ARCHIVE and len(res["meta"]["code_head"]) == 40
-    assert res["verdict"]["verdict"] in ("PASS", "KILL", "NOT EVALUABLE")
+    assert res["meta"]["origin"] == ARCHIVE and res["meta"]["code_head"] == fake.head
+    assert res["meta"]["end_check"] == "HEAD and tree verified unchanged"
+    assert len(fake.calls) == 4, fake.calls
+    assert res["counts"]["primary_fills"] > 0 and res["verdict"]["verdict"] in ("PASS", "KILL", "NOT EVALUABLE")
+
+
+def test_tree_change_mid_run_blocks_result(world, tmp_path, monkeypatch):
+    import ca.lock as L
+    root, w = world
+    fake = FakeGit(dirty_after=2)  # clean at the start check, dirty at the end check
+    monkeypatch.setattr(L, "_git", fake)
+    monkeypatch.setenv("CA_RUN_VERDICT", fake.head)
+    with pytest.raises(RefuseToRun, match="changed during the VERDICT run"):
+        run(_src(root, w, ARCHIVE), tmp_path / "run", w["expected_funding_sha"])
+    assert (tmp_path / "run" / "VERDICT_RUN_STARTED.json").exists()
+    assert not (tmp_path / "run" / "VERDICT_RESULT.json").exists() and not (tmp_path / "run" / "VERDICT_REPORT.md").exists()
+
+
+def test_missing_aggtrades_excluded_from_both_arms(world, tmp_path):
+    """v0.3.5: an event day and a placebo-only day served as 404 -> those orders leave
+    their arms (event not counted as an unfilled 0), and the excluded event's placebos go too."""
+    root, w = world
+    r = _copy(root, tmp_path)
+    full = run(_src(r, w), tmp_path / "full", w["expected_funding_sha"])
+    ev = pd.read_parquet(tmp_path / "full" / "events.parquet")
+    pl = pd.read_parquet(tmp_path / "full" / "placebos.parquet")
+    from ca import params as P
+    e = ev.iloc[len(ev) // 2]
+    ev_day = P.ms_to_date(int(e["close_ts"]))
+    pl_days = {(s, P.ms_to_date(int(t))) for s, t in zip(pl["symbol"], pl["close_ts"])}
+    ev_days = {(s, P.ms_to_date(int(t))) for s, t in zip(ev["symbol"], ev["close_ts"])}
+    placebo_only = sorted(pl_days - ev_days)[0]
+    r2 = _copy(root, tmp_path / "second")
+    for s, d in [(e["symbol"], ev_day), placebo_only]:
+        f = r2 / "data" / "verdict" / "aggtrades" / s / f"{d.isoformat()}.parquet"
+        if f.exists():
+            f.unlink()
+        w["fetcher"].missing.add((s, d.isoformat()))
+    try:
+        res = run(_src(r2, w), tmp_path / "missing", w["expected_funding_sha"])
+    finally:
+        w["fetcher"].missing.clear()
+    c = res["counts"]
+    assert c["event_orders_data_missing"] >= 1 and c["placebo_orders_data_missing"] >= 1
+    assert c["events_in_verdict_arms"] == c["events"] - c["event_orders_data_missing"]
+    assert res["verdict"]["counts"]["orders"] == c["events_in_verdict_arms"]
+    assert c["placebos_removed_with_their_event"] >= 0
+    i4 = res["verdict"]["items"]["4_beats_placebo"]
+    assert i4["placebo_orders"] == c["placebos"] - c["placebo_orders_data_missing"] - c["placebos_removed_with_their_event"] \
+        - int((pd.read_parquet(tmp_path / "missing" / "outcomes.parquet").query("order_kind == 'placebo' and config == 'grid' and hold == 15 and mult == 1")
+               .eval("filled & dropped")).sum())
+    rep = (tmp_path / "missing" / "VERDICT_REPORT.md").read_text()
+    assert "Missing aggTrades (v0.3.5, excluded from both arms): event orders = " in rep
+    assert full["counts"]["event_orders_data_missing"] == 0
 
 
 def test_coverage_check_skips_zero_volume_member_days(world, tmp_path):

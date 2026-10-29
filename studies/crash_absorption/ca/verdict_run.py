@@ -27,7 +27,7 @@ from ca import params as P
 from ca.events import detect_symbol_events, link_episodes, minute_features
 from ca.exits import trade_outcome
 from ca.fill import b2_entry, simulate_fill
-from ca.lock import ARCHIVE, SYNTHETIC, _git, verdict_unlocked
+from ca.lock import ARCHIVE, SYNTHETIC, head_if_unlocked, start_session
 from ca.placebo import candidate_bars, draw_from_matches, match
 from ca.trades import Trades
 from ca.universe import build_universe, check_reviewed, load_exclusions
@@ -139,9 +139,10 @@ def check_funding_coverage(src: Source, uni: dict, daily: pd.DataFrame) -> dict:
 def preconditions(src: Source, out_dir: Path, expected_funding_sha: str | None) -> dict:
     info = {"origin": src.origin}
     if src.origin != SYNTHETIC:
-        if not verdict_unlocked():
+        head = head_if_unlocked()  # the only git calls before the end-of-run re-check
+        if not head:
             raise RefuseToRun("CA_RUN_VERDICT must equal the current, clean git HEAD")
-        info["code_head"] = _git("rev-parse", "HEAD")
+        info["code_head"] = head
     info["funding"] = check_funding_manifest(src.data_dir, expected_funding_sha, src.get_funding_symbols())
     lock = out_dir / "VERDICT_RUN_STARTED.json"
     if lock.exists():
@@ -151,7 +152,7 @@ def preconditions(src: Source, out_dir: Path, expected_funding_sha: str | None) 
 
 # ----------------------------------------------------------------- detection
 def _detect(args):
-    s, path, uni = args
+    s, path, uni = args  # origin/session come from the pool initializer
     f = minute_features(pd.read_parquet(path, columns=["open_time", "close", "quote_volume"]))
     ev = detect_symbol_events(s, f, uni, SEG, args_origin[0])
     if ev.empty:
@@ -163,24 +164,28 @@ def _detect(args):
 args_origin = [ARCHIVE]  # set per process via initializer
 
 
-def _init(origin):
+def _init(origin: str, head: str | None = None) -> None:
+    """Worker setup: the run origin, and for a real run the VERDICT session with the
+    HEAD verified once by the parent (workers never call git)."""
     args_origin[0] = origin
+    if head:
+        start_session(head)
 
 
-def _pool(src: Source):
+def _pool(src: Source, origin: str, head: str | None):
     if src.workers > 1:
-        return cf.ProcessPoolExecutor(src.workers, initializer=_init, initargs=(src.origin,))
-    _init(src.origin)
+        return cf.ProcessPoolExecutor(src.workers, initializer=_init, initargs=(origin, head))
+    _init(origin, head)
     return cf.ThreadPoolExecutor(1)
 
 
-def detect(src: Source, uni: dict):
+def detect(src: Source, uni: dict, origin: str, head: str | None):
     members = sorted(set().union(*uni.values()))
     missing = [s for s in members if not src.minute_path(s).exists()]
     if missing:
         raise RefuseToRun(f"VERDICT 1m klines missing for {missing[:5]}")
     evs, matches = [], {}
-    with _pool(src) as ex:
+    with _pool(src, origin, head) as ex:
         for s, ev, m in ex.map(_detect, [(s, src.minute_path(s), uni) for s in members]):
             if len(ev):
                 evs.append(ev)
@@ -257,7 +262,6 @@ def _outcome_row(tr, fill, funding, hold, mult):
 
 def _symbol_outcomes(args):
     vdir, data_dir, s, orders, origin = args
-    _init(origin)
     funding = DL.load_funding(s, data_dir)
     rows, cache = [], {}
     for _, o in orders.iterrows():
@@ -290,12 +294,12 @@ def _symbol_outcomes(args):
     return rows
 
 
-def outcomes(src: Source, ev: pd.DataFrame, pl: pd.DataFrame) -> pd.DataFrame:
+def outcomes(src: Source, ev: pd.DataFrame, pl: pd.DataFrame, origin: str, head: str | None) -> pd.DataFrame:
     orders = pd.concat([ev[["event_id", "symbol", "close_ts", "close"]].assign(kind="event"),
                         pl[["event_id", "symbol", "close_ts", "close"]].assign(kind="placebo")], ignore_index=True)
-    jobs = [(src.vdir, src.data_dir, s, g.sort_values("close_ts"), src.origin) for s, g in orders.groupby("symbol")]
+    jobs = [(src.vdir, src.data_dir, s, g.sort_values("close_ts"), origin) for s, g in orders.groupby("symbol")]
     rows = []
-    with _pool(src) as ex:
+    with _pool(src, origin, head) as ex:
         for r in ex.map(_symbol_outcomes, jobs):
             rows += r
     return pd.DataFrame(rows)
@@ -310,22 +314,32 @@ def _primary(df: pd.DataFrame, kind: str, mult: int, hold: int = 15) -> pd.DataF
 
 
 def verdict_inputs(ev: pd.DataFrame, pl: pd.DataFrame, oc: pd.DataFrame):
+    """Primary-spec tables for verdict.py. v0.3.5: an order (event or placebo) whose
+    aggTrades file is missing is excluded from its arm and counted; the placebos of
+    an excluded event are removed too, so both arms come from the same events."""
     e1 = _primary(oc, "event", 1)
     e2 = _primary(oc, "event", 2)
+    miss_ev = set(oc.loc[(oc["order_kind"] == "event") & (oc["config"] == "data_missing"), "event_id"])
+    n_miss_pl = int(((oc["order_kind"] == "placebo") & (oc["config"] == "data_missing")).sum())
     orders = ev[["event_id", "day", "episode"]].set_index("event_id").copy()
-    orders["filled"] = e1["filled"].reindex(orders.index).fillna(False).astype(bool)
+    orders = orders[~orders.index.isin(miss_ev)]
+    if not orders.index.isin(e1.index).all():
+        raise RuntimeError("primary-spec row missing for an event with data")
+    orders["filled"] = e1["filled"].reindex(orders.index).astype(bool)
     orders["dropped"] = e1["dropped"].reindex(orders.index).fillna(False).astype(bool)
     orders["net_1x"] = e1["net"].reindex(orders.index).astype(float)
     orders["net_2x"] = e2["net"].reindex(orders.index).astype(float)
     orders["kind"] = e1["fill_kind"].reindex(orders.index)
-    missing = oc[(oc["order_kind"] == "event") & (oc["config"] == "data_missing")]["event_id"]
-    orders["data_missing"] = orders.index.isin(missing)
     p1 = oc[(oc["order_kind"] == "placebo") & (oc["config"] == "grid") & (oc["hold"] == 15) & (oc["mult"] == 1)]
-    pl_key = pl.reset_index(drop=True)
-    p1 = p1.merge(pl_key[["event_id", "close_ts", "event_day"]], on=["event_id", "close_ts"], how="left")
+    p1 = p1.merge(pl.reset_index(drop=True)[["event_id", "close_ts", "event_day"]], on=["event_id", "close_ts"], how="left")
+    with_event = ~p1["event_id"].isin(miss_ev)
+    removed = int((~with_event).sum())
+    p1 = p1[with_event]
     placebos = pd.DataFrame({"event_id": p1["event_id"], "event_day": p1["event_day"], "filled": p1["filled"].astype(bool),
                              "dropped": p1["dropped"].fillna(False).astype(bool), "net_1x": p1["net"].astype(float)})
-    return orders.reset_index(), placebos
+    info = {"event_orders_data_missing": len(miss_ev), "placebo_orders_data_missing": n_miss_pl,
+            "placebos_removed_with_their_event": removed}
+    return orders.reset_index(), placebos.reset_index(drop=True), info
 
 
 def _summ(g: pd.DataFrame) -> dict:
@@ -398,9 +412,13 @@ def write_report(out_dir: Path, result: dict) -> None:
         lines.append(f"| {k} | {vals} | {it['pass']} |")
     i4 = v["items"]["4_beats_placebo"]
     n_ev = v["counts"]["orders"]
+    c = result["counts"]
     lines += ["", f"Item 4 event side: n = {i4['events_compared']} events with >= 1 placebo; "
                   f"excluded (0 placebos) = {i4['events_without_placebo']} of {n_ev} "
                   f"({i4['events_without_placebo'] / n_ev:.1%})." if n_ev else "", "",
+              f"Missing aggTrades (v0.3.5, excluded from both arms): event orders = {c['event_orders_data_missing']}, "
+              f"placebo orders = {c['placebo_orders_data_missing']}, placebos removed with their event = "
+              f"{c['placebos_removed_with_their_event']}; events in the verdict arms = {c['events_in_verdict_arms']} of {c['events']}.", "",
               "## Counts", "", "```", json.dumps(result["counts"], indent=1, default=str), "```", "",
               "## Funding seam (2026-02 archive vs REST)", "", "```", json.dumps(result["seam"], indent=1, default=str), "```", "",
               "## Descriptive (v0.3.3)", "", "```", json.dumps(v.get("descriptive", {}), indent=1, default=str), "```", "",
@@ -414,6 +432,8 @@ def run(src: Source, out_dir: Path, expected_funding_sha: str | None) -> dict:
     out_dir.mkdir(parents=True, exist_ok=True)
     t0 = time.time()
     meta = preconditions(src, out_dir, expected_funding_sha)
+    head = meta.get("code_head")
+    origin = start_session(head) if head else SYNTHETIC  # real run: "archive@<HEAD>", checked without git
     daily = src.daily()
     from ca.pipeline import segment_days
     uni = build_universe(daily, src.get_exclusions(daily), segment_days(SEG), DL.DOWNLOAD_START)
@@ -421,26 +441,30 @@ def run(src: Source, out_dir: Path, expected_funding_sha: str | None) -> dict:
     meta["started"] = dt.datetime.now(dt.timezone.utc).isoformat()
     with open(out_dir / "VERDICT_RUN_STARTED.json", "x") as f:  # run-once lock, written before any VERDICT detection
         json.dump(meta, f, indent=1, default=str)
-    ev, pl = detect(src, uni)
+    ev, pl = detect(src, uni, origin, head)
     if ev.empty:
         raise RuntimeError("no VERDICT events")
     orders = pd.concat([ev[["symbol", "close_ts"]], pl[["symbol", "close_ts"]]], ignore_index=True)
     trade_info = fetch_trades(src, orders)
-    oc = outcomes(src, ev, pl)
-    vin_orders, vin_pl = verdict_inputs(ev, pl, oc)
-    v = evaluate_verdict(vin_orders, vin_pl, P.SEGMENTS[SEG][0], src.origin)
+    oc = outcomes(src, ev, pl, origin, head)
+    vin_orders, vin_pl, missing = verdict_inputs(ev, pl, oc)
+    v = evaluate_verdict(vin_orders, vin_pl, P.SEGMENTS[SEG][0], origin)
     e1 = _primary(oc, "event", 1)
     counts = {"events": len(ev), "episodes": int(ev["episode"].nunique()), "event_days": int(ev["day"].nunique()),
               "symbols_with_events": int(ev["symbol"].nunique()), "placebos": len(pl),
               "events_with_5_placebos": int((pl.groupby("event_id").size().reindex(ev["event_id"], fill_value=0) == 5).sum()),
-              "events_with_0_placebos": v["items"]["4_beats_placebo"]["events_without_placebo"],
+              "events_in_verdict_arms": len(vin_orders), **missing,
+              "events_with_0_placebos_in_item4": v["items"]["4_beats_placebo"]["events_without_placebo"],
               "primary_fills": int(e1["filled"].astype(bool).sum()),
               "primary_gap_fills": int((e1["fill_kind"] == "gap").sum()),
               "primary_maker_fills": int((e1["fill_kind"] == "maker").sum()),
-              "primary_dropped": v["counts"]["dropped"], "event_orders_data_missing": int(vin_orders["data_missing"].sum()),
-              "aggtrades": trade_info}
+              "primary_dropped": v["counts"]["dropped"], "aggtrades": trade_info}
+    if head and head_if_unlocked() != head:  # end-of-run re-check before anything is written
+        raise RefuseToRun("HEAD or tree changed during the VERDICT run (or CA_RUN_VERDICT changed); "
+                          "no result written. The run-once lock stays.")
     meta["finished"] = dt.datetime.now(dt.timezone.utc).isoformat()
     meta["seconds"] = round(time.time() - t0)
+    meta["end_check"] = "HEAD and tree verified unchanged" if head else "n/a (synthetic)"
     result = {"meta": meta, "verdict": v, "counts": counts,
               "seam": seam_report(src, src.get_funding_symbols()), "exploratory": exploratory(ev, oc)}
     (out_dir / "VERDICT_RESULT.json").write_text(json.dumps(result, indent=1, default=str, ensure_ascii=False))
