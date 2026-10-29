@@ -1,0 +1,324 @@
+{
+ "download1m": {
+  "symbols": 438,
+  "symbol_months": 3338,
+  "zip_bytes_listed": 5094143924,
+  "parquet_bytes": 3030345998,
+  "errors": {},
+  "seconds": 616
+ },
+ "detect": {
+  "events": 27255,
+  "episodes": 8206,
+  "distinct_days": 602,
+  "symbols_with_events": 431,
+  "universe_members": 438,
+  "per_month": {
+   "2024-01": 1417,
+   "2024-02": 1048,
+   "2024-03": 1677,
+   "2024-04": 1063,
+   "2024-05": 949,
+   "2024-06": 1289,
+   "2024-07": 1223,
+   "2024-08": 1071,
+   "2024-09": 640,
+   "2024-10": 901,
+   "2024-11": 1471,
+   "2024-12": 1603,
+   "2025-01": 1467,
+   "2025-02": 1588,
+   "2025-03": 1806,
+   "2025-04": 2087,
+   "2025-05": 2128,
+   "2025-06": 1256,
+   "2025-07": 1403,
+   "2025-08": 1168
+  },
+  "top10_symbols": {
+   "WIFUSDT": 431,
+   "POPCATUSDT": 371,
+   "TRBUSDT": 329,
+   "NEIROUSDT": 326,
+   "ORDIUSDT": 320,
+   "PEOPLEUSDT": 298,
+   "WLDUSDT": 294,
+   "ENAUSDT": 257,
+   "TIAUSDT": 252,
+   "FARTCOINUSDT": 251
+  },
+  "placebos": 103535,
+  "events_with_5": 20522,
+  "events_with_1_4": 383,
+  "events_with_0": 6350,
+  "seconds": 46
+ },
+ "aggtrades": {
+  "symbol_days": 28531,
+  "missing_files_404": [],
+  "errors": {},
+  "parquet_bytes": 9968214233,
+  "seconds": 6259
+ },
+ "fills": {
+  "rows": 1177110,
+  "seconds": 221
+ },
+ "report": {
+  "events_fill_rates": {
+   "lat2s_q5x": {
+    "orders": 27255,
+    "filled": 15227,
+    "fill_rate": 0.5586864795450376,
+    "gap": 523,
+    "maker": 14704,
+    "cancelled_unfilled": 12028,
+    "cancel_rate": 0.4413135204549624,
+    "filled_no_exit_data": 0,
+    "filled_no_vwap_window_data": 112
+   },
+   "lat2s_q10x": {
+    "orders": 27255,
+    "filled": 15064,
+    "fill_rate": 0.5527059255182535,
+    "gap": 523,
+    "maker": 14541,
+    "cancelled_unfilled": 12191,
+    "cancel_rate": 0.44729407448174646,
+    "filled_no_exit_data": 1,
+    "filled_no_vwap_window_data": 102
+   },
+   "lat2s_q20x": {
+    "orders": 27255,
+    "filled": 14804,
+    "fill_rate": 0.5431663914878004,
+    "gap": 523,
+    "maker": 14281,
+    "cancelled_unfilled": 12451,
+    "cancel_rate": 0.4568336085121996,
+    "filled_no_exit_data": 0,
+    "filled_no_vwap_window_data": 107
+   },
+   "lat5s_q5x": {
+    "orders": 27255,
+    "filled": 15045,
+    "fill_rate": 0.5520088057237205,
+    "gap": 1257,
+    "maker": 13788,
+    "cancelled_unfilled": 12210,
+    "cancel_rate": 0.4479911942762796,
+    "filled_no_exit_data": 0,
+    "filled_no_vwap_window_data": 120
+   },
+   "lat5s_q10x": {
+    "orders": 27255,
+    "filled": 14889,
+    "fill_rate": 0.5462850853054485,
+    "gap": 1257,
+    "maker": 13632,
+    "cancelled_unfilled": 12366,
+    "cancel_rate": 0.45371491469455144,
+    "filled_no_exit_data": 1,
+    "filled_no_vwap_window_data": 105
+   },
+   "lat5s_q20x": {
+    "orders": 27255,
+    "filled": 14649,
+    "fill_rate": 0.5374793615850303,
+    "gap": 1257,
+    "maker": 13392,
+    "cancelled_unfilled": 12606,
+    "cancel_rate": 0.4625206384149697,
+    "filled_no_exit_data": 0,
+    "filled_no_vwap_window_data": 110
+   },
+   "lat10s_q5x": {
+    "orders": 27255,
+    "filled": 14820,
+    "fill_rate": 0.5437534397358282,
+    "gap": 2226,
+    "maker": 12594,
+    "cancelled_unfilled": 12435,
+    "cancel_rate": 0.4562465602641717,
+    "filled_no_exit_data": 0,
+    "filled_no_vwap_window_data": 125
+   },
+   "lat10s_q10x": {
+    "orders": 27255,
+    "filled": 14671,
+    "fill_rate": 0.5382865529260686,
+    "gap": 2226,
+    "maker": 12445,
+    "cancelled_unfilled": 12584,
+    "cancel_rate": 0.4617134470739314,
+    "filled_no_exit_data": 1,
+    "filled_no_vwap_window_data": 110
+   },
+   "lat10s_q20x": {
+    "orders": 27255,
+    "filled": 14434,
+    "fill_rate": 0.5295909007521555,
+    "gap": 2226,
+    "maker": 12208,
+    "cancelled_unfilled": 12821,
+    "cancel_rate": 0.4704090992478444,
+    "filled_no_exit_data": 0,
+    "filled_no_vwap_window_data": 115
+   }
+  },
+  "placebo_fill_rates": {
+   "lat2s_q5x": {
+    "orders": 103535,
+    "filled": 27553,
+    "fill_rate": 0.2661225672477906,
+    "gap": 40,
+    "maker": 27513,
+    "cancelled_unfilled": 75982,
+    "cancel_rate": 0.7338774327522094,
+    "filled_no_exit_data": 3,
+    "filled_no_vwap_window_data": 653
+   },
+   "lat2s_q10x": {
+    "orders": 103535,
+    "filled": 26738,
+    "fill_rate": 0.25825083305162505,
+    "gap": 40,
+    "maker": 26698,
+    "cancelled_unfilled": 76797,
+    "cancel_rate": 0.7417491669483749,
+    "filled_no_exit_data": 4,
+    "filled_no_vwap_window_data": 594
+   },
+   "lat2s_q20x": {
+    "orders": 103535,
+    "filled": 25475,
+    "fill_rate": 0.2460520596899599,
+    "gap": 40,
+    "maker": 25435,
+    "cancelled_unfilled": 78060,
+    "cancel_rate": 0.7539479403100401,
+    "filled_no_exit_data": 3,
+    "filled_no_vwap_window_data": 519
+   },
+   "lat5s_q5x": {
+    "orders": 103535,
+    "filled": 27785,
+    "fill_rate": 0.2683633553870672,
+    "gap": 114,
+    "maker": 27671,
+    "cancelled_unfilled": 75750,
+    "cancel_rate": 0.7316366446129329,
+    "filled_no_exit_data": 3,
+    "filled_no_vwap_window_data": 659
+   },
+   "lat5s_q10x": {
+    "orders": 103535,
+    "filled": 26965,
+    "fill_rate": 0.2604433283430724,
+    "gap": 114,
+    "maker": 26851,
+    "cancelled_unfilled": 76570,
+    "cancel_rate": 0.7395566716569276,
+    "filled_no_exit_data": 4,
+    "filled_no_vwap_window_data": 603
+   },
+   "lat5s_q20x": {
+    "orders": 103535,
+    "filled": 25672,
+    "fill_rate": 0.24795479789443184,
+    "gap": 114,
+    "maker": 25558,
+    "cancelled_unfilled": 77863,
+    "cancel_rate": 0.7520452021055681,
+    "filled_no_exit_data": 3,
+    "filled_no_vwap_window_data": 523
+   },
+   "lat10s_q5x": {
+    "orders": 103535,
+    "filled": 28131,
+    "fill_rate": 0.27170522045685036,
+    "gap": 314,
+    "maker": 27817,
+    "cancelled_unfilled": 75404,
+    "cancel_rate": 0.7282947795431497,
+    "filled_no_exit_data": 3,
+    "filled_no_vwap_window_data": 663
+   },
+   "lat10s_q10x": {
+    "orders": 103535,
+    "filled": 27315,
+    "fill_rate": 0.26382382769111895,
+    "gap": 314,
+    "maker": 27001,
+    "cancelled_unfilled": 76220,
+    "cancel_rate": 0.7361761723088811,
+    "filled_no_exit_data": 3,
+    "filled_no_vwap_window_data": 611
+   },
+   "lat10s_q20x": {
+    "orders": 103535,
+    "filled": 26039,
+    "fill_rate": 0.25149949292509777,
+    "gap": 314,
+    "maker": 25725,
+    "cancelled_unfilled": 77496,
+    "cancel_rate": 0.7485005070749022,
+    "filled_no_exit_data": 3,
+    "filled_no_vwap_window_data": 535
+   }
+  },
+  "event_orders_data_missing": 0,
+  "placebo_orders_data_missing": 0,
+  "sanity_check": {
+   "n": 50,
+   "agree": 47,
+   "disagreements": [
+    {
+     "event_id": 1147,
+     "symbol": "AIUSDT",
+     "close_ts": 1705770000000,
+     "trade_level_filled": false,
+     "fill_kind": NaN,
+     "kline_low_below_L": true
+    },
+    {
+     "event_id": 14196,
+     "symbol": "KOMAUSDT",
+     "close_ts": 1735310220000,
+     "trade_level_filled": false,
+     "fill_kind": NaN,
+     "kline_low_below_L": true
+    },
+    {
+     "event_id": 19842,
+     "symbol": "PENDLEUSDT",
+     "close_ts": 1744221720000,
+     "trade_level_filled": false,
+     "fill_kind": NaN,
+     "kline_low_below_L": true
+    }
+   ],
+   "explanations": {
+    "1147 AIUSDT": "only bar with low < L opens 17:05, 2 s before cancel (17:05:02); no trade < L in [live, cancel]",
+    "14196 KOMAUSDT": "10.86x order qty traded < L after live: fills at 5x/10x, not at 20x (queue proxy)",
+    "19842 PENDLEUSDT": "only bar with low < L opens 18:07, 2 s before cancel (18:07:02); no trade < L in [live, cancel]"
+   }
+  },
+  "power_projection": {
+   "dev": {
+    "fills": 14804,
+    "episodes": 5548,
+    "days": 602
+   },
+   "projected_verdict": {
+    "fills": 4918.27242524917,
+    "episodes": 1843.189368770764,
+    "days": 200.0
+   },
+   "scale": 0.33222591362126247,
+   "meets_minimum": true
+  }
+ },
+ "_note": "Task 2c DEV plumbing only: counts, fill rates, data availability. No exit price, return, markout or PnL was computed. Code: scripts/dev_2c.py; EXCLUSIONS v1.0 FROZEN; detector on DEV only.",
+ "_code_commit": "0d84d98acbd78642b7fedba7e818ee7af93d70d0"
+}
