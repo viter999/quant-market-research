@@ -135,3 +135,13 @@ def test_holdout_confirm():
     assert not evaluate_holdout(o2, S, SYNTHETIC)["confirmed"]  # below +8 bps
     o3, _ = make(mean=0.001, sd=0.05)
     assert not evaluate_holdout(o3, S, SYNTHETIC)["confirmed"]  # LB <= 0
+
+
+def test_descriptive_per_order_dropped_as_zero():
+    o, pl = make()
+    o.loc[o.index[:10], ["filled", "dropped"]] = [True, True]
+    o.loc[o.index[:10], "net_1x"] = -1.0
+    d = evaluate_verdict(o, pl, S, SYNTHETIC)["descriptive"]
+    po = np.where(o["filled"] & ~o["dropped"], o["net_1x"], 0.0)
+    assert d["per_order_mean_dropped_as_0"] == pytest.approx(po.mean())
+    assert d["per_order_mean_dropped_excluded"] == pytest.approx(po[10:].mean())

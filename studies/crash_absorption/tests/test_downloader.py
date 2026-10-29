@@ -289,3 +289,13 @@ def test_load_funding_merges_archive_and_rest(tmp_path):
     assert fu.paid(t_feb - 1, t_feb) == pytest.approx(0.0003)
     with pytest.raises(FundingCoverageError):
         fu.paid(ms(dt.date(2026, 1, 15)), ms(dt.date(2026, 1, 15), 0, 15))
+
+
+def test_seam_span_and_compare():
+    a, b = DL.seam_span()
+    assert a == ms(dt.date(2026, 2, 1)) and b == ms(dt.date(2026, 3, 1)) - 1
+    assert_rest_allowed(DL.funding_rest_url("BTCUSDT", a, b))
+    arch = pd.DataFrame({"ts": [100, 200, 300], "rate": [0.0001, 0.0002, -0.0001]})
+    rest = pd.DataFrame({"ts": [101, 200, 296], "rate": [0.0001, 0.00025, -0.0001]})
+    r = DL.compare_funding_seam(arch, rest)
+    assert r["max_abs_dts_ms"] == 4 and r["max_abs_drate"] == pytest.approx(0.00005) and r["rest_matched_twice"] == 0

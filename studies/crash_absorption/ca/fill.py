@@ -53,13 +53,14 @@ def kline_touch(open_time: np.ndarray, low: np.ndarray, live_ts: int, cancel_ts:
 
 
 def b2_entry(trades: Trades, ref_ts: int, ref_close: float) -> Fill:
-    """B2 (descriptive, v0.3.2): taker buy at the first aggTrade at or after
-    bar close + 2 s, price x (1 + 5 bps), taker fee; same exit/buffers as primary.
-    No cancel window is specified: any first trade in the loaded data is used."""
+    """B2 (descriptive, v0.3.2/v0.3.3): taker buy at the first aggTrade in
+    [bar close + 2 s, bar close + 300 s], price x (1 + 5 bps), taker fee; same
+    exit/buffers as primary. No trade in that span = no entry (counted)."""
     live = int(ref_ts + P.PRIMARY_LATENCY_S * 1000)
+    cap = int(ref_ts + P.B2_CAP_S * 1000)
     i0 = int(np.searchsorted(trades.ts, live, side="left"))
-    if i0 >= len(trades.ts):
-        return Fill(False, None, None, None, None, float("nan"), float("nan"), live, live)
+    if i0 >= len(trades.ts) or trades.ts[i0] > cap:
+        return Fill(False, None, None, None, None, float("nan"), float("nan"), live, cap)
     entry = trades.price[i0] * (1.0 + P.GAP_SLIPPAGE)
     return Fill(True, "b2", int(trades.ts[i0]), entry, P.FEE_TAKER, float("nan"),
-                P.NOTIONAL_USD / entry, live, live)
+                P.NOTIONAL_USD / entry, live, cap)

@@ -38,6 +38,7 @@ PRIMARY_QUEUE_MULT = 20
 QUEUE_MULTS = (5, 10, 20)
 CANCEL_AFTER_S = 300
 GAP_SLIPPAGE = 0.0005
+B2_CAP_S = 300  # v0.3.3: B2 entry only if a trade occurs by bar close + 5 min
 
 # §6 exit and costs
 PRIMARY_HOLD_MIN = 15

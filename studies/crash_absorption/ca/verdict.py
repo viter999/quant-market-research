@@ -91,6 +91,10 @@ def evaluate_verdict(orders: pd.DataFrame, placebos: pd.DataFrame, segment_start
         verdict = PASS
     else:
         verdict = KILL
+    # descriptive (v0.3.3): per-order mean with dropped fills counted as 0
+    po_all = np.where(orders["filled"] & ~orders["dropped"], orders["net_1x"], 0.0)
+    out["descriptive"] = {"per_order_mean_dropped_as_0": float(po_all.mean()) if len(orders) else float("nan"),
+                          "per_order_mean_dropped_excluded": float(_per_order(valid).mean()) if len(valid) else float("nan")}
     out.update({"verdict": verdict, "items": items})
     if "kind" in orders.columns:
         out["counts"]["gap_fills"] = int((fills["kind"] == "gap").sum())

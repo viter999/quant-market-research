@@ -257,7 +257,7 @@ def funding_rest_url(symbol: str, start_ms: int, end_ms: int) -> str:
     return f"{FAPI}/fapi/v1/fundingRate?{q}"
 
 
-def download_funding_rest(symbol: str, out_dir: Path, fetch, span=None) -> Path:
+def download_funding_rest(symbol: str, out_dir: Path, fetch, span=None, sub: str = "funding_rest") -> Path:
     """fapi funding history for the partial month (v0.3.2), cached to parquet.
     Any failure (blocked host, HTTP error, 404) raises; zero is never assumed."""
     start, end = span or rest_funding_span()
@@ -280,7 +280,31 @@ def download_funding_rest(symbol: str, out_dir: Path, fetch, span=None) -> Path:
     if len(df) and (df["ts"].min() < start or df["ts"].max() > end):
         raise DataValidationError(f"fapi fundingRate for {symbol} outside requested span")
     df = df.sort_values("ts").drop_duplicates("ts")
-    return _write_funding(df, [(start, end)], Path(out_dir) / "funding_rest" / f"{symbol}.parquet")
+    return _write_funding(df, [(start, end)], Path(out_dir) / sub / f"{symbol}.parquet")
+
+
+def seam_span() -> tuple[int, int]:
+    """The last full archive month (2026-02), refetched via REST for the seam check."""
+    last_month = [p for f, p in file_periods() if f == "monthly"][-1]
+    a, b = _period_bounds("monthly", last_month)
+    return a, b - 1
+
+
+def compare_funding_seam(archive: pd.DataFrame, rest: pd.DataFrame) -> dict:
+    """v0.3.3: match each archive settlement to the nearest REST one; report
+    the maximum |timestamp| and |rate| differences and unmatched counts."""
+    a = archive.sort_values("ts").reset_index(drop=True)
+    r = rest.sort_values("ts").reset_index(drop=True)
+    if a.empty or r.empty:
+        return {"archive_n": len(a), "rest_n": len(r), "max_abs_dts_ms": None, "max_abs_drate": None}
+    pos = np.clip(np.searchsorted(r["ts"].to_numpy(), a["ts"].to_numpy()), 1, len(r) - 1) if len(r) > 1 else np.zeros(len(a), int)
+    if len(r) > 1:
+        left, right = r["ts"].to_numpy()[pos - 1], r["ts"].to_numpy()[pos]
+        pos = np.where(np.abs(a["ts"].to_numpy() - left) <= np.abs(a["ts"].to_numpy() - right), pos - 1, pos)
+    dts = np.abs(a["ts"].to_numpy() - r["ts"].to_numpy()[pos])
+    drate = np.abs(a["rate"].to_numpy() - r["rate"].to_numpy()[pos])
+    return {"archive_n": len(a), "rest_n": len(r), "max_abs_dts_ms": int(dts.max()),
+            "max_abs_drate": float(drate.max()), "rest_matched_twice": int(len(pos) - len(set(pos)))}
 
 
 def load_funding(symbol: str, data_dir: Path):

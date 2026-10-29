@@ -144,3 +144,11 @@ def test_b2_entry_and_outcome():
     out = trade_outcome(trades(rows), b2, _funding([], []), buffer_mult=2)
     assert out["net"] == pytest.approx(101.0 / 100.05 - 1 - 0.0005 - 0.0005 - 0.0010)
     assert not b2_entry(trades(rows[:1]), ref, 100.0).filled
+
+
+def test_b2_cap_5_min():
+    from ca.fill import b2_entry
+    ref = F
+    assert b2_entry(trades([(ref + 300_000, 100.0, 1.0, False)]), ref, 100.0).filled
+    late = b2_entry(trades([(ref + 300_001, 100.0, 1.0, False)]), ref, 100.0)
+    assert not late.filled and late.cancel_ts == ref + 300_000
