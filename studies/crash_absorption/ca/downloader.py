@@ -391,10 +391,23 @@ def stream_aggtrades(symbol: str, day: dt.date, windows, out_dir: Path, fetch, c
             raise DataValidationError(f"{symbol} {day}: duplicate agg_trade_id")
         out = Path(out_dir) / "aggtrades" / symbol / f"{day.isoformat()}.parquet"
         out.parent.mkdir(parents=True, exist_ok=True)
-        df.to_parquet(out, index=False)
+        write_trades_parquet(df, out)
         return out
     finally:
         shutil.rmtree(tmpdir, ignore_errors=True)
+
+
+def write_trades_parquet(df: pd.DataFrame, out: Path) -> None:
+    """Compact (zstd 9, delta-encoded ts/agg_id; lossless) and atomic (temp + rename),
+    so an interrupted run never leaves a truncated file that a resume would skip."""
+    import pyarrow as pa
+    import pyarrow.parquet as pq
+    df = df[["ts", "price", "qty", "agg_id", "is_buyer_maker"]].reset_index(drop=True)
+    tmp = out.with_suffix(".parquet.tmp")
+    pq.write_table(pa.Table.from_pandas(df, preserve_index=False), tmp, compression="zstd", compression_level=9,
+                   use_dictionary=["price", "qty", "is_buyer_maker"],
+                   column_encoding={"ts": "DELTA_BINARY_PACKED", "agg_id": "DELTA_BINARY_PACKED"})
+    tmp.replace(out)
 
 
 def load_aggtrades(path: Path):

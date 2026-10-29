@@ -345,3 +345,11 @@ def test_http_fetcher_retries_reset_mid_body(monkeypatch):
     with pytest.raises(ConnectionResetError):
         DL.HttpFetcher(retries=2).get("https://data.binance.vision/x-2024-01-01.zip")
     assert len(calls) == 3
+
+
+def test_write_trades_parquet_lossless_and_atomic(tmp_path):
+    df = pd.DataFrame({"ts": [1, 2, 2, 5], "price": [1.5, 1.25, 1.25, 2.0], "qty": [0.1, 3.0, 0.2, 1.0],
+                       "agg_id": [10, 11, 12, 13], "is_buyer_maker": [True, False, True, True]})
+    out = tmp_path / "x.parquet"
+    DL.write_trades_parquet(df, out)
+    assert pd.read_parquet(out).equals(df) and not (tmp_path / "x.parquet.tmp").exists()
