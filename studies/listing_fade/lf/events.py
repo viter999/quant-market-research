@@ -34,3 +34,7 @@ def days_between(a_ms: int, b_ms: int) -> list[dt.date]:
 
 def months_between(a_ms: int, b_ms: int) -> list[str]:
     return sorted({d.strftime("%Y-%m") for d in days_between(a_ms, b_ms)})
+
+
+def floor_min(ms: int) -> int:
+    return ms - ms % MIN

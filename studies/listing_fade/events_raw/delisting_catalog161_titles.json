@@ -1,0 +1,2241 @@
+{
+"meta": {
+"source": "all_titles of studies/delisting/events_raw/binance_futures_delistings_v2.json (branch study/delisting, commit 9989c3e)",
+"source_sha256": "0691a0d1026deaaf6700986c4f71730f20ea7cc9036d53921b9c323ca64bfd03",
+"catalog": "161 Delisting",
+"fetched_at_utc": "2026-10-29T13:42:52.025Z",
+"n": 446
+},
+"titles": [
+{
+"code": "de45689cbd7b4e1fa87055cdf5a85997",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-10-30",
+"release": 1793089800000
+},
+{
+"code": "b4015154ce33445ebf7b98d1bc12c072",
+"title": "Notice of Removal of Margin Trading Pairs - 2026-10-30",
+"release": 1793088009176
+},
+{
+"code": "ab3a0eac9e614819b7b6fa0c03504b1f",
+"title": "Binance Alpha Will Remove PTB, AA, OWL, DORA, ELIZAOS, MEMES, 哭哭马  (2026-10-23)",
+"release": 1792747808273
+},
+{
+"code": "c30e6891afa54651ba950f8af144f861",
+"title": "Binance Futures Will Delist PTBUSDT and MITOUSDT USDⓈ-M Perpetual Contracts (2026-10-23)",
+"release": 1792575001882
+},
+{
+"code": "ad54863d7b0446ebae48bbf3b868ee20",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-10-23",
+"release": 1792485000000
+},
+{
+"code": "290a660c0b2e4e888c582cd29ecf9ecc",
+"title": "Binance Will Delist EPIC, QUICK on 2026-10-28",
+"release": 1791957608049
+},
+{
+"code": "56476c15963b4c0cb113ab0e22613c5c",
+"title": "Binance Alpha Will Remove SUP, CUDIS, PYTHIA, BLUM, KIN, DN, GAIA, STRIKE, CDL, KO, VRA, EPT, SLX (SLIMEX), CAI (2026-10-09)",
+"release": 1791532805136
+},
+{
+"code": "2f1a743334f044abbd82e34093c7b771",
+"title": "Binance Futures Will Delist Multiple USDⓈ-M Perpetual Contracts (2026-10-05)",
+"release": 1790822713435
+},
+{
+"code": "63415de54a164619aaaf245850349654",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-10-02",
+"release": 1790673300000
+},
+{
+"code": "55310e70fc4b4d7c9fc4aa133700a958",
+"title": "Binance Margin And Loans Token Delist on 2026-10-02",
+"release": 1790668801341
+},
+{
+"code": "7d17add1ffe6416391f65a001734e1c7",
+"title": "Binance Will Close UAH Deposits and Withdrawals via Fiat Trade UAH and Delist USDT/UAH Spot Trading Pair",
+"release": 1790146800000
+},
+{
+"code": "262bbb7dcdc243b09e854742e57e1e8e",
+"title": "Notice of Removal of Margin Trading Pairs - 2026-09-25",
+"release": 1790064001264
+},
+{
+"code": "545ca5ad28254999b793bcf1ddd51f93",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-09-25",
+"release": 1790056800000
+},
+{
+"code": "30b1347d97324180bb469c761e4eed5a",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-09-18",
+"release": 1789536600000
+},
+{
+"code": "61e6132794e14f4495ba3314d2d1fc27",
+"title": "Notice of Removal of Margin Trading Pairs - 2026-09-18",
+"release": 1789466415716
+},
+{
+"code": "8e6fd91b79a34bddbd7643ef002db47e",
+"title": "Binance Will Delist USDP on 2026-09-24",
+"release": 1789020012727
+},
+{
+"code": "6951f54839734dfb93be3541756c6454",
+"title": "Notice of Removal of Margin Trading Pairs and Collateral - 2026-09-11",
+"release": 1788863408750
+},
+{
+"code": "b9198262dd5f4071a1119b9f52cbe00c",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-09-11",
+"release": 1788862500000
+},
+{
+"code": "454b8004796c46a9b883cc7dab6d6e67",
+"title": "Binance Alpha Will Remove MTP, BDXN, TALE, BOS, MAIGA, TIMI, SAROS, U (Union), SERAPH, RVV, AIAV, PENGUIN, ODOS, SN3 (2026-09-04)",
+"release": 1788510602234
+},
+{
+"code": "6f1643be398749c5b79ac876e10df3d7",
+"title": "Notice of Removal of Margin Trading Pairs - 2026-09-03",
+"release": 1788170403200
+},
+{
+"code": "d72915ed7a60473b92f0818d959a227a",
+"title": "Binance Will Delist ICX, SCRT, STORJ on 2026-09-03",
+"release": 1787205606608
+},
+{
+"code": "fab1676df7fb464a9e4634c6f777659e",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-08-21",
+"release": 1787041800000
+},
+{
+"code": "0a8103c40a4c4abb9c57724ed9d0a6c1",
+"title": "Notice of Removal of Margin Trading Pairs - 2026-08-21",
+"release": 1786960813377
+},
+{
+"code": "b2d783892ef54b4daddecf142076a8cf",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-08-14",
+"release": 1786434300000
+},
+{
+"code": "948546d989254418a4646db8a6da18c5",
+"title": "Binance Margin And Loan Will Delist BTTC & POWR on 2026-08-14",
+"release": 1786356004147
+},
+{
+"code": "23504a5454d545998414c9ad3e8832f3",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-08-07",
+"release": 1785835800000
+},
+{
+"code": "64cf7544b98e4f2ca7f54ba11fd72d9d",
+"title": "Binance Will Delist ACX, HFT, PIVX, PYR, VANRY, VIC on 2026-08-17",
+"release": 1785727810683
+},
+{
+"code": "40f303353b5f4789aba90dd972990f7e",
+"title": "Notice Regarding the Removal of AEUR and Conversion of AEUR to EUR",
+"release": 1785376806252
+},
+{
+"code": "3501cd0873414c2db75870813dccbd58",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-07-31",
+"release": 1785223800000
+},
+{
+"code": "ecbbd582470a46df92a27b51322a6301",
+"title": "Notice of Removal of Margin Trading Pairs - 2026-07-30",
+"release": 1785146414098
+},
+{
+"code": "f0e3fc835b9545759e4279c64b200389",
+"title": "Binance Futures Will Delist USDⓈ-M AERGOUSDT Perpetual Contract (2026-07-24)",
+"release": 1784643314244
+},
+{
+"code": "c591721ed8494806bc3d7a2ae8f79170",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-07-24",
+"release": 1784619000000
+},
+{
+"code": "71519fe12cd243bb96b46460e58f44f3",
+"title": "Notice of Removal of Margin Trading Pairs - 2026-07-24",
+"release": 1784538005340
+},
+{
+"code": "154a1621547b4862a56eebddf401bb95",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-07-17",
+"release": 1784012400000
+},
+{
+"code": "148235767ff84acfb9096d60c6eedd01",
+"title": "Notice of Removal of Margin Trading Pairs - 2026-07-17",
+"release": 1783936810276
+},
+{
+"code": "277c0e32800b40c3b8ed88a46ceac791",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-07-10",
+"release": 1783415700000
+},
+{
+"code": "2733031786ea4b2688696cf578ac339f",
+"title": "Binance Margin And Loan Will Delist TST & IOTX on 2026-07-10",
+"release": 1783332001595
+},
+{
+"code": "323b8b8ebe79436ca833cc1e870158af",
+"title": "Updated Notice of Removal of Spot Trading Pairs - 2026-07-01",
+"release": 1782894611190
+},
+{
+"code": "dc8c4b58f26549b1b629cbd254115dc0",
+"title": "Binance Alpha Will Remove TTD, OIK, LUNAI, TOWN, VINU, PUP, CYPR, DGRAM (2026-06-30)",
+"release": 1782815410266
+},
+{
+"code": "5a086ab9b6844ebd89838fbc8e5ac266",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-07-03",
+"release": 1782804600000
+},
+{
+"code": "b703403f123b4d95af7222431d053c7c",
+"title": "Binance Margin And Loan Will Delist HOT, THE on 2026-07-03",
+"release": 1782716408506
+},
+{
+"code": "a9c1a7bb97064c69a660316bff39f2bd",
+"title": "Binance Will Delist ALCX, ARDR, NFP, POND on 2026-07-10",
+"release": 1782464415053
+},
+{
+"code": "5702f93568604ea7bfd2f4233f054bd1",
+"title": "Binance Futures Will Delist USDⓈ-Margined IPUSDT and IPUSDC Perpetual Contracts (2026-06-28)",
+"release": 1782406806669
+},
+{
+"code": "f91d022b57e549a19bab454148082694",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-06-26",
+"release": 1782203400000
+},
+{
+"code": "51ca50f3c3ed444eacec1fa46ffdbcde",
+"title": "Notice of Removal of Margin Trading Pairs - 2026-06-26",
+"release": 1782118811009
+},
+{
+"code": "2ce2c4973d85405a9bb5fffc475c99dc",
+"title": "Binance Will Extend the Monitoring Tag to Include ACT, BLUR, PIVX & QKC on 2026-06-18",
+"release": 1781766018693
+},
+{
+"code": "965d2d68914b4f95b57ac426ea9e497e",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-06-19",
+"release": 1781601300000
+},
+{
+"code": "0ca7d76b3b5a42c390262ad4d23e4ff9",
+"title": "Notice of Removal of Margin Trading Pairs - 2026-06-19",
+"release": 1781521202097
+},
+{
+"code": "b150e2ec801b4be1addd89533b8f6217",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-06-12",
+"release": 1780993800000
+},
+{
+"code": "d5d69ae4b2f0497aa45d06da33796f9d",
+"title": "Binance Margin And Loan Will Delist XNO, IQ, QUICK, DGB on 2026-06-12",
+"release": 1780912804311
+},
+{
+"code": "24aced8c698649d9a552a47eeead5e34",
+"title": "Binance Will Delist COS, D, HIGH, MBOX on 2026-06-19",
+"release": 1780642807472
+},
+{
+"code": "02dd55ca2aa74d1cb34fe65d461df2b7",
+"title": "Binance Will Cease Support for Selected Stocks on 2026-06-05",
+"release": 1780628401333
+},
+{
+"code": "38737d4df3a8429d88bed7f057d03297",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-06-05",
+"release": 1780377300000
+},
+{
+"code": "af69ba2e070e48a29fcc12515fc60742",
+"title": "Notice of Removal of Margin Trading Pairs - 2026-06-05",
+"release": 1780306205389
+},
+{
+"code": "318ddd21e0ee4e3690633b5ccd5e41d9",
+"title": "Binance Alpha Will Remove DIGI, K, SKI, JOJO, PLAYSOLANA, 恶俗企鹅, PAL, TYCOON, HIPPO, LN, BNBXBT, BOOM  (2026-05-29)",
+"release": 1780034402285
+},
+{
+"code": "eff79d1a82d74b4d9811d90fb2daf899",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-05-29",
+"release": 1779782400000
+},
+{
+"code": "86bf0d14db4c44d5a88bf2e7c861db13",
+"title": "Notice of Removal of Margin Trading Pairs - 2026-05-29",
+"release": 1779706802381
+},
+{
+"code": "9e237a2623354411a65c70cbd66937c8",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-05-22",
+"release": 1779177600000
+},
+{
+"code": "6492bd3434204b29a1709e64f72e2ee6",
+"title": "Binance Margin And Binance Loans Will Delist AEUR and AI on 2026-05-22",
+"release": 1779159608915
+},
+{
+"code": "03e842182ca341699fd34fe1769ae413",
+"title": "Binance Alpha Will Remove PRAI, COMMON, PINGPONG, TAKER, JANITOR, GATA, KLINK, CORL, SWTCH, ARIAIP, LONG, ZKWASM, GORILLA, ECHO, LITKEY, FIR, GM, DELABS, DONKEY, WHY (2026-05-14)",
+"release": 1778738402917
+},
+{
+"code": "a42f51022cb649aea0b4cb808205fd76",
+"title": "Binance Will Delist ATA, FARM, MLN, PHB, SYS on 2026-05-27",
+"release": 1778659204681
+},
+{
+"code": "7a7a2466e68d4762b982e955f98dfcf7",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-05-15",
+"release": 1778561100000
+},
+{
+"code": "4df13a8c24be4abca874a4ff44f3e4ce",
+"title": "Notice of Removal of Margin Trading Pairs - 2026-05-15",
+"release": 1778482803295
+},
+{
+"code": "3a8fb2daed2b4f949d0bb4b943076155",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-05-08",
+"release": 1777969800000
+},
+{
+"code": "9b3112ca2a4b4d8098403d9cc4a1a855",
+"title": "Binance Alpha Will Remove REX, XO, TANSSI, DARKSTAR, YALA, RCADE, RDAC, SKATE, OVL, SLAY, Ghibli (SOL), Ghibli (BSC), PHY, VLR, SVSA, WBAI, EDGEN, FAIR3, MM, BUBB, AICELL, XLAB, SIGHT (2026-04-30)",
+"release": 1777541595547
+},
+{
+"code": "47db7c6e460c4978b2c0e479c4123716",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-05-01",
+"release": 1777368600000
+},
+{
+"code": "13d3b15fdb0c41a89542ba1114be13da",
+"title": "Notice of Removal of Margin Trading Pairs - 2026-05-01",
+"release": 1777352406771
+},
+{
+"code": "ba5d61807b474b0ca9f40250e7fa782c",
+"title": "Binance Futures Will Delist USDⓈ-M Multiple Perpetual Contracts (2026-04-28)",
+"release": 1777029313345
+},
+{
+"code": "1d2b6970facd470dbba6a674e1595bd4",
+"title": "Binance Futures Will Delist USDⓈ-M Multiple Perpetual Contracts (2026-04-28 & 2026-04-29)",
+"release": 1776956437768
+},
+{
+"code": "c498db770fa844e188bbad8cc5986674",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-04-24",
+"release": 1776756600000
+},
+{
+"code": "3f43b46c541c48e18b146574ead1c1f1",
+"title": "Notice of Removal of Margin Trading Pairs - 2026-04-24",
+"release": 1776747605017
+},
+{
+"code": "d067b373496c44a4ab8d28f3e90b66ad",
+"title": "Binance Will Delist DEGO, DENT, TRU on 2026-04-28",
+"release": 1776416406263
+},
+{
+"code": "c621ffe8d8474540b63c521568a5b95c",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-04-17",
+"release": 1776247200000
+},
+{
+"code": "bb7238d13db14c9ebce9fa8704e3098f",
+"title": "Binance Margin And Loan Will Delist BAR, PIVX, XVG on 2026-04-17",
+"release": 1776137401903
+},
+{
+"code": "895c114d247a41159cc7e4c913f42c36",
+"title": "Binance Will Delist UTK and Support Rebranding and Airdrop Plan on Binance Alpha",
+"release": 1776132001137
+},
+{
+"code": "d26a627649ee44fca27e07672add9ac2",
+"title": "Binance Will Delist BIFI, FIO, FUN, MDT, OXT, WAN on 2026-04-23",
+"release": 1775714405744
+},
+{
+"code": "f263d2f8ac7e488ead84b181b12bb69d",
+"title": "Binance Margin Will Delist WAN on 2026-04-10",
+"release": 1775552407906
+},
+{
+"code": "946c744172a942399a6ce96506e03fce",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-04-10",
+"release": 1775548800000
+},
+{
+"code": "97b4f3a7d02a486c8d412ada2281b907",
+"title": "Binance Futures Will Delist Multiple Perpetual Contracts (2026-04-08 & 2026-04-09)",
+"release": 1775224771078
+},
+{
+"code": "262ee892d2db4fb6b4d2f152db53001c",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-04-02",
+"release": 1774942200000
+},
+{
+"code": "cb0ce24d50ac4db782f7484dbc6377b5",
+"title": "Binance Margin Will Delist UTK on 2026-03-30",
+"release": 1774494003206
+},
+{
+"code": "c8fb39371ed44553b27d9e4419ca86d0",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-03-27",
+"release": 1774421100000
+},
+{
+"code": "cc3a7e5882674ca4a8d296ef150ac0e8",
+"title": "Notice of Removal of Margin Trading Pairs - 2026-03-27",
+"release": 1774321214174
+},
+{
+"code": "48f99309fd5442d7b44491c76483223e",
+"title": "Binance Futures Will Delist COIN-M APTUSD and OPUSD Perpetual Contracts (2026-03-25)",
+"release": 1774016064610
+},
+{
+"code": "ddac99c0e5044c13a13c7c113e530e2b",
+"title": "Binance Will Delist A2Z, FORTH, HOOK, IDEX, LRC, NTRN, RDNT, SXP on 2026-04-01",
+"release": 1773824408667
+},
+{
+"code": "8991527b47dd414ba4f90fd31d75cd13",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-03-20",
+"release": 1773819900000
+},
+{
+"code": "f6ebc17e4dbd451b873d9ef25c801237",
+"title": "Binance Futures Will Delist Multiple USDⓈ-M and COIN-M Perpetual Contracts (2026-03-17 & 2026-03-18)",
+"release": 1773411259653
+},
+{
+"code": "6643b898afa54f3a9d96a53f432e068d",
+"title": "Binance VIP Loan Will Delist TUSD and ALCX from Eligible Collateral Asset List - 2026-03-30",
+"release": 1773367204369
+},
+{
+"code": "e27183f5c08c48bd940bdd2d7f81eca4",
+"title": "Binance Alpha Will Remove MIRROR, SHARDS, FST, DGC, COA, ULTI, TGT, AGON, BNB Card, AFT, PFVS, SGC, RDO, ELDE, MILK, TAT, BOT, SSS, SUBHUB, PLANCK, OOOO (2026-03-12)",
+"release": 1773316809568
+},
+{
+"code": "cdc24bc5c7444ccebee3253a169cb67e",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-03-13",
+"release": 1773129600000
+},
+{
+"code": "37a8026d1bbb4385916513623135ee2b",
+"title": "Binance Margin Will Delist ARDR on 2026-03-12",
+"release": 1773118801491
+},
+{
+"code": "7bd34bbcdd994fe5920b33dc347db0ff",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-03-06",
+"release": 1772530200000
+},
+{
+"code": "031a5a6bef924bbe96e407dbfc23e6dc",
+"title": "Notice of Removal of Margin Trading Pairs - 2026-03-05",
+"release": 1772514015211
+},
+{
+"code": "bc62fa3ea64d4326ac32781b50565519",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-02-27",
+"release": 1771999200000
+},
+{
+"code": "4fccf352384c4f32b54d8f3184fe2af7",
+"title": "Notice of Removal of Margin Token and Trading Pairs - 2026-02-26",
+"release": 1771894800000
+},
+{
+"code": "d2c0b9f4c1e94260b04be48036522cfe",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-02-13",
+"release": 1770882300000
+},
+{
+"code": "42fa3f9c987b406b83f35f4460ca2714",
+"title": "Notice of Removal of Margin Trading Pairs - 2026-02-13",
+"release": 1770692412774
+},
+{
+"code": "fa494850a7a34b4ebdc6e55beb40f63f",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-02-10",
+"release": 1770622200000
+},
+{
+"code": "53d255cc249741b7965558493b46f5e6",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-02-06",
+"release": 1770278400000
+},
+{
+"code": "9ac36fb4f2ad4bf2b3b27f9c9224739c",
+"title": "Binance Futures Will Delist USDⓈ-M RVVUSDT and YALAUSDT Perpetual Contracts (2026-02-10)",
+"release": 1770275659503
+},
+{
+"code": "511c2fbe48a6429f91ad28d99cffc826",
+"title": "Notice of Removal of Margin Trading Pairs - 2026-02-06",
+"release": 1770096608931
+},
+{
+"code": "987ca051aa2145bc8538e98cb1eda9b6",
+"title": "Upcoming Changes to CZK Spot Trading on Binance",
+"release": 1770091201874
+},
+{
+"code": "39afd25e6e09454bb29d06e972b7a033",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-02-03",
+"release": 1770024600000
+},
+{
+"code": "87a9bdf137f348668a85575ee02b8a27",
+"title": "Binance Will Delist ACA, CHESS, DATA, DF, GHST, NKN on 2026-02-13",
+"release": 1770022792762
+},
+{
+"code": "ed20e109dd4648b7a2f0c4a9ff725c4c",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-01-30",
+"release": 1769673600000
+},
+{
+"code": "482d63d2b376420e808ddbe160c488bb",
+"title": "Binance Alpha Will Remove WIZARD, SHOGGOTH, G, FWOG, UFD, BRIC, UPTOP, PORT3, XNAP, MORE, BOMB, BOOST (2026-01-29)",
+"release": 1769666419390
+},
+{
+"code": "79211335d1de4f7589ad2d8780580970",
+"title": "Binance Futures Will Delist Multiple USDⓈ-M Perpetual Contracts (2026-01-30)",
+"release": 1769595249706
+},
+{
+"code": "fb18d08c2d8b48cfb92aec286b100572",
+"title": "Notice of Removal of Margin Trading Pairs - 2026-01-30",
+"release": 1769488213713
+},
+{
+"code": "9faa3bdf8c614aa6a1dac40e9f38acef",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-01-27",
+"release": 1769412600000
+},
+{
+"code": "1ced2fdbcfeb49c9a27c70015aab3aba",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-01-23",
+"release": 1769050800000
+},
+{
+"code": "e02cbd00b40b4c4198ff14791777091b",
+"title": "Notice of Removal of Margin Trading Pairs - 2026-01-23",
+"release": 1768874401997
+},
+{
+"code": "811fb1daf8804536bcfa3a0bafcc6cec",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-01-20",
+"release": 1768807800000
+},
+{
+"code": "5798be852fb5449bb438dde4166126dc",
+"title": "Binance Futures Will Delist Multiple USDⓈ-M Perpetual Contracts (2026-01-21)",
+"release": 1768636591216
+},
+{
+"code": "c1d4248f495a413685155eaf10f73381",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-01-16",
+"release": 1768442400000
+},
+{
+"code": "9a5ed5122b2245b1896349d03cbd6732",
+"title": "Notice of Removal of Margin Trading Pairs - 2026-01-15",
+"release": 1768276801133
+},
+{
+"code": "94f1030719d24fa7bfd3f88aa9d9f4bc",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-01-13",
+"release": 1768212000000
+},
+{
+"code": "54bb43542d164f4ca6de56280cf20e92",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-01-09",
+"release": 1767850200000
+},
+{
+"code": "d03c598a9a7146f49bb9091a66a8e4fd",
+"title": "Notice of Removal of Margin Trading Pair - 2026-01-03",
+"release": 1767358801334
+},
+{
+"code": "a3cc1da2ec104a33a05bd9da6c3e3552",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-01-03",
+"release": 1767357000000
+},
+{
+"code": "9a45b229f3ab4bd5b09617297d4d6e95",
+"title": "Upcoming Changes to RON Spot Trading on Binance",
+"release": 1767348211827
+},
+{
+"code": "b153c46c899a4e539478630c2b42f09c",
+"title": "Notice of Removal of Spot Trading Pair (BTC/RON) - 2026-01-02",
+"release": 1767261601307
+},
+{
+"code": "aa26b0b569d94830a070ba9d69b0f214",
+"title": "Notice of Removal of Spot Trading Pairs - 2026-01-02",
+"release": 1767150000000
+},
+{
+"code": "62aea45c9ea44de4bddf550c67f4c483",
+"title": "Notice of Removal of Margin Trading Pairs - 2026-01-06",
+"release": 1767070801410
+},
+{
+"code": "1351888d07104a7b93b60afae7d503c9",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-12-26",
+"release": 1766559600000
+},
+{
+"code": "af09179f54b145fca4e1bf192be97876",
+"title": "Notice of Removal of Margin Trading Pairs - 2025-12-30",
+"release": 1766462417232
+},
+{
+"code": "871615e225e0474f8151ea57460ef026",
+"title": "Binance Alpha Will Remove BUZZ, DARK, FROG, GORK, MIRAI, PERRY, RFC, SNAI, TERMINUS (2025-12-19)",
+"release": 1766127601801
+},
+{
+"code": "7a009775ccbb469da109f99a030feb66",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-12-19",
+"release": 1765956600000
+},
+{
+"code": "8da6b25a3e60425da7209eb64626695a",
+"title": "Notice of Removal of Margin Trading Pairs - 2025-12-23",
+"release": 1765861201650
+},
+{
+"code": "20eee4109e06448992f0557bf798bb36",
+"title": "Binance Futures Will Delist AIAUSDT USDⓈ-M Perpetual Contract (2025-12-11)",
+"release": 1765453426582
+},
+{
+"code": "4c79639f9d264dbfaa82f6b291d2e52a",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-12-12",
+"release": 1765335600000
+},
+{
+"code": "7621c0ff8a924305b6e8fe78ce2c7fcd",
+"title": "Binance Futures Will Delist Multiple USDⓈ-M Perpetual Contracts (2025-12-10)",
+"release": 1764930770574
+},
+{
+"code": "9430eb0ddbc74c21959330f532a8a760",
+"title": "Notice of Removal of Margin Trading Pairs - 2025-12-11",
+"release": 1764824404295
+},
+{
+"code": "f958d031b39f46b1ab3947b1d53fa736",
+"title": "Binance Will Delist FIS, REI, VOXEL on 2025-12-17",
+"release": 1764743396380
+},
+{
+"code": "1836f3db22cd4bf696c0efef21f791d3",
+"title": "Notice of Removal of Margin Trading Pairs - 2025-12-04",
+"release": 1764738006158
+},
+{
+"code": "062ade71d2054e979964269723936c6e",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-12-05",
+"release": 1764732600000
+},
+{
+"code": "746056ce732d43dda12c1e5ae1b7a059",
+"title": "Binance Futures Will Delist Multiple Perpetual Contracts (2025-12-05)",
+"release": 1764576863757
+},
+{
+"code": "cd7a4840c0e14877b07f890cdc06baf8",
+"title": "Notice of Removal of Margin Trading Pairs - 2025-12-04",
+"release": 1764295201173
+},
+{
+"code": "3306bff6bb9e4dd4a49cdbc3ceb8f09a",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-11-28",
+"release": 1764140400000
+},
+{
+"code": "53998d26b57f47beb97811ec9f5e582b",
+"title": "Binance Futures Will Delist Multiple USDⓈ-M Perpetual Contracts (2025-11-28)",
+"release": 1763991911669
+},
+{
+"code": "aa3cc74779bf456e8b100304905b9cc2",
+"title": "Binance Futures Will Delist USDⓈ-M PORT3USDT Perpetual Contract (2025-11-23)",
+"release": 1763877454108
+},
+{
+"code": "4e544f84e3794ebc892bb4ada8f009b7",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-11-21",
+"release": 1763535600000
+},
+{
+"code": "6392491d998b4cbaa6d4beee0fd898c6",
+"title": "Binance Futures Will Delist Multiple USDⓈ-M Perpetual Contracts (2025-11-21)",
+"release": 1763438473736
+},
+{
+"code": "4e11bae0efbb4811842ff1b2d37d1389",
+"title": "Binance Futures Will Delist COIN-M RUNEUSD Perpetual Contract (2025-11-19)",
+"release": 1763105419907
+},
+{
+"code": "947ed0e631d442e8bf06fcd8fc7cdba8",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-11-14",
+"release": 1762932600000
+},
+{
+"code": "869c1c15564048e29ae6139578637cd4",
+"title": "Binance Futures Will Delist USDⓈ-M MYROUSDT and 1000XUSDT Perpetual Contracts (2025-11-14)",
+"release": 1762782300002
+},
+{
+"code": "f73071bd329f4a31ba0218ac675bea67",
+"title": "Binance Futures Will Delist COIN-M MANAUSD and EGLDUSD Perpetual Contracts (2025-11-13)",
+"release": 1762507832708
+},
+{
+"code": "a414fd64592c42d28c881b49ae5b5aca",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-11-07",
+"release": 1762314300000
+},
+{
+"code": "f5698969fc264525a3957baa820b7217",
+"title": "Notice of Removal of Margin Trading Pairs - 2025-11-04",
+"release": 1762254001220
+},
+{
+"code": "ebe57975b8c34e928c7d3fdacfcef32a",
+"title": "Binance Futures Will Delist Multiple Perpetual Contracts",
+"release": 1762137028085
+},
+{
+"code": "de87685396b44694bf6fedddc6d97cef",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-10-31",
+"release": 1761719400000
+},
+{
+"code": "a6c810fc36424548917e146dbe21469a",
+"title": "Binance Will Delist FLM, KDA, PERP on 2025-11-12",
+"release": 1761706804123
+},
+{
+"code": "fe8c53fbe54540b88cff9caa193ffd60",
+"title": "Binance Futures Will Delist COIN-M GMTUSD and DOGSUSD Perpetual Contracts (2025-10-28)",
+"release": 1761219095905
+},
+{
+"code": "c06f4048fd4c42f2a608ffb120ae3945",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-10-24",
+"release": 1761117300000
+},
+{
+"code": "df1dc9b0e8cc4e0ab56cf318c56bc290",
+"title": "Notice of Removal of Margin Trading Pairs - 2025-10-23",
+"release": 1761094805512
+},
+{
+"code": "c045753243994cfcba6a22563389e910",
+"title": "Binance Futures Will Delist USDⓈ-M SLERFUSDT and COIN-M CHZUSD Perpetual Contracts (2025-10-20 & 2025-10-21)",
+"release": 1760759930952
+},
+{
+"code": "6a6879302b1a4ef89961cc3838df8b60",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-10-17",
+"release": 1760511600000
+},
+{
+"code": "f3032795aacb4c6094193eb2c75bc21a",
+"title": "Notice of Removal of Margin Trading Pairs - 2025-10-16",
+"release": 1760451766406
+},
+{
+"code": "591c38a42688433e93afd32122f22585",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-10-10",
+"release": 1759906800000
+},
+{
+"code": "93fe07787c4446199852bebdb3219a74",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-10-03",
+"release": 1759302018652
+},
+{
+"code": "47965a2e19084822a5573699cdaf0102",
+"title": "Notice of Removal of Margin Trading Pairs - 2025-10-02",
+"release": 1759221030976
+},
+{
+"code": "82df1b55a0d84c288fa396d5a5cead48",
+"title": "Binance Futures Will Delist USDⓈ-M HIFIUSDT and BAKEUSDT Perpetual Contracts (2025-10-03)",
+"release": 1759146319511
+},
+{
+"code": "5a4fddd83a25401cabc2ae6271b532a2",
+"title": "Binance Futures Will Delist USDⓈ-M UXLINKUSDT Perpetual Contract (2025-09-26)",
+"release": 1758715205980
+},
+{
+"code": "59f15afc302e4a91a91c3d7b11b631ff",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-09-26",
+"release": 1758679200745
+},
+{
+"code": "77d088eda9b040dc9f73bb7e57ae8e26",
+"title": "Binance Futures Will Delist USDⓈ-M NEIROETHUSDT Perpetual Contract (2025-09-26)",
+"release": 1758526202610
+},
+{
+"code": "10fd115c29244067bd4566a70f77e327",
+"title": "Binance Futures Will Delist USDⓈ-M ALPHAUSDT Perpetual Contract (2025-09-23)",
+"release": 1758098727976
+},
+{
+"code": "fb348cd146834cc8ab3ccc8ecbc3bdf4",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-09-19",
+"release": 1758090602108
+},
+{
+"code": "c95b56efd290471ba11c6cb850208d07",
+"title": "Binance Futures Will Delist USDⓈ-M BSWUSDT Perpetual Contract (2025-09-15)",
+"release": 1757499283992
+},
+{
+"code": "38fa944df3884e169d0f9592884381b9",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-09-12",
+"release": 1757487604389
+},
+{
+"code": "1df082fb97244a31ba3f0b913969095f",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-09-05",
+"release": 1756882801292
+},
+{
+"code": "b601f1d986ad403b8c667dd0ca17e2e7",
+"title": "Binance Will Delist BAKE, HIFI, SLF on 2025-09-17",
+"release": 1756868394550
+},
+{
+"code": "d5fc5fdda5c74e3e8780050ed0841267",
+"title": "Binance Futures Will Delist USDⓈ-M LEVERUSDT Perpetual Contract (2025-09-03)",
+"release": 1756465212480
+},
+{
+"code": "caf7122e023f42f7b2074eebbc82f243",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-08-29",
+"release": 1756281637167
+},
+{
+"code": "c62d1ed9054b4a70b2ecbe0af01e50bb",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-08-22",
+"release": 1755658822496
+},
+{
+"code": "b021b76f70af4465a0b5add81d751de7",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-08-15",
+"release": 1755057611582
+},
+{
+"code": "21e399dcea734230a3c181daf5407b64",
+"title": "Binance Futures Will Delist USDⓈ-M DEFIUSDT and MEMEFI Perpetual Contracts (2025-08-11)",
+"release": 1754465406291
+},
+{
+"code": "95ea413c2c1c41498664b0bad613fcd9",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-08-08",
+"release": 1754449211273
+},
+{
+"code": "3270cb16cd344fecb9646758131189dc",
+"title": "Notice of Removal of Margin Trading Pairs - 2025-08-08",
+"release": 1754276413308
+},
+{
+"code": "4da1c4e783e24cfd93f24d73e484654e",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-08-01",
+"release": 1753844410680
+},
+{
+"code": "7f81ba43118f4877af41ed984f901e67",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-07-25",
+"release": 1753257631403
+},
+{
+"code": "8cf8c5c8702d40eabee04d8a66788733",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-07-04",
+"release": 1751425204968
+},
+{
+"code": "173b2a63c03141009029407ecfebd14a",
+"title": "Binance Will Delist ALPHA, BSW, KMD, LEVER, LTO on 2025-07-04",
+"release": 1750921209887
+},
+{
+"code": "a37e284394114daf8e0045360dd129eb",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-06-27",
+"release": 1750831206996
+},
+{
+"code": "ca8dff7e7c98469c92de91ef618fdd29",
+"title": "Notice of Removal of Margin Trading Pairs - 2025-06-25",
+"release": 1750654801773
+},
+{
+"code": "73093927c8b547a1ac974d43e3cd70c6",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-06-20",
+"release": 1750222804319
+},
+{
+"code": "021c6be6c155475c99b724c214560c63",
+"title": "Notice of Removal of Margin Trading Pairs - 2025-06-18",
+"release": 1750060801439
+},
+{
+"code": "e6a6214f24d14215bb0741c8779f0ae7",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-06-06",
+"release": 1749018602608
+},
+{
+"code": "714283bd536e405ba8afd855fa9ac0ec",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-05-23",
+"release": 1747803609907
+},
+{
+"code": "867a8e3ef6ae4012b5262991541a7754",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-05-09",
+"release": 1746601202379
+},
+{
+"code": "efada095e26b420f8bbbdea92a6bff20",
+"title": "Notice of Removal of Margin Trading Pairs - 2025-05-07",
+"release": 1745553607900
+},
+{
+"code": "0274f9d47da1437990bc13eb17b0ec99",
+"title": "Binance Will Delist ALPACA, PDA, VIB, WING on 2025-05-02",
+"release": 1745467205257
+},
+{
+"code": "7b8cad25f6b04ac7ad63353ea016097a",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-04-18",
+"release": 1744786803310
+},
+{
+"code": "2ccdb0b2708b46d08e0a04118f539d4a",
+"title": "Notice of Removal of Spot Trading Pair - 2025-04-15",
+"release": 1744702204341
+},
+{
+"code": "eaedea37f4ee4bd1a8a53332ebf9cf80",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-04-11",
+"release": 1744182005065
+},
+{
+"code": "fac9c3e401da4cc8b604566fd261d70c",
+"title": "Binance Announced the First Batch of Vote to Delist Results and Will Delist BADGER, BAL, BETA, CREAM, CTXC, ELF, FIRO, HARD, NULS, PROS, SNT, TROY, UFT, VIDT on 2025-04-16",
+"release": 1744092007355
+},
+{
+"code": "77c21bfbaec349c18709d6c49a49e03b",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-03-28 & 2025-03-31",
+"release": 1742972401256
+},
+{
+"code": "db7ad1c7aa6248cda735102cdcdc4b8d",
+"title": "Binance Will Delist AERGO, AST, BURGER, COMBO, LINA on 2025-03-28",
+"release": 1742536220352
+},
+{
+"code": "69ff9abd38ad4cfcbe4521f654278a7d",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-03-21",
+"release": 1742356810621
+},
+{
+"code": "edf76712d2ea48f8916a32cfe1b82fb9",
+"title": "Notice of Removal of Margin Trading Pairs - 2025-03-25",
+"release": 1742266815394
+},
+{
+"code": "4b88b1f8848444d9ad7af3d406bff72e",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-03-14",
+"release": 1741770011825
+},
+{
+"code": "820e86ea4d5145a1bc357682394552ba",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-03-07",
+"release": 1741140001767
+},
+{
+"code": "487e8345ab8146bba30ce251e2f9f974",
+"title": "Notice of Removal of Margin Trading Pairs - 2025-03-11",
+"release": 1741060808105
+},
+{
+"code": "7600776423b74af5a8716354b0cdef8b",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-02-28",
+"release": 1740546019347
+},
+{
+"code": "0d93139d71c64f74bd63749c141842fb",
+"title": "Binance Earn: Notice on Removal of Dual Investment Token Pairs - 2025-02-21",
+"release": 1740027606855
+},
+{
+"code": "d3f0e61ac6d942c98ede2cfeade10314",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-02-21",
+"release": 1739937608036
+},
+{
+"code": "f3cc64a8758d4bb394e0830e5b31da97",
+"title": "Binance Will Delist AMB, CLV, STMX, VITE on 2025-02-24",
+"release": 1739775624287
+},
+{
+"code": "a0231fded5c0478a8cc17de3250473b8",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-02-14",
+"release": 1739343628506
+},
+{
+"code": "c07bde681b514deebde05194494bf030",
+"title": "Notice of Removal of Margin Trading Pairs - 2025-02-17",
+"release": 1739239206765
+},
+{
+"code": "364a6d0ebedc401d9ae8a3eb7d953fe8",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-02-06",
+"release": 1738652401494
+},
+{
+"code": "572715f2d96e47769ebbb967c2a6e445",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M REEFUSDT Perpetual Contract (2025-01-22)",
+"release": 1736928006723
+},
+{
+"code": "85c046a0853b43c2b791ffc3343ed7f0",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-01-17",
+"release": 1736924413729
+},
+{
+"code": "0121f22d485c43da89f2686c5c703886",
+"title": "Notice on Delisting of Binance Loans (Flexible Rate) Loanable Assets - 2025-01-15",
+"release": 1736841604362
+},
+{
+"code": "5283cba1003240e8829afa803ce7815c",
+"title": "Notice of Removal of Spot Trading Pairs - 2025-01-10",
+"release": 1736319604480
+},
+{
+"code": "9a044a0ff8bd4134ba202b9e8e506d58",
+"title": "Notice of Removal of Margin Trading Pairs - 2025-01-16",
+"release": 1736301611670
+},
+{
+"code": "5b215fbc6a0a46afaf0d7e331d2583fa",
+"title": "Notice on Delisting of Binance Loans (Flexible Rate) Loanable Assets - 2025-01-03",
+"release": 1735880404764
+},
+{
+"code": "f1b4fd16b90947aeaa25721940c4b594",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-12-27",
+"release": 1735020004422
+},
+{
+"code": "1e43c128806544018d3cc537a8add3f6",
+"title": "Delisting of USDⓈ-M OMGUSDT Perpetual Contract Will Be Further Postponed",
+"release": 1734678000929
+},
+{
+"code": "b140faee7cf9482cb10257308abda245",
+"title": "Binance Will Delist AKRO, BLZ, WRX on 2024-12-25",
+"release": 1734508872939
+},
+{
+"code": "6d4532716f864947ba21791fd974cad5",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-12-20",
+"release": 1734494422735
+},
+{
+"code": "eedac7aff5b849d58efda6c4b3cec01b",
+"title": "Delisting of USDⓈ-M OMGUSDT Perpetual Contract Postponed",
+"release": 1734184414273
+},
+{
+"code": "efbb0b417f2b432a94b5421010d57671",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-12-13",
+"release": 1733900401363
+},
+{
+"code": "27eac260521b4f40ab331e1a345887a7",
+"title": "Binance Futures Will Delist USDⓈ-M MAVIAUSDT, OMGUSDT, and BONDUSDT Perpetual Contracts (2024-12-16)",
+"release": 1733454004185
+},
+{
+"code": "6ec32247cff443df9240c86bd483508e",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-12-06",
+"release": 1733295601811
+},
+{
+"code": "de1809a251fe4d588d6002973caa71b9",
+"title": "Notice of Removal of Margin Trading Pairs - 2024-12-11",
+"release": 1733194813524
+},
+{
+"code": "7ce833294cdf4eff97dd4d1cc01845f3",
+"title": "Suspension of Gifto (GFT) Deposits and Update on the Delisting Date (2024-12-03)",
+"release": 1732889433223
+},
+{
+"code": "cfe97d52a8c840d3ba631835b637e9e7",
+"title": "Binance Futures Will Delist USDⓈ-M XEMUSDT, ORBSUSDT and LOOMUSDT Perpetual Contracts (2024-12-09)",
+"release": 1732852801809
+},
+{
+"code": "131b75b63a71490393034f36de70c92c",
+"title": "Binance Will Delist GFT, IRIS, KEY, OAX, REN on 2024-12-10",
+"release": 1732609814278
+},
+{
+"code": "5004099914c4450bab7523e28e1218cb",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-11-22",
+"release": 1732086001462
+},
+{
+"code": "041f0131d1e144dd98b5cbd8e9866ede",
+"title": "Notice of Removal of Margin Trading Pairs - 2024-11-27",
+"release": 1732068016813
+},
+{
+"code": "0003e83470f14aed8935327636d87d49",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-11-08",
+"release": 1730876416575
+},
+{
+"code": "f5ac2ed2e6ca44c4b991256e8d897429",
+"title": "Notice of Removal of Margin Trading Pairs - 2024-11-14",
+"release": 1730858404449
+},
+{
+"code": "043c8407bb904652a428573a50d07e07",
+"title": "Binance Will Delist IDRT, KP3R, OOKI, UNFI on 2024-11-06",
+"release": 1729666837062
+},
+{
+"code": "54f36abaff6d4b0f8b7e08691c2b4a40",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-10-25",
+"release": 1729665008538
+},
+{
+"code": "d1dd5a919cd0442187b33e2e883231eb",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-10-11",
+"release": 1728459005581
+},
+{
+"code": "fac9138cdf1947d4a7184990c04ab2c9",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-10-04",
+"release": 1727852403528
+},
+{
+"code": "6a964b8dd8ec4f609b1b75c714240b07",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-09-27",
+"release": 1727247606169
+},
+{
+"code": "81a24cffdec94316a4c99a780cd1641f",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-09-20",
+"release": 1726642808272
+},
+{
+"code": "87fa3bdc933b4e198de8a40e56e277cc",
+"title": "Notice of Removal of Margin Trading Pairs - 2024-09-24",
+"release": 1726547412323
+},
+{
+"code": "65b02ef68e2045c7ac4e2b0b1feaf2cb",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-09-13",
+"release": 1726038010024
+},
+{
+"code": "f6c1a549e5374ecaa8591b536b2b138f",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-08-30",
+"release": 1724828403826
+},
+{
+"code": "84d4dc37762944828f3e91c4eabb6bb6",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-08-23",
+"release": 1724223602529
+},
+{
+"code": "f881d01a7e5f42cf9432b733ca355513",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-08-16",
+"release": 1723611608432
+},
+{
+"code": "865c4e7e31b34b9bb439044d97414273",
+"title": "Notice of Removal of Margin Trading Pairs - 2024-08-22",
+"release": 1723608007883
+},
+{
+"code": "e2fcd2c945654c8d832395335429403e",
+"title": "Binance Will Delist CVP, EPX, FOR, LOOM, REEF, VGX on 2024-08-26",
+"release": 1723446011329
+},
+{
+"code": "e633a048a38a44c29828a441e4c4dac2",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-08-02",
+"release": 1722409208662
+},
+{
+"code": "5034711ef01a478daa801e9e21a1f54f",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-07-26",
+"release": 1721800809034
+},
+{
+"code": "6b85eba2df6e4874b4ea4b5d2f4d1062",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-07-19",
+"release": 1721192408338
+},
+{
+"code": "44e121076fb045f69810a1da1e4c632f",
+"title": "Binance Margin Will Delist TUSD from Cross and Isolated Margin - 2024-07-24",
+"release": 1720663202463
+},
+{
+"code": "08fb183272a8493184700d675aac6a52",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-07-12",
+"release": 1720601739503
+},
+{
+"code": "5e58d78490334f3aa658058df5af5f09",
+"title": "Notice of Removal of Margin Trading Pairs - 2024-07-17",
+"release": 1720497601416
+},
+{
+"code": "4ffb7170f2f84ce3a06cc0cf1a788c23",
+"title": "Binance Will Delist BOND, DOCK, MDX, POLS on 2024-07-22",
+"release": 1720422069631
+},
+{
+"code": "5deaa61d88884afa874f346d1f538e8d",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-07-06",
+"release": 1720163547091
+},
+{
+"code": "b5a78d6af44848d5a4aa594e657f6754",
+"title": "Notice of Removal of Margin Trading Pairs - 2024-07-08",
+"release": 1720152007987
+},
+{
+"code": "67cdd26ad79c42019b49d83d2caab8a7",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-07-05",
+"release": 1719982803754
+},
+{
+"code": "3d9bdfbcdd5c4bc5801fb67765c5a15d",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-06-28",
+"release": 1719384754496
+},
+{
+"code": "b7192d0756e14156a8e401f22d0ed89d",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-06-21",
+"release": 1718776801796
+},
+{
+"code": "be3b189044584849b1344fa36baf49a7",
+"title": "Notice of Removal of Margin Trading Pairs - 2024-06-19",
+"release": 1718690401882
+},
+{
+"code": "cbc625e02b784e769eb0d59ac31d3e5a",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-06-14",
+"release": 1718168401265
+},
+{
+"code": "8deafee157f64834a16bb56d44a16017",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-06-07",
+"release": 1717565402267
+},
+{
+"code": "f65faeeefe07417a8b6dd2900ba8da7e",
+"title": "Binance Will Delist OMG, WAVES, WNXM, XEM on 2024-06-17",
+"release": 1717383620294
+},
+{
+"code": "02cf89d1fada444b99ab06c0cce99338",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-05-31",
+"release": 1716955213943
+},
+{
+"code": "2fdef0793f714d9ea388ccb92d06c141",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-05-24",
+"release": 1716354002528
+},
+{
+"code": "b0425f147ddf4f2a887ca2a781ccc68e",
+"title": "Notice of Removal of Margin Trading Pairs - 2024-05-31",
+"release": 1716346801136
+},
+{
+"code": "1f93ef0e7ac84561bec9741f3393b55b",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-05-17",
+"release": 1715756405799
+},
+{
+"code": "5150d4f0ee1546d7ae6382ba7cda3ffe",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of COIN-M KNCUSD, ICXUSD, XTZUSD, ROSEUSD and APEUSD Perpetual Contracts",
+"release": 1715330951658
+},
+{
+"code": "cb525a5fbb954935afc77630fc5bd0cc",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M IDEXUSDT, SLPUSDT, GLMRUSDT, MDTUSDT and AUDIOUSDT Perpetual Contracts",
+"release": 1715144426574
+},
+{
+"code": "04be5fb46fe84e2eadc01fbc2c445cfa",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-05-10",
+"release": 1715133309910
+},
+{
+"code": "a58cc13f78a34fbba11f00ff7144e9ee",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M STPTUSDT, SNTUSDT, MBLUSDT, RADUSDT and CVXUSDT Perpetual Contracts",
+"release": 1714971617942
+},
+{
+"code": "40880fb02154405ea1f5b17a874cfb8a",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-04-26",
+"release": 1713942011075
+},
+{
+"code": "529f9465efdc4e138034de7fe02d3e58",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-04-12",
+"release": 1712732405683
+},
+{
+"code": "fa40fcad97514426b4add05033b8fd23",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-04-05",
+"release": 1712113246400
+},
+{
+"code": "45ecc42544bc4791bf8cc3fbcd15dbb2",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-03-29",
+"release": 1711524855486
+},
+{
+"code": "ce74360a3fd444b2b35da7186f8dd0ad",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M ANTUSDT, DGBUSDT and CTKUSDT Perpetual Contracts",
+"release": 1711341612437
+},
+{
+"code": "1e531578a30c46eebf52c8dae3c56092",
+"title": "Binance Will Delist DREP, MOB, PNT on 2024-04-03",
+"release": 1710914407471
+},
+{
+"code": "673183dd8eea4e3cba1596dcec7565d1",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M FOOTBALLUSDT and BLUEBIRDUSDT Perpetual Contracts",
+"release": 1710824702006
+},
+{
+"code": "dd8b8a2c4d2f4616ae5b927b51d31730",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-03-15",
+"release": 1710315632769
+},
+{
+"code": "cee8c1f17df34b91a73ae1dbba456a41",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-03-08",
+"release": 1709702704796
+},
+{
+"code": "ebbb63034b374abd94a534cdeead44a6",
+"title": "Notice of Removal of Margin Trading Pairs - 2024-03-15",
+"release": 1709692203976
+},
+{
+"code": "a4a8fe7c7d734cc4a31b7a24ff717621",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-03-01",
+"release": 1709098527711
+},
+{
+"code": "425f0d86cc044d77ab76476f2cb75115",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-02-09",
+"release": 1707293403373
+},
+{
+"code": "772c3895550d4b858e4747030c9a6068",
+"title": "Notice of Removal of Margin Trading Pairs - 2024-02-16",
+"release": 1707275704155
+},
+{
+"code": "f73b083ba6834771b07dbe5319917ae5",
+"title": "Binance Will Delist ANT, MULTI, VAI, XMR on 2024-02-20",
+"release": 1707202812575
+},
+{
+"code": "b003f46ecdf44015b84fbe4128193085",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-02-02",
+"release": 1706679003694
+},
+{
+"code": "f515cfd05a084b8e983ee2488b6242c2",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-01-26",
+"release": 1706082908910
+},
+{
+"code": "44f3c7f4136b40dda2c93ad0ecc2c0a9",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-01-19",
+"release": 1705400725138
+},
+{
+"code": "f7e3c64aa763470980050f3b823b8ccd",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-01-12",
+"release": 1704873005010
+},
+{
+"code": "f0605a9f50cf4ee684e34151413fa7c3",
+"title": "Notice of Removal of Spot Trading Pairs - 2024-01-05",
+"release": 1704272706024
+},
+{
+"code": "8dbdb48e2507406389dddd1abb1694d4",
+"title": "Notice of Removal of Spot Trading Pairs - 2023-12-29",
+"release": 1703658303224
+},
+{
+"code": "707bb0bc0c9448c38926d99cad6d8573",
+"title": "Notice of Removal of Spot Trading Pairs - 2023-12-29",
+"release": 1703237704546
+},
+{
+"code": "d24dd4a035c443b1ad8cf49f60b9d194",
+"title": "Binance Will Delist BTS, PERL, TORN, WTC on 2023-12-07",
+"release": 1701064826207
+},
+{
+"code": "d980d81501594f80b2903cdfe29f1166",
+"title": "Binance Margin & Binance Futures Will Delist BUSD",
+"release": 1700814330006
+},
+{
+"code": "50c302eb2f244f6bac5fb4981ab11168",
+"title": "Notice of Removal of Margin Trading Pairs - 2023-12-07",
+"release": 1700712923504
+},
+{
+"code": "5d4059b63d4a46f99ed4d87364c1eed3",
+"title": "Notice of Removal of Spot Trading Pairs - 2023-11-24",
+"release": 1700628634679
+},
+{
+"code": "cf5269dbdcda433db7065407dd658f4c",
+"title": "Notice of Removal of SOLBUSD Margin Trading Pair - 2023-11-30",
+"release": 1700536504320
+},
+{
+"code": "5211a421359c443abcd30533c3f67e91",
+"title": "Notice of Removal of Spot Trading Pairs - 2023-11-20",
+"release": 1700200806435
+},
+{
+"code": "b7914be710264fa2aa6520575e8c291e",
+"title": "Notice of Removal of Margin Trading Pairs - 2023-11-23",
+"release": 1700038819825
+},
+{
+"code": "5d65c5757dda4b11814e926d2a91a0ee",
+"title": "Notice of Removal of Spot Trading Pairs - 2023-11-17",
+"release": 1700032503062
+},
+{
+"code": "d6ff2248d337458cac062afb4e0c8f27",
+"title": "Notice of Removal of Spot Trading Pairs - 2023-11-10",
+"release": 1699422861670
+},
+{
+"code": "87197e1c25dc42b8b37360a1c05515d1",
+"title": "Notice of Removal of Spot Trading Pairs - 2023-11-03",
+"release": 1698826851668
+},
+{
+"code": "b510633dbf5443889015a89f41ab681d",
+"title": "Notice of Removal of Margin Trading Pairs - 2023-11-09",
+"release": 1698811804132
+},
+{
+"code": "04cbc1c3c77449f9b77d48a353cead34",
+"title": "Notice of Removal of Spot Trading Pairs - 2023-10-27",
+"release": 1698216012581
+},
+{
+"code": "d360909a0aa147ccad4eaba79bec09a6",
+"title": "Notice of Removal of Margin Trading Pairs - 2023-11-02",
+"release": 1698199203478
+},
+{
+"code": "6c95b3a188e140a39108251f72ecbf87",
+"title": "Binance to Delist and Cease Redemption for ADAUP and ADADOWN Leveraged Tokens (2023-11-01)",
+"release": 1697623240905
+},
+{
+"code": "b12222cb336f411da3f509812f829994",
+"title": "Notice of Removal of Spot Trading Pairs - 2023-10-20",
+"release": 1697619603151
+},
+{
+"code": "7845923038534ef88436b3cb25cd7215",
+"title": "Notice of Removal of Margin Trading Pairs - 2023-10-26",
+"release": 1697609703004
+},
+{
+"code": "d8cdb70d7658400bad803d2e9c6f315d",
+"title": "Notice of Removal of Spot Trading Pairs - 2023-10-13",
+"release": 1697012705932
+},
+{
+"code": "1dd3230be12c48c396fb03b79e0203d9",
+"title": "Notice of Removal of Margin Trading Pairs - 2023-10-19",
+"release": 1697005236739
+},
+{
+"code": "ad539191a8d8447eb14dd8660bd57b44",
+"title": "Notice of Removal of Trading Pairs - 2023-10-06",
+"release": 1696403103350
+},
+{
+"code": "1184147d771d46d79b4490cf90aebcae",
+"title": "Notice of Removal of Isolated Margin Trading Pairs - 2023-10-12",
+"release": 1696392604027
+},
+{
+"code": "a86e9b19401e4033bf5b2327ccae2258",
+"title": "Notice of Removal of Margin Trading Pairs - 2023-10-06",
+"release": 1695956652169
+},
+{
+"code": "c3db74e44cd74bf8af1e3796dce7e14b",
+"title": "Notice of Removal of Trading Pairs - 2023-09-29",
+"release": 1695787208875
+},
+{
+"code": "8d0c68f2044a4133b414ebb42bbf30fb",
+"title": "Notice of Removal of Isolated Margin Trading Pairs - 2023-09-28",
+"release": 1695276603853
+},
+{
+"code": "c314977b8eb74f6e9c1d1b4b12bceffb",
+"title": "Notice of Removal of Trading Pairs - 2023-09-22",
+"release": 1695198003507
+},
+{
+"code": "7f6d179aff1740d387d451a9659d9c6b",
+"title": "Notice of Removal of Trading Pairs - 2023-09-15",
+"release": 1694595603887
+},
+{
+"code": "45f3a80231774a07bafa5185e031f296",
+"title": "Notice of Removal of Cross Margin & Isolated Margin Trading Pairs - 2023-09-21",
+"release": 1694575503511
+},
+{
+"code": "90f2f17c043c43e7a75e01aacf911282",
+"title": "Notice of Removal of Trading Pairs - 2023-09-08",
+"release": 1693976405685
+},
+{
+"code": "19c694ed39f14a9791e0f34a2235def1",
+"title": "Binance Margin Will Delist ALPHA/BUSD, ANT/BUSD, BAL/BUSD, COS/BTC, DGB/BUSD, FIRO/BUSD, OOKI/BUSD, QI/BTC, RVN/BUSD & TWT/BUSD Isolated Margin Pairs",
+"release": 1693552182147
+},
+{
+"code": "65d22ef74f2f4fb8a71921fe5353781b",
+"title": "Notice of Removal of Trading Pairs - 2023-09-01",
+"release": 1693383309241
+},
+{
+"code": "d0f401e56c594069afad13c80f97a356",
+"title": "Binance Margin Will Delist the AMB/BUSD, DASH/BUSD, FIDA/BUSD, HARD/BUSD, HOT/BUSD, IOST/BTC, NULS/BUSD, PORTO/BUSD and REQ/BUSD Cross Margin & Isolated Margin Pairs",
+"release": 1693375203152
+},
+{
+"code": "d70e85232e864994b619b222d8f4fc0f",
+"title": "Notice of Removal of Trading Pairs - 2023-08-25",
+"release": 1692777621501
+},
+{
+"code": "6723cf112ab943bb9db7542bf8e107f0",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M SOLBUSD Perpetual Contract",
+"release": 1692616803287
+},
+{
+"code": "f662330259c44f869ea1dd618925677e",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M LTCBUSD and DOGEBUSD Perpetual Contracts",
+"release": 1692266704608
+},
+{
+"code": "efcc02e2c5d1486aaf27cde5aa059479",
+"title": "Notice of Removal of Trading Pairs - 2023-08-18",
+"release": 1692174936844
+},
+{
+"code": "0a22f72cdfac479f95393e7b57e6dda1",
+"title": "Binance Margin Will Delist the EPX/BUSD, GAL/BUSD, GMX/BUSD, HIVE/BUSD, KLAY/BUSD, RAD/BUSD and TVK/BUSD Cross Margin & Isolated Margin Pairs",
+"release": 1692155138357
+},
+{
+"code": "f43511a4c1d347a8a2dd1efbdd2fe716",
+"title": "Binance Will Delist SNM, SRM and YFII on 2023-08-22",
+"release": 1692082868922
+},
+{
+"code": "2ef6a32bb9704a01ba43f8ecbb2c057e",
+"title": "Notice of Removal of Trading Pairs - 2023-08-17",
+"release": 1692065113766
+},
+{
+"code": "63b70cab6d4f482f892f0fd7bda9e05e",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M ADABUSD and MATICBUSD Perpetual Contract",
+"release": 1691658004905
+},
+{
+"code": "94ed7e1b7fcf4588b053c01c2e453fed",
+"title": "Binance to Cease ADAUP & ADADOWN Trading and Subscription Services (2023-08-09)",
+"release": 1691556806728
+},
+{
+"code": "8a8c41ad9eac4225b46b7d53d0df8f2c",
+"title": "Binance Margin Will Delist the ASTR/BUSD, AUDIO/BUSD, BAT/BUSD, BSW/BUSD, NMR/BUSD, PEOPLE/BUSD and RSR/BUSD Cross Margin & Isolated Margin Pairs",
+"release": 1691464207277
+},
+{
+"code": "63f3038beda94f3e9a05652f55c4fb75",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M TRXBUSD and DODOBUSD Perpetual Contracts",
+"release": 1691055003469
+},
+{
+"code": "c2bc8eaae3264576921b4999cf00fe12",
+"title": "Notice of Removal of Trading Pairs - 2023-08-04",
+"release": 1690945524325
+},
+{
+"code": "584d65bfa49f4f5894d2416e76214dc5",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M APTBUSD and FTMBUSD Perpetual Contracts",
+"release": 1690451103030
+},
+{
+"code": "632aa37b7ce44e4f89f0e917e885ffbf",
+"title": "Binance Margin Will Delist the CKB/BUSD, CTK/BUSD, ELF/BUSD, FOR/BUSD, PERP/BUSD, SKL/BUSD & UNFI/BUSD Isolated Margin Pairs",
+"release": 1690252204237
+},
+{
+"code": "8c0173395ac941e4a96fa4bf5d0a2cd1",
+"title": "Notice of Removal of Trading Pairs - 2023-07-26",
+"release": 1690188303587
+},
+{
+"code": "217d0ff70eac403480b5137e2a90b424",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M LDOBUSD and GALABUSD Perpetual Contracts",
+"release": 1689840007070
+},
+{
+"code": "37a510c756cc44ca8948a8a64fddd512",
+"title": "Binance Margin Will Delist the OGN/BUSD, OSMO/BUSD, REI/BUSD and SPELL/BUSD Cross Margin & Isolated Margin Pairs",
+"release": 1689760808223
+},
+{
+"code": "64e983b9aebb48998e7ba789aabe3de2",
+"title": "Binance Margin Will Delist the ALCX/BUSD, ALPACA/BUSD, CVX/BUSD, DOCK/BUSD, LOOM/BUSD, MC/BUSD, MOB/BUSD & TROY/BUSD Isolated Margin Pairs",
+"release": 1689318001849
+},
+{
+"code": "3e64fa6aa26c40e0be51e0f8c3a1d9b1",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M AGIXBUSD Perpetual Contract",
+"release": 1689072303374
+},
+{
+"code": "e6764830f1aa468990b3263cd967c655",
+"title": "Binance to Delist and Cease Redemption for XRPUP and XRPDOWN Leveraged Tokens (2023-07-25)",
+"release": 1689066007256
+},
+{
+"code": "3e82983b9b614d3facea143ef97efb2d",
+"title": "Notice of Removal of Trading Pairs - 2023-07-13",
+"release": 1689056113799
+},
+{
+"code": "1b4044db45834ae6b367e12ac776215c",
+"title": "Binance Margin Will Delist the ATA/BUSD, FORTH/BUSD, JST/BUSD, QTUM/BUSD, SUN/BUSD, ZEN/BUSD & ZRX/BUSD Isolated Margin Pairs",
+"release": 1688703003727
+},
+{
+"code": "d9349160f5504b87bd7948d8c36c4615",
+"title": "Notice of Removal of Trading Pairs - 2023-07-05",
+"release": 1688372704022
+},
+{
+"code": "8915d06693ed49f78262c80b6d54c13a",
+"title": "Binance Margin Will Delist MBL/BUSD, PUNDIX/BUSD Cross Margin Pairs and FARM/BUSD, LSK/BUSD, MBL/BUSD, PLA/BUSD, PUNDIX/BUSD, SC/BUSD Isolated Margin Pairs",
+"release": 1686815412709
+},
+{
+"code": "ca6a53640b174613821bc993d3fd9bca",
+"title": "Notice of Removal of Trading Pairs - 2023-06-14",
+"release": 1686555013494
+},
+{
+"code": "cd599a0f00004f399b03b8077788e39c",
+"title": "Binance Margin Will Delist the BNT/BUSD, CVX/BTC, POLS/BUSD, POWR/BUSD, STPT/BUSD & STRAX/BUSD Isolated Margin Pairs",
+"release": 1686550803118
+},
+{
+"code": "0e84e685101d457a95cbe5c550b6e891",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M 1000LUNCBUSD Perpetual Contract",
+"release": 1685610906427
+},
+{
+"code": "bd9a8eb9e0c940278d888cb95b76ba41",
+"title": "Notice of Removal of Trading Pairs - 2023-06-01",
+"release": 1685088001922
+},
+{
+"code": "51ac7ced06274cd08710b38289e2ea43",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M 1000SHIBBUSD Perpetual Contract",
+"release": 1685007904026
+},
+{
+"code": "d2c3ba4339604af2855bfe950d1ceaa4",
+"title": "Notice of Removal of Trading Pairs - 2023-05-26",
+"release": 1684899904672
+},
+{
+"code": "e7d6bc2aa47c42a28d2e023a7ceb7234",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M LINKBUSD Perpetual Contract",
+"release": 1684470616021
+},
+{
+"code": "a8e3ce7e46ed46359336e1d48ab8c538",
+"title": "Binance Margin Will Delist the JASMY/BTC Cross Margin Pair and AMP/BTC, JASMY/BTC, STMX/BTC Isolated Margin Pairs",
+"release": 1684299631912
+},
+{
+"code": "62abb8275ea6457faa154398970db7ce",
+"title": "Notice of Removal of Trading Pairs - 2023-05-18",
+"release": 1684224328377
+},
+{
+"code": "575835ebb33346b28cf1dd78a8a50aaa",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M APEBUSD Perpetual Contract",
+"release": 1683874532167
+},
+{
+"code": "7734f3d4ddd14d65a7cc1563115fe30b",
+"title": "Notice of Removal of Trading Pairs - 2023-05-11",
+"release": 1683622803457
+},
+{
+"code": "e47dd8e9f2d84c3aa175bd09fe2f8c94",
+"title": "Binance Margin Will Delist the WRX/BTC Isolated Margin Pair",
+"release": 1683619303518
+},
+{
+"code": "4536c9819c5d498a975ae40fcd6ecac4",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M DOTBUSD Perpetual Contract",
+"release": 1683251412529
+},
+{
+"code": "821d520d23f04be8a6b4ec692fdfd9e0",
+"title": "Notice of Removal of Trading Pairs - 2023-05-04",
+"release": 1682996404484
+},
+{
+"code": "72ae35cffb8842d5acb8ff22c70f8dd3",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M FILBUSD Perpetual Contract",
+"release": 1682678706662
+},
+{
+"code": "f9ed8900260141bbb2af4bb71741839a",
+"title": "Binance to Delist and Cease Redemption for TRXUP, TRXDOWN, DOTUP, DOTDOWN, LINKUP & LINKDOWN Leveraged Tokens (2023-04-27)",
+"release": 1682577903228
+},
+{
+"code": "084acdd39aae4b1b8660fc3b9ab7efef",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M ETCBUSD Perpetual Contract",
+"release": 1682071224769
+},
+{
+"code": "10d9ee3c69584398894526c5dba9e3a6",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M GMTBUSD, NEARBUSD and AVAXBUSD Perpetual Contracts",
+"release": 1681466509865
+},
+{
+"code": "27933fc8f6c8451fbb18c0189681441a",
+"title": "Binance Will Delist QLC, NEBL and AUTO on 2023-04-18",
+"release": 1681196422114
+},
+{
+"code": "9453bc521ae34d2e8ea22e15c5635a29",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M PHBBUSD, SANDBUSD and UNIBUSD Perpetual Contracts",
+"release": 1680776103366
+},
+{
+"code": "60fff2470a2e428da6fa9e36ed9147ad",
+"title": "Notice of Removal of Trading Pairs - 2023-04-07",
+"release": 1680660330406
+},
+{
+"code": "8c012ee71d4046699a0025e37c0e3c3d",
+"title": "Binance Margin Will Delist SNM From Isolated Margin",
+"release": 1680597004561
+},
+{
+"code": "7fd48887590649699ad65419023bacfb",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M AMBBUSD, LEVERBUSD and TLMBUSD Perpetual Contracts",
+"release": 1680253507407
+},
+{
+"code": "2bcaff7b39064aa8969bb509d28b90f5",
+"title": "Binance Margin Will Delist NEBL as a Borrowable Asset From Cross Margin and DCR, NEBL, XVG From Isolated Margin",
+"release": 1679900403355
+},
+{
+"code": "466bca3b08d2461b90c207dec6595378",
+"title": "Notice of Removal of Trading Pairs - 2023-03-24",
+"release": 1679461803177
+},
+{
+"code": "2f5fb73f1b6e411090318ca60a9f47bc",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M ICPBUSD and LUNA2BUSD Perpetual Contracts",
+"release": 1679296806814
+},
+{
+"code": "f1a8aa29692b4442a8f18be2076e14a0",
+"title": "Binance Will Delist HNT and WABI on 2023-03-24",
+"release": 1679036475726
+},
+{
+"code": "8777f417774f427ba3abd86060e7e462",
+"title": "Notice of Removal of Trading Pairs - 2023-03-16",
+"release": 1678759204801
+},
+{
+"code": "edab50e09da64814970d9fb86a740617",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M CVXBUSD, GALBUSD and WAVESBUSD Perpetual Contracts",
+"release": 1678688117686
+},
+{
+"code": "d94b8c9ee502498db90c1ed2b299fead",
+"title": "Notice of Removal of Trading Pairs - 2023-03-02",
+"release": 1677549604336
+},
+{
+"code": "5a927cdc26a0401b8bb5f49c5b61f54d",
+"title": "Binance Margin Will Delist LOOM, STRAX as Borrowable Assets From Cross Margin and OG From Isolated Margin",
+"release": 1677063603612
+},
+{
+"code": "b461bf1f04d9456ea978f1549a31e174",
+"title": "Binance Will Delist AION, MIR, ANC on 2023-02-27",
+"release": 1676865785355
+},
+{
+"code": "7ec33a2d62974c3490b92ff0780ba461",
+"title": "Notice of Removal of Trading Pairs - 2023-02-10",
+"release": 1675830028030
+},
+{
+"code": "fca7186611164299b4456073a9594e2a",
+"title": "Binance Margin Will Delist FIO, GNO, IRIS, MLN, WTC Trading Pairs From Isolated Margin",
+"release": 1675749621021
+},
+{
+"code": "303ab4c96a174d6b80ea7c1884190f3b",
+"title": "Binance Futures to Suspend Trading on USDT-Margined MINA Perpetual Contract",
+"release": 1675653983239
+},
+{
+"code": "40582b9b67564072a9a3d3cad4f70b00",
+"title": "Binance Margin Will Delist JST, SNM, SUN as Borrowable Assets From Cross Margin",
+"release": 1674799803614
+},
+{
+"code": "50556d0ff0bc408e82d39ea129c51f29",
+"title": "Notice of Removal of Trading Pairs - 2023-01-27",
+"release": 1674623421071
+},
+{
+"code": "181e7d0c59b1498f866a1e79b6c499f6",
+"title": "Binance Margin Will Delist NEXO, POLS, QUICK as Borrowable Assets From Cross Margin and ALCX, NEXO, POLS, TOMO Trading Pairs From Isolated Margin",
+"release": 1674112226735
+},
+{
+"code": "a80d47617f1046b883b5ba237d2c75a7",
+"title": "Binance Will Delist BEAM on 2023-01-26",
+"release": 1674100806617
+},
+{
+"code": "ed7dcc263e6e4f3687f8260340ec96ce",
+"title": "Binance Margin Will Delist FLM, KMD as Borrowable Assets From Cross Margin and COCOS, CREAM, SCRT From Isolated Margin",
+"release": 1673592309526
+},
+{
+"code": "4de1611d14ed44d2b9923b0540193f70",
+"title": "Binance Margin Will Delist AGLD, DATA, ERN, FIO & TROY as Borrowable Assets From Cross Margin and KEY From Isolated Margin",
+"release": 1672907126372
+},
+{
+"code": "98469caac0b54a2198208b7ceed71f91",
+"title": "Notice of Removal of Trading Pairs - 2023-01-06",
+"release": 1672801227284
+},
+{
+"code": "b271dde3a3ea459aadc5369f777d69d4",
+"title": "Binance Margin Will Delist ATA, DEXE, HIGH, STPT & WAN as Borrowable Assets From Cross Margin",
+"release": 1672290931854
+},
+{
+"code": "50fc982ec6904923a1404826333c6c2b",
+"title": "Notice of Removal of Trading Pairs - 2022-12-30",
+"release": 1672193412555
+},
+{
+"code": "2a7d2f14142646959b101f4254d22340",
+"title": "Binance Futures Will Delist COIN-M GALAUSD, ZILUSD and VETUSD Perpetual Contracts",
+"release": 1671768907038
+},
+{
+"code": "fb10a5286033409fbba06a197a7a2ffc",
+"title": "Binance Margin Will Delist FET, FORTH, KEY, MBOX, WIN as Borrowable Assets From Cross Margin and AION, BTS From Isolated Margin",
+"release": 1671710396824
+},
+{
+"code": "c76352c9c2c846c997cbf65cfdf77976",
+"title": "Notice of Removal of Trading Pairs - 2022-12-27",
+"release": 1671614083784
+},
+{
+"code": "9da748d1d20048beb0fd4e824da4c50e",
+"title": "Binance Margin Will Delist CHESS, CVP and More Tokens as Borrowable Assets From Cross Margin",
+"release": 1671085221101
+},
+{
+"code": "35a4169422154c838f012331f5f4b425",
+"title": "Binance Will Delist MITH, TRIBE, REP and BTCST on 2022-12-22",
+"release": 1671076804887
+},
+{
+"code": "7dcc170b060c4c6a8ade4ded423f726a",
+"title": "Notice on Updating Leverage & Margin Tiers, and Delisting USDⓈ-M ANCBUSD and AUCTIONBUSD Perpetual Contracts",
+"release": 1670912849285
+},
+{
+"code": "f4f20b3b72324b3b82c543988f5b2328",
+"title": "Binance Margin Will Delist BNX, TORN and More Margin Pairs on Cross Margin & Isolated Margin",
+"release": 1670497371715
+},
+{
+"code": "13647176b1594beebe1a8aa3f9f843c8",
+"title": "Notice of Removal of Trading Pairs - 2022-12-09",
+"release": 1670382304520
+},
+{
+"code": "9ea990c25dcd474081c2259c85a59325",
+"title": "Binance Margin Will Delist ACA and More Margin Pairs on Cross Margin & Isolated Margin",
+"release": 1670325826754
+},
+{
+"code": "84d48bb4678b4da6a7da419bcc99dfb8",
+"title": "Binance Will Delist All American-Style Daily Options",
+"release": 1669779905243
+},
+{
+"code": "2220f382c1764f84834b1d74a26489a8",
+"title": "Binance Margin Will Delist CVC & More Margin Pairs on Cross Margin & Isolated Margin",
+"release": 1669617922401
+},
+{
+"code": "3188e26f14a1464b91487abad452c04f",
+"title": "Binance Futures Will Delist and Update the Leverage & Margin Tiers of CVCUSDT Perpetual Futures Contract",
+"release": 1669606227750
+},
+{
+"code": "f88299165488493cba3e53208c19080d",
+"title": "Notice of Removal of Trading Pairs - 2022-11-28",
+"release": 1669352405367
+},
+{
+"code": "8f74739047874206827f0fcbd1c3ae6b",
+"title": "Binance Will Delist Multiple American-Style Daily Options",
+"release": 1669101669372
+},
+{
+"code": "b25c54dc95744d5db55e4437c55ce6b5",
+"title": "Binance Margin Will Delist GTO, TRIBE & More Margin Pairs on Cross Margin & Isolated Margin",
+"release": 1668765625978
+},
+{
+"code": "e0ff4c7020ca4203b49907505bc86809",
+"title": "Binance Will Delist SRM and RAY Margin Pairs and Binance Earn Products",
+"release": 1668650316774
+},
+{
+"code": "9a6676662bd5417c92267953f3819dd0",
+"title": "Binance Futures Will Delist RAYUSDT and SRMUSDT Perpetual Futures Contracts",
+"release": 1668409204880
+},
+{
+"code": "47642955ae7f4a3688133df8067ac3c2",
+"title": "Notice of Removal of Trading Pairs - 2022-11-15",
+"release": 1668401726864
+},
+{
+"code": "3b4c7c08479b48d48189191e37a7adca",
+"title": "Binance Will Delist FTT Margin Pairs, USDⓈ-M Futures Contracts and Binance Flexible Products",
+"release": 1668332838510
+},
+{
+"code": "52587fa2aed1495c9494917865e7de78",
+"title": "Notice of Removal of Trading Pairs - 2022-11-18",
+"release": 1667905204536
+},
+{
+"code": "cd7aae08f6a84ad89ca6a2c4d52fa32e",
+"title": "Binance Will Delist DNT, NBS, BTG and TCT on 2022-10-24",
+"release": 1665633628184
+},
+{
+"code": "64b9451dc9394f058802dd9ee4b52913",
+"title": "Notice of Removal of Trading Pairs - 2022-10-14",
+"release": 1665028826479
+},
+{
+"code": "02b5d183f4944f18b3b0335f7b7348cc",
+"title": "Binance Margin Will Delist TCT on Isolated Margin",
+"release": 1663229120786
+},
+{
+"code": "96c8dc9145ff48069c932513f69c616a",
+"title": "Notice of Removal of Trading Pairs - 2022-09-16",
+"release": 1662966001479
+},
+{
+"code": "b312715afbff4d7493b77089967303b1",
+"title": "Binance Futures Will Delist USDT-Margined BLZ Perpetual Contract",
+"release": 1660730127229
+},
+{
+"code": "90498d8e2fec42468ec3d659bdfbb78b",
+"title": "Binance Futures Will Delist USDT-Margined BTS Perpetual Contract",
+"release": 1660013959306
+},
+{
+"code": "d5f079935fda4abfb4a5636f01984ec2",
+"title": "Binance Will Delist EZ, QSP, BRD, NXS, NAV, MDA and SPARTA on 2022-08-11",
+"release": 1659591197638
+},
+{
+"code": "2c90ba6178524b9e9e19640df1fa2606",
+"title": "Binance Staking to Delist EZ, TRU, VITE, ANC & MIR",
+"release": 1657273103633
+},
+{
+"code": "d8f6cf77d58b4571a2c4c1ed77572256",
+"title": "Binance Will Delist GRS, NAS and GO on 2022-07-08",
+"release": 1656658181710
+},
+{
+"code": "c99bd249484f4bbaa7f8489ae2bc860a",
+"title": "Notice of Removal of Trading Pairs - 2022-07-07",
+"release": 1656561693806
+},
+{
+"code": "0cc7c656b0704373bb4088fc531f89e0",
+"title": "Binance Futures Will Delist CRV Coin-Margined Perpetual Contract",
+"release": 1655953224692
+},
+{
+"code": "6ce355dedc5d438abde7b5dc99b3a56d",
+"title": "Binance Futures Will Delist USDT-Margined SC Perpetual Contract",
+"release": 1654855342935
+},
+{
+"code": "ea22aba58a1f470d9aff6aa80c4ac52f",
+"title": "Notice of Removal of Trading Pairs - 2022-06-16",
+"release": 1654743904185
+},
+{
+"code": "670a4bc8c72b46edbddf53fbb05acefd",
+"title": "Notice of Removal of Trading Pairs - 2022-06-09",
+"release": 1654567202690
+},
+{
+"code": "af469aeeab074738bb4a276070a9d11b",
+"title": "Binance Futures Will Delist TLM and ICP USDT-Margined Contracts",
+"release": 1654165095432
+},
+{
+"code": "075f5376937f4b1c8fc5af20cf71cb2a",
+"title": "Notice of Removal of Trading Pairs - 2022-06-02",
+"release": 1653962401938
+},
+{
+"code": "665d875ded974f97a719642040dac31a",
+"title": "Notice of Removal of Trading Pairs - 2022-05-26",
+"release": 1652925601555
+},
+{
+"code": "d1cb959677034c45b5149f1d998ae2b1",
+"title": "Binance Futures Will Delist AKRO and DODO USDT-Margined Contracts",
+"release": 1652871565804
+},
+{
+"code": "5ebb76d7d7394bf180100a9b3e243f4e",
+"title": "Notice of Removal of Trading Pairs - 2022-05-14",
+"release": 1652447761674
+},
+{
+"code": "70d41dea57454556b68d2a58c70c9cc5",
+"title": "Binance Margin to Delist ANC and MIR on Cross Margin and Isolated Margin",
+"release": 1652424609208
+},
+{
+"code": "0bfb6cfd10aa4d26926260c0159ef58d",
+"title": "Binance Futures Will Delist USDT-Margined ANC Perpetual Contract",
+"release": 1652408842500
+},
+{
+"code": "514e0ba636e843bda47d5d740b7dadf4",
+"title": "Notice of Removal of Trading Pairs and Updates on Tick Size for Spot Trading Pair - 2022-05-13",
+"release": 1652401725571
+},
+{
+"code": "ef3ce76d5c2d45ee9b6dc3f281cde744",
+"title": "Binance Futures Will Delist LUNA USDT-Margined Contract",
+"release": 1652367541271
+},
+{
+"code": "30b94fa12397417ebb75567d525c2ecd",
+"title": "Binance Margin to Delist LUNA on Cross Margin and Isolated Margin",
+"release": 1652353160901
+},
+{
+"code": "1b73e64616ee4e769c29e70c66728d1a",
+"title": "Binance Futures to Delist Coin-Margined LUNA Perpetual Contracts and Update the Leverage & Margin Tiers for USDT-Margined LUNA Perpetual Contracts",
+"release": 1652331009976
+},
+{
+"code": "363087d066d94ac99b28e41c49194cba",
+"title": "Notice of Removal of Trading Pairs - 2022-05-19",
+"release": 1652320802285
+},
+{
+"code": "482ba9f146b540bd9b04613e9e8038df",
+"title": "Notice of Removal of Trading Pairs - 2022-05-12",
+"release": 1652148002556
+},
+{
+"code": "7305d3e50f0647838078ded2be975d48",
+"title": "Binance Futures Will Delist FTTBUSD USDT-Margined Contract",
+"release": 1652070302529
+},
+{
+"code": "4c5090f8adc84612904619cde1231271",
+"title": "Notice of Removal of Trading Pairs - 2022-04-28",
+"release": 1650938402498
+},
+{
+"code": "9d7752764de44d399fdb2260c8aa9693",
+"title": "Notice of Removal of Trading Pairs - 2022-04-21",
+"release": 1650333603777
+},
+{
+"code": "81f425fef8774e0a82451fa480b95085",
+"title": "Binance to Delist and Cease Redemption for XTZUP, XTZDOWN, LTCUP & LTCDOWN Leveraged Tokens (2022-04-07)",
+"release": 1649322306941
+},
+{
+"code": "da14a6dce7a64283b8d536ca1c97c026",
+"title": "Binance Will Delist HEGIC, RENBTC and SUSD on 2022-04-11",
+"release": 1649066280853
+},
+{
+"code": "4baf8d70485c46e38637bd063c58c4d8",
+"title": "Binance Futures Will Delist 1000BTTC and YFII USDT-Margined Contracts",
+"release": 1649049710096
+},
+{
+"code": "a32282b26bdf499e93a29c83b8bc83ab",
+"title": "Notice of Removal of Trading Pairs - 2022-04-01",
+"release": 1648107904072
+},
+{
+"code": "3c83d5627b494c5db5c0c23f572f0503",
+"title": "Notice of Removal of Trading Pairs - 2022-03-18",
+"release": 1646963927030
+},
+{
+"code": "105793a7dd7b4b3dae049f1e670f3c25",
+"title": "Notice of Removal of Trading Pairs - 2022-03-10",
+"release": 1646705386426
+},
+{
+"code": "92eea3f48aa04210a454511151f3d362",
+"title": "Binance Will Delist BCD, CND, MTH, NCASH and YOYO on 2022-03-08",
+"release": 1646107170632
+},
+{
+"code": "034252c30f554df284984982d65742ba",
+"title": "Notice of Removal of Trading Pairs - 2022-03-03",
+"release": 1646103749930
+},
+{
+"code": "f7af728484fc4e8b82cdecf017d8b18a",
+"title": "Notice of Removal of AXS/BIDR Trading Pair - 2022-02-25",
+"release": 1645495079687
+},
+{
+"code": "b5c4d0de8f7c49ffbbf32c344a368a37",
+"title": "Notice of Removal of Trading Pairs - 2022-02-24",
+"release": 1645069676026
+}
+]
+}
