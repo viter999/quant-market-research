@@ -24,11 +24,14 @@ def load(data_dir, sym):
 
 
 def daily_returns(d):
-    """Close-to-close returns between consecutive calendar days only."""
+    """Close-to-close returns between consecutive calendar days on which the
+    symbol traded (quote volume > 0 on the day AND the previous day), v0.3.4."""
     c = d["close"]
     ordinal = np.array([x.toordinal() for x in c.index])
     consecutive = np.r_[False, np.diff(ordinal) == 1][: len(c)]
-    return (c / c.shift(1) - 1)[consecutive]
+    qv = d["quote_volume"].to_numpy()
+    traded = np.r_[False, (qv[1:] > 0) & (qv[:-1] > 0)][: len(c)]
+    return (c / c.shift(1) - 1)[consecutive & traded]
 
 
 def main(data_dir):
