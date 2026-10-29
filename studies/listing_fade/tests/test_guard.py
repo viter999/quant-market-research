@@ -46,3 +46,25 @@ def test_latest_test_launch_fits_the_guard():
 
 def test_days_between():
     assert E.days_between(ms(2024, 1, 1, 23), ms(2024, 1, 3)) == [dt.date(2024, 1, 1), dt.date(2024, 1, 2)]
+
+
+def test_funding_chain_rule():
+    import pandas as pd
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+    import exclusions as X
+    H = E.HOUR
+    f = pd.DataFrame({"ts": [4 * H, 8 * H, 10 * H, 12 * H], "funding_interval_hours": [4, 2, 2, 2]})
+    assert X.funding_complete(f, True, 3 * H, 13 * H)            # 4h -> 2h switch is fine
+    assert not X.funding_complete(f.drop(index=2), True, 3 * H, 13 * H)   # 8h -> 12h gap at 2h interval
+    assert not X.funding_complete(f, False, 3 * H, 13 * H)       # a monthly file missing
+    assert not X.funding_complete(f, True, 3 * H, 15 * H)        # nothing after 12h but hold runs to 15h
+    assert not X.funding_complete(None, True, 3 * H, 13 * H)
+
+
+def test_funding_chain_anchored_on_outside_records():
+    import pandas as pd
+    import exclusions as X
+    H = E.HOUR
+    f = pd.DataFrame({"ts": [4 * H, 8 * H, 12 * H, 16 * H, 18 * H, 20 * H], "funding_interval_hours": [4, 4, 4, 2, 2, 2]})
+    assert X.funding_complete(f, True, 12 * H + 6, 19 * H)     # AERGO case: 12h (4h) -> 16h (2h)
+    assert not X.funding_complete(f.drop(index=3), True, 12 * H + 6, 19 * H)

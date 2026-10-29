@@ -1,0 +1,23 @@
+{
+ "universe_rows": 249,
+ "universe_episodes": 181,
+ "universe_launch_days": 166,
+ "by_reason_first_failing": {
+  "kept": 211,
+  "vol_1h_lt_5M": 36,
+  "aggtrades_files_missing": 1,
+  "funding_record_missing": 1
+ },
+ "kept_rows": 211,
+ "kept_episodes": 157,
+ "drops": {
+  "no_entry_trades": 0,
+  "no_exit_trades": 0,
+  "btc_bar_missing": 0
+ },
+ "usable_rows": 211,
+ "usable_episodes": 157,
+ "usable_launch_days": 143,
+ "premarket_usable_rows": 21,
+ "item1_met": true
+}

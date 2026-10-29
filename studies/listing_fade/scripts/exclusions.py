@@ -2,7 +2,8 @@
 Inputs are timestamps, trade sides, quote notional (price x qty, for the $5M
 volume rule only) and file/bar presence. No return, markout or PnL is computed.
 
-  1 no_aggtrades_24h        no aggTrade in [L, L+24h)  (T0 undefined)
+  1 no_aggtrades_24h        no aggTrade in [L, L+24h)  (T0 undefined); if the archive
+                            files themselves are missing: aggtrades_files_missing
   2 vol_1h_lt_5M            sum(price*qty) of aggTrades in [T0, T0+1h) < $5M
   3 funding_record_missing  a settlement in the hold (T0+60m, T0+72h] has no record
   4 delisting_announced     a catalog-161 delisting title names the token, released in [A, T0+72h)
@@ -31,17 +32,23 @@ def key(e):
 
 
 def funding_complete(f: pd.DataFrame | None, months_ok: bool, lo: int, hi: int) -> bool:
-    """Every settlement in (lo, hi] has a record: the chain lo -> r1 -> ... -> rk -> hi
-    has no gap longer than the funding interval (+5 min)."""
+    """Every settlement in (lo, hi] has a record. The chain is: the last record at or
+    before lo (else lo itself) -> the records in (lo, hi] -> the first record after hi
+    (else hi itself). No gap may exceed the larger funding interval of its two ends
+    (+5 min); lo / hi as an end take the interval of their neighbour record."""
     if f is None or not months_ok:
         return False
-    r = f[(f["ts"] > lo) & (f["ts"] <= hi)].sort_values("ts")
-    if r.empty:
+    f = f.sort_values("ts")
+    inside = f[(f["ts"] > lo) & (f["ts"] <= hi)]
+    if inside.empty:
         return False
-    ts, iv = r["ts"].tolist(), (r["funding_interval_hours"] * E.HOUR).tolist()
-    if ts[0] - lo > iv[0] + TOL or hi - ts[-1] > iv[-1] + TOL:
-        return False
-    return all(b - a <= w + TOL for a, b, w in zip(ts, ts[1:], iv[1:]))
+    prev, nxt = f[f["ts"] <= lo].tail(1), f[f["ts"] > hi].head(1)
+    pts = [(int(t), int(h) * E.HOUR) for t, h in zip(inside["ts"], inside["funding_interval_hours"])]
+    pts = ([(int(prev["ts"].iloc[0]), int(prev["funding_interval_hours"].iloc[0]) * E.HOUR)] if len(prev)
+           else [(lo, pts[0][1])]) + pts
+    pts += ([(int(nxt["ts"].iloc[0]), int(nxt["funding_interval_hours"].iloc[0]) * E.HOUR)] if len(nxt)
+            else [(hi, pts[-1][1])])
+    return all(b - a <= max(wa, wb) + TOL for (a, wa), (b, wb) in zip(pts, pts[1:]))
 
 
 def delisting_hit(e: dict, t0: int, titles: list[dict]) -> str:
@@ -70,7 +77,8 @@ def main() -> int:
                                        m.get("kline_missing_days", []) + m.get("funding_missing", []))}
         t0 = m["T0_ms"]
         if t0 is None:
-            r["reason"] = "no_aggtrades_24h"
+            # archive files missing is not "never traded": reported as a data gap
+            r["reason"] = "aggtrades_files_missing" if m.get("agg_launch_missing_days") else "no_aggtrades_24h"
             rows.append(r)
             continue
         a = pd.read_parquet(DATA / "aggtrades" / f"{key(e)}_launch.parquet", columns=["ts", "price", "qty", "ibm"])

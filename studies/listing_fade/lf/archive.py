@@ -13,7 +13,7 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "crash_absorption"))
 from ca.downloader import AGG_COLS, HttpFetcher, _csv_member, _read_csv_member, parse_klines  # noqa: E402,F401
 
-from .guard import assert_allowed
+from .guard import MAX_ALLOWED, assert_allowed, last_covered_date
 
 ARCHIVE = "https://data.binance.vision"
 UM = "data/futures/um"
@@ -103,9 +103,15 @@ def klines(sym: str, days: list[dt.date], fetch) -> tuple[pd.DataFrame | None, l
 
 
 def funding(sym: str, months: list[str], fetch) -> tuple[pd.DataFrame | None, list[str], list[str]]:
+    """Monthly files. A month whose file would cover dates after the guard limit
+    (2026-03) is never requested; it is reported as missing ('YYYY-MM:beyond_guard'),
+    so those settlements count as missing records, never as zero."""
     parts, present, missing = [], [], []
     with tempfile.TemporaryDirectory() as td:
         for m in months:
+            if last_covered_date(funding_url(sym, m)) > MAX_ALLOWED:
+                missing.append(f"{m}:beyond_guard")
+                continue
             z = fetch_zip(fetch, funding_url(sym, m), Path(td))
             if z is None:
                 missing.append(m)
