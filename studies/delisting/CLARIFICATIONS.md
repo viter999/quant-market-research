@@ -1,4 +1,4 @@
-# CLARIFICATIONS v0.2.1 — implementation rules for PREREG v0.2 (no outcome seen; PROPOSED, pending Shawn)
+# CLARIFICATIONS v0.2.1 — implementation rules for PREREG v0.2 (no outcome seen) — APPROVED 29 Oct 2026 (research director, delegated by Shawn), as written in 9775f0b
 
 Written before any price, return or funding sum was computed. Only volume and bar presence were looked at (§1 exclusions).
 
