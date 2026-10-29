@@ -61,7 +61,39 @@ def segment(a_ms: int) -> str:
 
 def clean(t: str) -> str:
     t = t.replace("&nbsp;", " ").replace("\xa0", " ").replace("&amp;", "&")
-    return re.sub(r"\s+", " ", t)
+    t = re.sub(r"\s+", " ", t)
+    if re.search(r"\d\d:\d\d ?PM", t):
+        raise ValueError("PM time found; not handled")
+    t = re.sub(r"(\d\d:\d\d) ?AM ?\(UTC", r"\1 (UTC", t)  # 2022 style '09:00 AM (UTC)'
+    # '2022-11-15 04:00 and 2022-11-15 04:30 (UTC) respectively' -> both times carry (UTC)
+    t = re.sub(r"(20\d\d-\d\d-\d\d \d\d:\d\d) and (20\d\d-\d\d-\d\d \d\d:\d\d ?\(UTC)", r"\1 (UTC) and \2", t)
+    return t
+
+
+def old_names(t: str) -> str:
+    """2022 naming: 'the AKRO USDT-Margined Contract', 'the 1000BTTC and YFII
+    USDT-Margined Contracts', 'the USDT-Margined SC Perpetual Contract' ->
+    AKROUSDT, 1000BTTCUSDT, YFIIUSDT, SCUSDT. A token already ending in BUSD
+    (e.g. 'FTTBUSD USDT-Margined Contract') is a BUSD-quoted contract and is left as is."""
+    def usdt(tok: str) -> str:
+        return tok if tok.endswith(("BUSD", "USDT")) else tok + "USDT"
+    t = re.sub(r"USDT-Margined ([0-9A-Z]{2,15}) Perpetual", lambda m: usdt(m.group(1)) + " Perpetual", t)
+    return re.sub(r"(?<![0-9A-Za-z])((?:[0-9A-Z]{2,15}(?:, | and ))*[0-9A-Z]{2,15}) USDT-Margined",
+                  lambda m: re.sub(r"[0-9A-Z]{2,15}", lambda k: usdt(k.group(0)), m.group(1)) + " USDT-Margined", t)
+
+
+def text_from_raw(body_raw: str) -> str:
+    """Body text from the CMS node tree (body_raw): text nodes in document order,
+    separated by spaces. v2 carries only body_raw."""
+    out: list[str] = []
+
+    def walk(n):
+        if n.get("node") == "text":
+            out.append(n.get("text", ""))
+        for c in n.get("child", []) or []:
+            walk(c)
+    walk(json.loads(body_raw))
+    return " ".join(out)
 
 
 def assign_times(seg: str) -> dict[str, str]:
@@ -74,6 +106,11 @@ def assign_times(seg: str) -> dict[str, str]:
         return {}
     listed = re.search(TIME + r"\s*:", seg) is not None
     out: dict[str, str] = {}
+    uniq = list(dict.fromkeys(s for _, s in syms))
+    if "respectively" in seg and len(times) > 1:
+        if len(uniq) != len(times):
+            return {}
+        return {s: t for s, (_, t) in zip(uniq, times)}
     for pos, s in syms:
         if listed:
             prev = [t for p, t in times if p < pos]
@@ -90,12 +127,13 @@ def settlement_segment(text: str) -> str | None:
     m = re.search(r"(?:close all positions|conduct (?:an )?automatic settlements?)", text, re.I)
     if not m:
         return None
-    end = re.search(r"The contracts? will be delisted|will be delisted after|In addition|Please Note", text[m.start():])
+    end = re.search(r"The contracts? will be delisted|will be delisted after|In addition|Please Note|Binance Futures will update",
+                    text[m.start():], re.I)
     return text[m.start(): m.start() + (end.start() if end else 1500)]
 
 
 def noopen_segment(text: str) -> str | None:
-    m = re.search(r"not (?:be )?allowed to (?:open new|place new)", text, re.I)
+    m = re.search(r"not (?:be )?allowed to (?:open new|place new)|will not be able to open new", text, re.I)
     if not m:
         return None
     end = re.search(r"\bAt 20\d\d-|In order to protect|During the|This information|For More Information|Note:",
@@ -104,7 +142,7 @@ def noopen_segment(text: str) -> str | None:
 
 
 def parse_article(a: dict) -> dict:
-    text = clean(a["body_text"])
+    text = old_names(clean(text_from_raw(a["body_raw"])))
     title = clean(a["title"])
     res = {"symbols": {}, "status": None, "note": ""}
     if re.search(r"postpone", title, re.I):

@@ -1,22 +1,22 @@
 code,A_ms,A_utc,segment,title,status,n_usdt_symbols,note
-4baf8d70485c46e38637bd063c58c4d8,1649049710096,2022-04-04 05:21:50,TEST,Binance Futures Will Delist 1000BTTC and YFII USDT-Margined Contracts,fetch_failed,,SyntaxError: Failed to execute 'json' on 'Response': Unexpected end of JSON input
-7305d3e50f0647838078ded2be975d48,1652070302529,2022-05-09 04:25:02,TEST,Binance Futures Will Delist FTTBUSD USDT-Margined Contract,fetch_failed,,SyntaxError: Unexpected end of JSON input
-1b73e64616ee4e769c29e70c66728d1a,1652331009976,2022-05-12 04:50:09,TEST,Binance Futures to Delist Coin-Margined LUNA Perpetual Contracts and Update the Leverage & Margin Tiers for USDT-Margined LUNA Perpetual Contracts,fetch_failed,,SyntaxError: Failed to execute 'json' on 'Response': Unexpected end of JSON input
-ef3ce76d5c2d45ee9b6dc3f281cde744,1652367541271,2022-05-12 14:59:01,TEST,Binance Futures Will Delist LUNA USDT-Margined Contract,fetch_failed,,SyntaxError: Unexpected end of JSON input
-0bfb6cfd10aa4d26926260c0159ef58d,1652408842500,2022-05-13 02:27:22,TEST,Binance Futures Will Delist USDT-Margined ANC Perpetual Contract,fetch_failed,,SyntaxError: Unexpected end of JSON input
-d1cb959677034c45b5149f1d998ae2b1,1652871565804,2022-05-18 10:59:25,TEST,Binance Futures Will Delist AKRO and DODO USDT-Margined Contracts,fetch_failed,,SyntaxError: Failed to execute 'json' on 'Response': Unexpected end of JSON input
-af469aeeab074738bb4a276070a9d11b,1654165095432,2022-06-02 10:18:15,TEST,Binance Futures Will Delist TLM and ICP USDT-Margined Contracts,fetch_failed,,SyntaxError: Failed to execute 'json' on 'Response': Unexpected end of JSON input
-6ce355dedc5d438abde7b5dc99b3a56d,1654855342935,2022-06-10 10:02:22,TEST,Binance Futures Will Delist USDT-Margined SC Perpetual Contract,fetch_failed,,SyntaxError: Failed to execute 'json' on 'Response': Unexpected end of JSON input
-0cc7c656b0704373bb4088fc531f89e0,1655953224692,2022-06-23 03:00:24,TEST,Binance Futures Will Delist CRV Coin-Margined Perpetual Contract,fetch_failed,,SyntaxError: Failed to execute 'json' on 'Response': Unexpected end of JSON input
-90498d8e2fec42468ec3d659bdfbb78b,1660013959306,2022-08-09 02:59:19,TEST,Binance Futures Will Delist USDT-Margined BTS Perpetual Contract,fetch_failed,,SyntaxError: Failed to execute 'json' on 'Response': Unexpected end of JSON input
-b312715afbff4d7493b77089967303b1,1660730127229,2022-08-17 09:55:27,TEST,Binance Futures Will Delist USDT-Margined BLZ Perpetual Contract,fetch_failed,,SyntaxError: Unexpected end of JSON input
-9a6676662bd5417c92267953f3819dd0,1668409204880,2022-11-14 07:00:04,TEST,Binance Futures Will Delist RAYUSDT and SRMUSDT Perpetual Futures Contracts,fetch_failed,,SyntaxError: Failed to execute 'json' on 'Response': Unexpected end of JSON input
-3188e26f14a1464b91487abad452c04f,1669606227750,2022-11-28 03:30:27,TEST,Binance Futures Will Delist and Update the Leverage & Margin Tiers of CVCUSDT Perpetual Futures Contract,fetch_failed,,SyntaxError: Unexpected end of JSON input
-7dcc170b060c4c6a8ade4ded423f726a,1670912849285,2022-12-13 06:27:29,TEST,"Notice on Updating Leverage & Margin Tiers, and Delisting USDⓈ-M ANCBUSD and AUCTIONBUSD Perpetual Contracts",fetch_failed,,SyntaxError: Failed to execute 'json' on 'Response': Unexpected end of JSON input
-2a7d2f14142646959b101f4254d22340,1671768907038,2022-12-23 04:15:07,TEST,"Binance Futures Will Delist COIN-M GALAUSD, ZILUSD and VETUSD Perpetual Contracts",fetch_failed,,SyntaxError: Failed to execute 'json' on 'Response': Unexpected end of JSON input
-303ab4c96a174d6b80ea7c1884190f3b,1675653983239,2023-02-06 03:26:23,TEST,Binance Futures to Suspend Trading on USDT-Margined MINA Perpetual Contract,fetch_failed,,SyntaxError: Failed to execute 'json' on 'Response': Unexpected end of JSON input
-edab50e09da64814970d9fb86a740617,1678688117686,2023-03-13 06:15:17,TEST,"Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M CVXBUSD, GALBUSD and WAVESBUSD Perpetual Contracts",fetch_failed,,SyntaxError: Failed to execute 'json' on 'Response': Unexpected end of JSON input
-2f5fb73f1b6e411090318ca60a9f47bc,1679296806814,2023-03-20 07:20:06,TEST,Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M ICPBUSD and LUNA2BUSD Perpetual Contracts,fetch_failed,,SyntaxError: Failed to execute 'json' on 'Response': Unexpected end of JSON input
+4baf8d70485c46e38637bd063c58c4d8,1649049710096,2022-04-04 05:21:50,TEST,Binance Futures Will Delist 1000BTTC and YFII USDT-Margined Contracts,parsed,2,
+7305d3e50f0647838078ded2be975d48,1652070302529,2022-05-09 04:25:02,TEST,Binance Futures Will Delist FTTBUSD USDT-Margined Contract,parsed_no_usdt_symbol,0,BUSD only
+1b73e64616ee4e769c29e70c66728d1a,1652331009976,2022-05-12 04:50:09,TEST,Binance Futures to Delist Coin-Margined LUNA Perpetual Contracts and Update the Leverage & Margin Tiers for USDT-Margined LUNA Perpetual Contracts,parsed_no_usdt_symbol,0,no USDT symbol
+ef3ce76d5c2d45ee9b6dc3f281cde744,1652367541271,2022-05-12 14:59:01,TEST,Binance Futures Will Delist LUNA USDT-Margined Contract,parsed,1,
+0bfb6cfd10aa4d26926260c0159ef58d,1652408842500,2022-05-13 02:27:22,TEST,Binance Futures Will Delist USDT-Margined ANC Perpetual Contract,parsed,1,
+d1cb959677034c45b5149f1d998ae2b1,1652871565804,2022-05-18 10:59:25,TEST,Binance Futures Will Delist AKRO and DODO USDT-Margined Contracts,parsed,2,
+af469aeeab074738bb4a276070a9d11b,1654165095432,2022-06-02 10:18:15,TEST,Binance Futures Will Delist TLM and ICP USDT-Margined Contracts,parsed,2,
+6ce355dedc5d438abde7b5dc99b3a56d,1654855342935,2022-06-10 10:02:22,TEST,Binance Futures Will Delist USDT-Margined SC Perpetual Contract,parsed,1,
+0cc7c656b0704373bb4088fc531f89e0,1655953224692,2022-06-23 03:00:24,TEST,Binance Futures Will Delist CRV Coin-Margined Perpetual Contract,parsed_no_usdt_symbol,0,no USDT symbol
+90498d8e2fec42468ec3d659bdfbb78b,1660013959306,2022-08-09 02:59:19,TEST,Binance Futures Will Delist USDT-Margined BTS Perpetual Contract,parsed,1,
+b312715afbff4d7493b77089967303b1,1660730127229,2022-08-17 09:55:27,TEST,Binance Futures Will Delist USDT-Margined BLZ Perpetual Contract,parsed,1,
+9a6676662bd5417c92267953f3819dd0,1668409204880,2022-11-14 07:00:04,TEST,Binance Futures Will Delist RAYUSDT and SRMUSDT Perpetual Futures Contracts,parsed,2,
+3188e26f14a1464b91487abad452c04f,1669606227750,2022-11-28 03:30:27,TEST,Binance Futures Will Delist and Update the Leverage & Margin Tiers of CVCUSDT Perpetual Futures Contract,parsed,1,
+7dcc170b060c4c6a8ade4ded423f726a,1670912849285,2022-12-13 06:27:29,TEST,"Notice on Updating Leverage & Margin Tiers, and Delisting USDⓈ-M ANCBUSD and AUCTIONBUSD Perpetual Contracts",parsed_no_usdt_symbol,0,BUSD only
+2a7d2f14142646959b101f4254d22340,1671768907038,2022-12-23 04:15:07,TEST,"Binance Futures Will Delist COIN-M GALAUSD, ZILUSD and VETUSD Perpetual Contracts",parsed_no_usdt_symbol,0,COIN-M only
+303ab4c96a174d6b80ea7c1884190f3b,1675653983239,2023-02-06 03:26:23,TEST,Binance Futures to Suspend Trading on USDT-Margined MINA Perpetual Contract,parsed,1,
+edab50e09da64814970d9fb86a740617,1678688117686,2023-03-13 06:15:17,TEST,"Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M CVXBUSD, GALBUSD and WAVESBUSD Perpetual Contracts",parsed_no_usdt_symbol,0,BUSD only
+2f5fb73f1b6e411090318ca60a9f47bc,1679296806814,2023-03-20 07:20:06,TEST,Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M ICPBUSD and LUNA2BUSD Perpetual Contracts,parsed_no_usdt_symbol,0,BUSD only
 7fd48887590649699ad65419023bacfb,1680253507407,2023-03-31 09:05:07,TEST,"Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M AMBBUSD, LEVERBUSD and TLMBUSD Perpetual Contracts",parsed_no_usdt_symbol,0,BUSD only
 9453bc521ae34d2e8ea22e15c5635a29,1680776103366,2023-04-06 10:15:03,TEST,"Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M PHBBUSD, SANDBUSD and UNIBUSD Perpetual Contracts",parsed_no_usdt_symbol,0,BUSD only
 10d9ee3c69584398894526c5dba9e3a6,1681466509865,2023-04-14 10:01:49,TEST,"Binance Futures Will Delist and Update the Leverage & Margin Tiers of USDⓈ-M GMTBUSD, NEARBUSD and AVAXBUSD Perpetual Contracts",parsed_no_usdt_symbol,0,BUSD only
@@ -66,13 +66,13 @@ aa3cc74779bf456e8b100304905b9cc2,1763877454108,2025-11-23 05:57:34,TEST,Binance 
 20eee4109e06448992f0557bf798bb36,1765453426582,2025-12-11 11:43:46,TEST,Binance Futures Will Delist AIAUSDT USDⓈ-M Perpetual Contract (2025-12-11),parsed,1,
 5798be852fb5449bb438dde4166126dc,1768636591216,2026-01-17 07:56:31,TEST,Binance Futures Will Delist Multiple USDⓈ-M Perpetual Contracts (2026-01-21),parsed,4,
 79211335d1de4f7589ad2d8780580970,1769595249706,2026-01-28 10:14:09,TEST,Binance Futures Will Delist Multiple USDⓈ-M Perpetual Contracts (2026-01-30),parsed,4,
-9ac36fb4f2ad4bf2b3b27f9c9224739c,1770275659503,2026-02-05 07:14:19,TEST,Binance Futures Will Delist USDⓈ-M RVVUSDT and YALAUSDT Perpetual Contracts (2026-02-10),fetch_failed,,SyntaxError: Unexpected end of JSON input
+9ac36fb4f2ad4bf2b3b27f9c9224739c,1770275659503,2026-02-05 07:14:19,TEST,Binance Futures Will Delist USDⓈ-M RVVUSDT and YALAUSDT Perpetual Contracts (2026-02-10),parsed,2,
 f6ebc17e4dbd451b873d9ef25c801237,1773411259653,2026-03-13 14:14:19,TEST,Binance Futures Will Delist Multiple USDⓈ-M and COIN-M Perpetual Contracts (2026-03-17 & 2026-03-18),parsed,3,
 48f99309fd5442d7b44491c76483223e,1774016064610,2026-03-20 14:14:24,HOLDOUT,Binance Futures Will Delist COIN-M APTUSD and OPUSD Perpetual Contracts (2026-03-25),parsed_no_usdt_symbol,0,COIN-M only
 97b4f3a7d02a486c8d412ada2281b907,1775224771078,2026-04-03 13:59:31,HOLDOUT,Binance Futures Will Delist Multiple Perpetual Contracts (2026-04-08 & 2026-04-09),parsed,4,
 1d2b6970facd470dbba6a674e1595bd4,1776956437768,2026-04-23 15:00:37,HOLDOUT,Binance Futures Will Delist USDⓈ-M Multiple Perpetual Contracts (2026-04-28 & 2026-04-29),parsed,6,
 ba5d61807b474b0ca9f40250e7fa782c,1777029313345,2026-04-24 11:15:13,HOLDOUT,Binance Futures Will Delist USDⓈ-M Multiple Perpetual Contracts (2026-04-28),parsed,2,
-5702f93568604ea7bfd2f4233f054bd1,1782406806669,2026-06-25 17:00:06,HOLDOUT,Binance Futures Will Delist USDⓈ-Margined IPUSDT and IPUSDC Perpetual Contracts (2026-06-28),fetch_failed,,SyntaxError: Unexpected end of JSON input
-f0e3fc835b9545759e4279c64b200389,1784643314244,2026-07-21 14:15:14,HOLDOUT,Binance Futures Will Delist USDⓈ-M AERGOUSDT Perpetual Contract (2026-07-24),fetch_failed,,SyntaxError: Unexpected end of JSON input
-2f1a743334f044abbd82e34093c7b771,1790822713435,2026-10-01 02:45:13,OUT_OF_RANGE,Binance Futures Will Delist Multiple USDⓈ-M Perpetual Contracts (2026-10-05),fetch_failed,,SyntaxError: Unexpected end of JSON input
-c30e6891afa54651ba950f8af144f861,1792575001882,2026-10-21 09:30:01,OUT_OF_RANGE,Binance Futures Will Delist PTBUSDT and MITOUSDT USDⓈ-M Perpetual Contracts (2026-10-23),fetch_failed,,SyntaxError: Unexpected end of JSON input
+5702f93568604ea7bfd2f4233f054bd1,1782406806669,2026-06-25 17:00:06,HOLDOUT,Binance Futures Will Delist USDⓈ-Margined IPUSDT and IPUSDC Perpetual Contracts (2026-06-28),parsed,1,
+f0e3fc835b9545759e4279c64b200389,1784643314244,2026-07-21 14:15:14,HOLDOUT,Binance Futures Will Delist USDⓈ-M AERGOUSDT Perpetual Contract (2026-07-24),parsed,1,
+2f1a743334f044abbd82e34093c7b771,1790822713435,2026-10-01 02:45:13,OUT_OF_RANGE,Binance Futures Will Delist Multiple USDⓈ-M Perpetual Contracts (2026-10-05),parsed,3,
+c30e6891afa54651ba950f8af144f861,1792575001882,2026-10-21 09:30:01,OUT_OF_RANGE,Binance Futures Will Delist PTBUSDT and MITOUSDT USDⓈ-M Perpetual Contracts (2026-10-23),parsed,2,
