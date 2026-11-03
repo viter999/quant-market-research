@@ -21,6 +21,24 @@ construction, produce a trading signal — and that scoping was deliberate,
 because execution-state questions are answerable with the data available
 whereas return questions at this sample size are not.
 
+## Related work
+
+Other public work on Hyperliquid TWAPs approaches them from different angles:
+
+- **Explorers and data APIs** — [twaptracker.xyz](https://twaptracker.xyz/)
+  ([source](https://github.com/bford21/hl-twap-api)) and
+  [Hyperliquid-TWAP-API](https://github.com/Davidrsdiaz/Hyperliquid-TWAP-API-Open-Source)
+  index historical TWAP fills so they can be searched by wallet or queried
+  through an API.
+- **Market impact** — Barone and Lillo,
+  [*Trading in the Sunshine or in the Shade: Market Impact and Adverse
+  Selection on Hyperliquid*](https://arxiv.org/abs/2606.15715) (2026), study
+  the market impact and adverse selection around visible TWAP orders.
+
+Whale Lab asks a different question: for a TWAP that is still running, how
+and when will it end, and how much more will it execute? As far as I have
+found, none of the work above forecasts a live order's end state.
+
 ## The data
 
 Public venue data from a third-party archive of Hyperliquid node output:
