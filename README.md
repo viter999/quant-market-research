@@ -7,6 +7,18 @@ I build data infrastructure, register hypotheses before testing them, and
 publish the results — including the ones that failed. Most of my completed
 studies are negative. That is the honest state of the work.
 
+## Results at a glance
+
+| | |
+|---|---|
+| Completed pre-registered studies | **9** |
+| Confirmed | **1** — volatility forecast (predicts the size of moves, not their direction) |
+| Failed, null or dropped | **7** |
+| Failed its data-integrity gates | **1** — Whale Lab E2 v1.1 |
+| In progress | **2** — Whale Lab E2 v2 (prospective), OFI Engine |
+
+Every study, with its verdict and link: [Selected research](#selected-research).
+
 ---
 
 ## Projects
