@@ -11,10 +11,11 @@ studies are negative. That is the honest state of the work.
 
 | | |
 |---|---|
-| Completed pre-registered studies | **9** |
+| Completed pre-registered studies | **10** |
 | Confirmed | **1** — volatility forecast (predicts the size of moves, not their direction) |
 | Failed, null or dropped | **7** |
 | Failed its data-integrity gates | **1** — Whale Lab E2 v1.1 |
+| Descriptive (no pass/fail) | **1** — Life After Liquidation |
 | In progress | **2** — Whale Lab E2 v2 (prospective), OFI Engine |
 
 Every study, with its verdict and link: [Selected research](#selected-research).
@@ -109,6 +110,7 @@ Full detail: [docs/research-method.md](docs/research-method.md).
 | Cross-coin momentum on Binance perps | Pre-registered. Weekly long the top third / short the bottom third of coins by 28-day return. Net −0.6 bps per week (Newey-West t −0.01): costs of about 32 bps per week ate the +31.6 bps gross return. See [`cross-coin-momentum/`](cross-coin-momentum/). | **FAIL** |
 | Volatility forecast for equal-risk sizing | Pre-registered forecast test, not a return study. A 50/50 blend of ATR10 and ATR100 forecast the next week's average daily true range better than either alone (discovery z 6.49 vs ATR10, 7.87 vs ATR100), and beat the runner-up again on held-out historical 2020–2022 data (z 6.47). See [`vol-forecast-atr-blend/`](vol-forecast-atr-blend/). | **CONFIRMED** |
 | Time-series trend on Binance perps | Pre-registered. Donchian 20/50/100-day breakout ensemble, long and short, on the 30 most liquid USDT-M perps with volatility-scaled sizing, judged once at 2x cost on 2022–2023. Net −18.5% (Sharpe −0.27), and still −14.7% at base cost, so no edge rather than an edge eaten by costs; it also trailed BTC buy-and-hold and the same rule on BTC alone. See [`ts-trend-study/`](ts-trend-study/). | **FAIL** |
+| Life after liquidation on Hyperliquid | Pre-registered descriptive study, no pass/fail. 54,180 liquidated wallets vs up to 5 matched wallets each (Jan–Apr 2026). 52.4% were liquidated again within 30 days vs 17.1% (95% CI of the gap 32.5–38.1 pts); 55% opened a new position within a day vs 29%; most did not size up (28% vs 29% took a first position ≥ 2× usual). An association, not a cause: leverage is not observed. See [`life-after-liquidation/`](life-after-liquidation/). | **DESCRIPTIVE** |
 
 **Worked example — preregistration to null result:**
 [research/basis-dislocation/](research/basis-dislocation/) contains the

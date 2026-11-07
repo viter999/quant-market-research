@@ -1,0 +1,59 @@
+Life After Liquidation - step 4X EXPLORATORY (not pre-registered as main results)
+
+CHECKS:
+  PASS  (i) X2 np row found / liquidated side found >= 99%: 100.00% / 100.00% of 24,000
+  PASS  (ii) X3 baseline in [0,1]: min 0.000 max 1.000
+  PASS  (iii) X4 split counts sum to 54,180: {'alts only': 34621, 'majors only (BTC/ETH)': 17635, 'mixed': 1924}
+  PASS  (iv) X5 120 days, 30 cascade days: 120 days, 30 cascade
+  PASS  (v) step 4 cb1d event mean = 54.6%: 54.6%
+
+CHECK: PASS
+
+X1 RE-LIQUIDATION SPEED (among wallets liquidated again within 30 d)
+  liquidated       n=28,399  median 90.1 h  (quartiles 24.1 h, 232.3 h)  <=24 h 25.0%  <=7 d 67.1%
+  similar wallets  n=46,302  median 229.8 h  (quartiles 91.9 h, 431.9 h)  <=24 h 9.6%  <=7 d 40.7%
+  liquidated again within 24 hours (all) liquidated   13.1% | similar wallets    1.6% | difference   11.4% [   9.9%,   13.0%]  (n=54,135)
+
+X2 DIRECTION ON SAME-COIN RE-ENTRY (events only; no control possible)
+  all      n=23,999  same side as liquidated position 80.0%  | opposite side 20.0%
+  wiped    n=16,604  same side as liquidated position 77.9%  | opposite side 22.1%
+  partial  n=7,395  same side as liquidated position 84.5%  | opposite side 15.5%
+
+X3 SAME COIN vs OWN 30-DAY HABIT (subjects with >= 1 prior new position and a re-entry within 30 d)
+  prior share on episode coins (baseline) liquidated   46.2% | similar wallets   17.1% | difference   29.1% [  28.0%,   30.1%]  (n=43,045)
+  first new position on the same coin    liquidated   55.0% | similar wallets   16.8% | difference   38.2% [  37.1%,   39.2%]  (n=43,045)
+  excess = same coin - baseline          liquidated    8.8% | similar wallets   -0.2% | difference    9.1% [   8.1%,   10.0%]  (n=43,045)
+
+X4 MAJORS vs ALTS (episode coins)
+ majors only (BTC/ETH) (17,635 events)
+  comes back within 1 day                liquidated   57.3% | similar wallets   27.0% | difference   30.4% [  28.2%,   32.9%]  (n=17,618)
+  liquidated again within 30 days        liquidated   59.8% | similar wallets   15.5% | difference   44.4% [  42.1%,   46.8%]  (n=17,618)
+  first new position >= 2x usual size    liquidated   23.7% | similar wallets   26.4% | difference   -2.8% [  -3.7%,   -1.8%]  (n=12,136)
+  first new position on the same coin    liquidated   71.2% | similar wallets   38.0% | difference   33.2% [  32.2%,   34.3%]  (n=14,658)
+  goes quiet 30 days (no fills)          liquidated   14.4% | similar wallets   30.0% | difference  -15.7% [ -17.2%,  -14.2%]  (n=17,618)
+ alts only (34,621 events)
+  comes back within 1 day                liquidated   52.7% | similar wallets   29.1% | difference   23.6% [  20.9%,   26.4%]  (n=34,596)
+  liquidated again within 30 days        liquidated   48.5% | similar wallets   18.0% | difference   30.5% [  26.4%,   34.5%]  (n=34,596)
+  first new position >= 2x usual size    liquidated   29.0% | similar wallets   30.2% | difference   -1.2% [  -2.3%,   -0.2%]  (n=22,861)
+  first new position on the same coin    liquidated   45.0% | similar wallets    4.0% | difference   41.0% [  39.8%,   42.2%]  (n=26,783)
+  goes quiet 30 days (no fills)          liquidated   19.8% | similar wallets   25.0% | difference   -5.1% [  -9.2%,   -0.7%]  (n=34,596)
+ mixed (1,924 events)
+  comes back within 1 day                liquidated   63.1% | similar wallets   35.7% | difference   27.5% [  24.5%,   31.2%]  (n=1,921)
+  liquidated again within 30 days        liquidated   55.0% | similar wallets   16.4% | difference   38.7% [  34.5%,   43.9%]  (n=1,921)
+  first new position >= 2x usual size    liquidated   40.0% | similar wallets   30.6% | difference    9.4% [   5.4%,   13.1%]  (n=1,474)
+  first new position on the same coin    liquidated   74.0% | similar wallets   37.8% | difference   36.2% [  33.0%,   39.4%]  (n=1,606)
+  goes quiet 30 days (no fills)          liquidated   13.1% | similar wallets   25.7% | difference  -12.6% [ -15.8%,  -10.5%]  (n=1,921)
+
+X5 MARKET STRESS (cascade day = top 25% of 120 days by total liquidated notional)
+ cascade day (27,441 events)
+  comes back within 1 day                liquidated   56.0% | similar wallets   30.6% | difference   25.3% [  22.7%,   28.1%]  (n=27,412)
+  liquidated again within 30 days        liquidated   52.2% | similar wallets   17.5% | difference   34.7% [  30.3%,   39.0%]  (n=27,412)
+  first new position >= 2x usual size    liquidated   28.2% | similar wallets   28.7% | difference   -0.5% [  -1.7%,    0.9%]  (n=18,514)
+  first new position on the same coin    liquidated   56.7% | similar wallets   17.5% | difference   39.2% [  37.7%,   40.7%]  (n=21,906)
+  goes quiet 30 days (no fills)          liquidated   17.3% | similar wallets   26.8% | difference   -9.4% [ -13.2%,   -5.1%]  (n=27,412)
+ normal day (26,739 events)
+  comes back within 1 day                liquidated   53.2% | similar wallets   26.6% | difference   26.6% [  24.0%,   29.3%]  (n=26,723)
+  liquidated again within 30 days        liquidated   52.6% | similar wallets   16.7% | difference   35.9% [  32.3%,   39.5%]  (n=26,723)
+  first new position >= 2x usual size    liquidated   27.0% | similar wallets   29.2% | difference   -2.1% [  -3.0%,   -1.3%]  (n=17,957)
+  first new position on the same coin    liquidated   53.2% | similar wallets   16.2% | difference   37.0% [  35.8%,   38.3%]  (n=21,141)
+  goes quiet 30 days (no fills)          liquidated   18.3% | similar wallets   26.5% | difference   -8.2% [ -12.2%,   -4.1%]  (n=26,723)
