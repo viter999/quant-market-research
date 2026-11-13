@@ -1,0 +1,10 @@
+Life After a Big Win - EXPLORATORY: win gap minus loss gap (added after the first read)
+gap = event wallets minus their similar wallets; last column = win gap - loss gap, 95% interval from 2,000 event-day draws
+
+  opens a new position within 1 hour       win gap  +23.5 | loss gap  +23.5 | win - loss   +0.0 pts [-1.8, +1.7]
+  first new position >= 2x usual size      win gap  +21.3 | loss gap  +20.9 | win - loss   +0.4 pts [-1.5, +2.5]
+  first new position on the event coin     win gap  +33.5 | loss gap  +33.0 | win - loss   +0.5 pts [-1.5, +2.5]
+  notional after > notional before         win gap  +20.0 | loss gap   +4.4 | win - loss  +15.7 pts [+13.4, +17.8]
+  change in active days                    win gap   +1.7 | loss gap   -0.4 | win - loss   +2.1 days [+1.7, +2.4]
+  liquidated within 30 days                win gap   +2.0 | loss gap   -0.9 | win - loss   +2.8 pts [+1.1, +4.6]
+  no fills at all in 30 days               win gap   -1.5 | loss gap   +0.8 | win - loss   -2.3 pts [-3.0, -1.6]
