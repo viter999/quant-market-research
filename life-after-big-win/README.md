@@ -136,4 +136,6 @@ About 40% of the 1-hour gap in the main table came from the clock; a gap of 14 t
 - **Coverage.** 460 events (234 wins, 226 losses) had no similar wallet and are left out of the comparisons.
 - **Scope.** One exchange and four months; results may not hold elsewhere.
 
+Part 2: the big-loss group has its own short write-up in [Life After a Big Loss](../life-after-big-loss/). It uses the same run and adds no new analysis.
+
 Prior work: risk-taking after gains (the "house money" effect) has long been studied in finance. The new part here is wallet-level evidence from Hyperliquid, including the mirror group of big losses.
