@@ -1,0 +1,41 @@
+CHECK PASS
+  PASS  (i) kept wallets, group sizes and raw rates equal the main run: 35,335 kept; 72.6% (n=9,463) / 70.0% (n=14,501) / 59.3% (n=7,913) / 46.8% (n=3,458)
+  PASS  (ii) every wallet falls in one later-activity band: 0-2 days: 7,599 / 3-7 days: 9,027 / 8-14 days: 8,366 / 15-30 days: 10,343
+
+AFTER THE COMEBACK - EXPLORATORY check X (added after the main results were read). Association only.
+Caution: activity after the comeback can itself be changed by a liquidation, so this check over-adjusts.
+
+=== X1: WAIT, at similar activity AFTER the comeback ===
+  Share of each group in each later-activity band:
+   under 1 hour: 0-2 days: 18.2% | 3-7 days: 22.8% | 8-14 days: 22.8% | 15-30 days: 36.2%
+     1-24 hours: 0-2 days: 18.6% | 3-7 days: 23.8% | 8-14 days: 23.6% | 15-30 days: 33.9%
+       1-7 days: 0-2 days: 25.1% | 3-7 days: 29.6% | 8-14 days: 25.2% | 15-30 days: 20.1%
+      7-30 days: 0-2 days: 34.5% | 3-7 days: 30.9% | 8-14 days: 22.9% | 15-30 days: 11.8%
+  Liquidated again within 30 days of the comeback, inside each later-activity band (rate, n):
+    0-2 days: under 1 hour:  56.0% (n=1,721) | 1-24 hours:  57.0% (n=2,703) | 1-7 days:  49.8% (n=1,983) | 7-30 days:  41.9% (n=1,192)
+    3-7 days: under 1 hour:  73.0% (n=2,161) | 1-24 hours:  71.2% (n=3,453) | 1-7 days:  61.6% (n=2,346) | 7-30 days:  51.6% (n=1,067)
+   8-14 days: under 1 hour:  77.6% (n=2,160) | 1-24 hours:  73.1% (n=3,424) | 1-7 days:  62.4% (n=1,991) | 7-30 days:  44.4% (n=791)
+  15-30 days: under 1 hour:  77.7% (n=3,421) | 1-24 hours:  74.1% (n=4,921) | 1-7 days:  63.7% (n=1,593) | 7-30 days:  52.9% (n=408)
+  At the same later-activity mix (4 of 4 bands used, coverage 100.0%):
+   under 1 hour: raw  72.6% | same later-activity mix  71.8% [68.9, 74.3]
+     1-24 hours: raw  70.0% | same later-activity mix  69.5% [66.5, 72.1]
+       1-7 days: raw  59.3% | same later-activity mix  59.9% [56.9, 62.8]
+      7-30 days: raw  46.8% | same later-activity mix  48.2% [43.6, 53.3]
+  GAP under 1 hour minus 7-30 days: raw +25.9 | same later-activity mix +23.6 points [+18.7, +28.1]
+  Pre-set reading: the gap is NOT only about trading on more days afterwards.
+
+=== X2: SAME COIN, at similar activity AFTER the comeback ===
+  Share of each group in each later-activity band:
+     other coin: 0-2 days: 19.6% | 3-7 days: 24.6% | 8-14 days: 24.7% | 15-30 days: 31.1%
+      same coin: 0-2 days: 23.0% | 3-7 days: 26.3% | 8-14 days: 22.9% | 15-30 days: 27.8%
+  Liquidated again within 30 days of the comeback, inside each later-activity band (rate, n):
+    0-2 days: other coin:  43.5% (n=3,016) | same coin:  58.5% (n=4,583)
+    3-7 days: other coin:  59.1% (n=3,793) | same coin:  72.4% (n=5,234)
+   8-14 days: other coin:  61.5% (n=3,802) | same coin:  75.2% (n=4,564)
+  15-30 days: other coin:  68.3% (n=4,793) | same coin:  76.8% (n=5,550)
+  At the same later-activity mix (4 of 4 bands used, coverage 100.0%):
+     other coin: raw  59.5% | same later-activity mix  59.0% [56.3, 61.8]
+      same coin: raw  71.1% | same later-activity mix  71.4% [68.7, 74.0]
+  GAP same coin minus other coin: raw +11.6 | same later-activity mix +12.3 points [+11.2, +13.4]
+  Pre-set reading: the gap is NOT only about trading on more days afterwards.
+
