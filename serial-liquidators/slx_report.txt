@@ -1,0 +1,40 @@
+CHECK PASS
+  PASS  (i) raw rates and group sizes equal the M4 headline: 23.67% (n=68,732) / 44.16% (n=16,182) / 56.14% (n=8,833) / 70.19% (n=11,227) / 86.94% (n=9,098)
+  PASS  (ii) cell weights: all 27 sum to 100%, used cells sum to the coverage: all cells 100.00%, used 17 of 27 cells covering 83.76% of the population
+  PASS  (iii) X2 band counts sum to 177,432: 177,432
+
+SERIAL LIQUIDATORS - EXPLORATORY check X (added after the main results were read). Association only.
+
+=== X1: REPEAT PATTERN AT SIMILAR ACTIVITY ===
+Population: wallets active >= 3 days in Dec-Feb and with a non-liquidation fill in Mar-May: 114,072.
+Cells = Dec-Feb active days x Mar-May active days x Dec-Feb traded notional. Used: 17 of 27 cells (all five groups have >= 30 wallets), covering 83.8% of the population.
+Share liquidated in Mar-May, by Dec-Feb liquidation days:
+     0: raw  23.67% | raw, used cells only  18.28% | ADJUSTED to the same activity mix  18.23% [17.92, 18.53]
+     1: raw  44.16% | raw, used cells only  41.01% | ADJUSTED to the same activity mix  41.43% [40.63, 42.24]
+     2: raw  56.14% | raw, used cells only  53.55% | ADJUSTED to the same activity mix  54.35% [53.30, 55.47]
+   3-5: raw  70.19% | raw, used cells only  68.81% | ADJUSTED to the same activity mix  69.48% [68.57, 70.38]
+    6+: raw  86.94% | raw, used cells only  87.02% | ADJUSTED to the same activity mix  84.35% [81.65, 86.84]
+  Adjusted 6+ minus 0: 66.13 points [63.35, 68.63] (raw: 63.27).
+
+Inside each Dec-Feb active-day band (rate, n):
+  active   3-9 days: 0:  25.4% (n=34,785) | 1:  45.9% (n=7,218) | 2:  59.1% (n=3,631) | 3-5:  72.8% (n=2,767) | 6+:  82.5% (n=177)
+  active 10-29 days: 0:  22.6% (n=23,710) | 1:  42.4% (n=5,887) | 2:  54.2% (n=3,439) | 3-5:  69.6% (n=5,557) | 6+:  85.4% (n=3,855)
+  active   30+ days: 0:  20.4% (n=10,237) | 1:  43.5% (n=3,077) | 2:  53.8% (n=1,763) | 3-5:  68.8% (n=2,903) | 6+:  88.3% (n=5,066)
+Inside each Mar-May active-day band (rate, n):
+  active   1-9 days: 0:  11.7% (n=31,551) | 1:  34.4% (n=8,335) | 2:  46.6% (n=4,660) | 3-5:  59.8% (n=5,419) | 6+:  73.8% (n=3,139)
+  active 10-29 days: 0:  28.2% (n=19,734) | 1:  50.7% (n=4,351) | 2:  63.4% (n=2,290) | 3-5:  77.6% (n=3,065) | 6+:  91.9% (n=2,617)
+  active   30+ days: 0:  40.2% (n=17,447) | 1:  59.2% (n=3,496) | 2:  71.1% (n=1,883) | 3-5:  82.4% (n=2,743) | 6+:  95.4% (n=3,342)
+Inside each Dec-Feb traded-notional band (rate, n):
+  traded     < $100k: 0:  24.3% (n=46,389) | 1:  44.4% (n=10,198) | 2:  57.4% (n=5,527) | 3-5:  69.8% (n=6,232) | 6+:  84.7% (n=3,212)
+  traded  $100k-$10M: 0:  22.5% (n=20,535) | 1:  43.6% (n=5,472) | 2:  53.7% (n=3,019) | 3-5:  70.6% (n=4,552) | 6+:  87.8% (n=5,257)
+  traded      > $10M: 0:  21.9% (n=1,808) | 1:  45.3% (n=512) | 2:  57.5% (n=287) | 3-5:  71.6% (n=443) | 6+:  90.8% (n=629)
+Narrowest cell view (Dec-Feb active 30+ days, Mar-May active 30+ days), by traded notional:
+  traded     < $100k: 0:  26.0% (n=1,998) | 1:  50.0% (n=312) | 2:  64.9% (n=151) | 3-5:  78.3% (n=299) | 6+:  95.0% (n=440)
+  traded  $100k-$10M: 0:  25.4% (n=3,327) | 1:  53.5% (n=1,143) | 2:  63.8% (n=663) | 3-5:  78.5% (n=1,062) | 6+:  94.9% (n=1,813)
+  traded      > $10M: 0:  21.6% (n=855) | 1:  49.8% (n=257) | 2:  67.8% (n=149) | 3-5:  83.6% (n=214) | 6+:  97.3% (n=377)
+
+=== X2: HOW MANY TIMES, AT SIMILAR ACTIVITY (liquidated wallets, six months) ===
+  active   1-2 days:  28,138 liquidated wallets | liquidation days 1:  95.1% | 2:   4.9% | 3-5:   0.0% | 6-10:   0.0% | 11+:   0.0% | median liquidation days per 100 active days: 50.0
+  active   3-9 days:  56,036 liquidated wallets | liquidation days 1:  52.7% | 2:  27.5% | 3-5:  19.0% | 6-10:   0.8% | 11+:   0.0% | median liquidation days per 100 active days: 33.3
+  active 10-29 days:  50,633 liquidated wallets | liquidation days 1:  31.6% | 2:  18.4% | 3-5:  31.4% | 6-10:  15.7% | 11+:   2.9% | median liquidation days per 100 active days: 16.0
+  active   30+ days:  42,625 liquidated wallets | liquidation days 1:  29.3% | 2:  12.7% | 3-5:  20.9% | 6-10:  16.5% | 11+:  20.6% | median liquidation days per 100 active days: 6.2

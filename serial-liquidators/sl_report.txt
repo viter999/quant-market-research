@@ -1,0 +1,166 @@
+CHECK PASS
+  PASS  (a) liquidation fills read = 2,161,385 (LAL figure), all inside the period: 2,161,385 read, 2,161,385 in period
+  PASS  (b) 60-min clusters rebuilt = 710,878 = episodes.parquet rows: rebuilt 710,878, table 710,878
+  PASS  (c) wallet_day liquidation-fill total = liq_fills rows: wallet_day 2,161,385, liq_fills 2,161,385
+  PASS  (d) market-maker flag from wallet_day agrees with episodes.parquet for every wallet there: 0 disagree, 0 missing from wallet_day
+  PASS  (e) M1 shares sum to 100%, ">= k" shares fall as k rises, top 10% >= top 1%, each split adds up to all wallets: wallets 177,432; group sum 177,432
+  PASS  (f) 20 random liquidated wallets: liquidation days, spells and notional recounted from liq_fills: 20/20 match
+
+SERIAL LIQUIDATORS - results (frozen plan v2). Hyperliquid perps, 1 Dec 2025 - 31 May 2026 UTC. Vaults and market makers excluded.
+Liquidated notional = position size closed by liquidation, not dollars lost.
+
+Before exclusion: 181,497 wallets with a liquidation fill, 2,161,385 fills, 608,729 liquidation days, $14,135,120,761 liquidated notional.
+Market makers (reported once): 4,065 liquidated market-maker wallets, 12,472 liquidation days (  2.05%), $486,347,487 liquidated notional (  3.44%). Excluded below.
+
+=== M1 / M2: ALL LIQUIDATED WALLETS ===
+--- ALL: 177,432 liquidated wallets, unit = days ---
+  M1 share of wallets by count: 1:  47.79% | 2:  17.76% | 3-5:  19.97% | 6-10:   8.71% | 11+:   5.77%   (sum 100.00%)
+  M1 median 2, p90 7, p99 26, max 128; total days 596,257; total liquidated notional $13,648,773,274
+  M2 wallets with >= 3 days:  34.45% of wallets,  75.21% of all days,  76.78% of liquidated notional
+  M2 wallets with >= 5 days:  18.55% of wallets,  59.20% of all days,  65.00% of liquidated notional
+  M2 wallets with >= 10 days:   6.73% of wallets,  36.65% of all days,  45.32% of liquidated notional
+  M2 top 1% (= 1,775 wallets) ranked by days:  11.72% of days,  15.15% of notional | ranked by notional:   3.77% of days,  75.56% of notional
+  M2 top 10% (= 17,744 wallets) ranked by days:  44.65% of days,  56.21% of notional | ranked by notional:  26.01% of days,  95.34% of notional
+  M2 Gini of days 0.537; Gini of liquidated notional 0.964
+--- ALL: 177,432 liquidated wallets, unit = spells ---
+  M1 share of wallets by count: 1:  51.65% | 2:  18.44% | 3-5:  19.04% | 6-10:   7.41% | 11+:   3.46%   (sum 100.00%)
+  M1 median 1, p90 6, p99 18, max 46; total spells 478,686; total liquidated notional $13,648,773,274
+  M2 wallets with >= 3 spells:  29.91% of wallets,  67.19% of all spells,  72.30% of liquidated notional
+  M2 wallets with >= 5 spells:  14.54% of wallets,  47.95% of all spells,  57.30% of liquidated notional
+  M2 wallets with >= 10 spells:   4.25% of wallets,  23.72% of all spells,  27.16% of liquidated notional
+  M2 top 1% (= 1,775 wallets) ranked by spells:   8.74% of spells,  12.93% of notional | ranked by notional:   3.03% of spells,  75.56% of notional
+  M2 top 10% (= 17,744 wallets) ranked by spells:  39.22% of spells,  48.20% of notional | ranked by notional:  22.65% of spells,  95.34% of notional
+  M2 Gini of spells 0.475; Gini of liquidated notional 0.964
+--- ALL (clusters, 60-min gap): 177,432 liquidated wallets, unit = c60 ---
+  M1 share of wallets by count: 1:  45.82% | 2:  17.09% | 3-5:  20.17% | 6-10:   9.55% | 11+:   7.37%   (sum 100.00%)
+  M1 median 2, p90 8, p99 34, max 317; total c60 696,514; total liquidated notional $13,648,773,274
+  M2 wallets with >= 3 c60:  37.09% of wallets,  79.62% of all c60,  82.57% of liquidated notional
+  M2 wallets with >= 5 c60:  21.18% of wallets,  65.89% of all c60,  71.25% of liquidated notional
+  M2 wallets with >= 10 c60:   8.46% of wallets,  45.02% of all c60,  54.26% of liquidated notional
+  M2 top 1% (= 1,775 wallets) ranked by c60:  14.20% of c60,  15.61% of notional | ranked by notional:   4.42% of c60,  75.56% of notional
+  M2 top 10% (= 17,744 wallets) ranked by c60:  48.51% of c60,  59.05% of notional | ranked by notional:  28.51% of c60,  95.34% of notional
+  M2 Gini of c60 0.578; Gini of liquidated notional 0.964
+--- ALL (clusters, 30-min gap): 177,432 liquidated wallets, unit = c30 ---
+  M1 share of wallets by count: 1:  45.62% | 2:  17.05% | 3-5:  20.15% | 6-10:   9.64% | 11+:   7.55%   (sum 100.00%)
+  M1 median 2, p90 9, p99 35, max 363; total c30 708,941; total liquidated notional $13,648,773,274
+  M2 wallets with >= 3 c30:  37.33% of wallets,  80.05% of all c30,  82.98% of liquidated notional
+  M2 wallets with >= 5 c30:  21.47% of wallets,  66.61% of all c30,  72.41% of liquidated notional
+  M2 wallets with >= 10 c30:   8.66% of wallets,  45.94% of all c30,  55.50% of liquidated notional
+  M2 top 1% (= 1,775 wallets) ranked by c30:  14.52% of c30,  16.59% of notional | ranked by notional:   4.56% of c30,  75.56% of notional
+  M2 top 10% (= 17,744 wallets) ranked by c30:  48.97% of c30,  58.17% of notional | ranked by notional:  28.86% of c30,  95.34% of notional
+  M2 Gini of c30 0.582; Gini of liquidated notional 0.964
+--- ALL (clusters, 120-min gap): 177,432 liquidated wallets, unit = c120 ---
+  M1 share of wallets by count: 1:  46.14% | 2:  17.22% | 3-5:  20.09% | 6-10:   9.45% | 11+:   7.09%   (sum 100.00%)
+  M1 median 2, p90 8, p99 33, max 262; total c120 678,435; total liquidated notional $13,648,773,274
+  M2 wallets with >= 3 c120:  36.64% of wallets,  78.92% of all c120,  81.92% of liquidated notional
+  M2 wallets with >= 5 c120:  20.76% of wallets,  64.86% of all c120,  69.72% of liquidated notional
+  M2 wallets with >= 10 c120:   8.18% of wallets,  43.67% of all c120,  52.56% of liquidated notional
+  M2 top 1% (= 1,775 wallets) ranked by c120:  13.78% of c120,  15.62% of notional | ranked by notional:   4.27% of c120,  75.56% of notional
+  M2 top 10% (= 17,744 wallets) ranked by c120:  47.84% of c120,  58.09% of notional | ranked by notional:  28.02% of c120,  95.34% of notional
+  M2 Gini of c120 0.571; Gini of liquidated notional 0.964
+
+M1 median liquidated notional per liquidation day, by wallet group (number of liquidation days):
+  1: $422 (84,788 wallet-days) | 2: $438 (63,026 wallet-days) | 3-5: $487 (131,510 wallet-days) | 6-10: $612 (115,467 wallet-days) | 11+: $932 (201,466 wallet-days)
+
+=== M3: BASE RATE (wallets with >= 1 liquidation day, among wallets that are not market makers) ===
+  ALL active days   1-2:   320,472 wallets,   8.78% liquidated at least once
+  ALL active days   3-9:   168,660 wallets,  33.22% liquidated at least once
+  ALL active days 10-29:   106,332 wallets,  47.62% liquidated at least once
+  ALL active days   30+:    70,965 wallets,  60.06% liquidated at least once
+  ALL active >= 3 days: 345,957 wallets,  43.15% liquidated at least once
+  ALL any fill: 666,429 wallets,  26.62% liquidated at least once
+  traded < $100k active days   1-2:   311,969 wallets,   8.80% liquidated at least once
+  traded < $100k active days   3-9:   144,730 wallets,  34.36% liquidated at least once
+  traded < $100k active days 10-29:    66,822 wallets,  48.39% liquidated at least once
+  traded < $100k active days   30+:    18,301 wallets,  52.93% liquidated at least once
+  traded < $100k active >= 3 days: 229,853 wallets,  39.92% liquidated at least once
+  traded < $100k any fill: 541,822 wallets,  22.00% liquidated at least once
+  traded $100k-$10M active days   1-2:     8,415 wallets,   8.06% liquidated at least once
+  traded $100k-$10M active days   3-9:    23,357 wallets,  26.23% liquidated at least once
+  traded $100k-$10M active days 10-29:    37,744 wallets,  46.24% liquidated at least once
+  traded $100k-$10M active days   30+:    45,840 wallets,  62.60% liquidated at least once
+  traded $100k-$10M active >= 3 days: 106,941 wallets,  48.88% liquidated at least once
+  traded $100k-$10M any fill: 115,356 wallets,  45.90% liquidated at least once
+  traded > $10M active days   1-2:        88 wallets,  21.59% liquidated at least once
+  traded > $10M active days   3-9:       573 wallets,  31.94% liquidated at least once
+  traded > $10M active days 10-29:     1,766 wallets,  47.79% liquidated at least once
+  traded > $10M active days   30+:     6,824 wallets,  62.19% liquidated at least once
+  traded > $10M active >= 3 days: 9,163 wallets,  57.52% liquidated at least once
+  traded > $10M any fill: 9,251 wallets,  57.18% liquidated at least once
+  first seen Dec 2025 active days   1-2:    40,401 wallets,  17.98% liquidated at least once
+  first seen Dec 2025 active days   3-9:    44,903 wallets,  33.94% liquidated at least once
+  first seen Dec 2025 active days 10-29:    36,978 wallets,  49.36% liquidated at least once
+  first seen Dec 2025 active days   30+:    37,535 wallets,  62.73% liquidated at least once
+  first seen Dec 2025 active >= 3 days: 119,416 wallets,  47.76% liquidated at least once
+  first seen Dec 2025 any fill: 159,817 wallets,  40.23% liquidated at least once
+  first seen later active days   1-2:   280,071 wallets,   7.45% liquidated at least once
+  first seen later active days   3-9:   123,757 wallets,  32.97% liquidated at least once
+  first seen later active days 10-29:    69,354 wallets,  46.69% liquidated at least once
+  first seen later active days   30+:    33,430 wallets,  57.07% liquidated at least once
+  first seen later active >= 3 days: 226,541 wallets,  40.72% liquidated at least once
+  first seen later any fill: 506,612 wallets,  22.33% liquidated at least once
+
+=== M4: REPEAT ACROSS HALVES (first half Dec-Feb, second half Mar-May) ===
+Wallets active on >= 3 days in the first half, grouped by first-half liquidation days. 95% intervals: 2,000 bootstrap draws of wallets.
+  first-half liquidation days    0:   118,594 wallets | HEADLINE still trading in 2nd half and liquidated in 2nd half:  23.67% [23.35, 23.99] (n=68,732) | over all:  14.04% [13.84, 14.23] | gone (no non-liquidation fill in 2nd half):  42.04%
+  first-half liquidation days    1:    31,567 wallets | HEADLINE still trading in 2nd half and liquidated in 2nd half:  44.16% [43.42, 44.98] (n=16,182) | over all:  23.56% [23.10, 24.03] | gone (no non-liquidation fill in 2nd half):  48.74%
+  first-half liquidation days    2:    18,077 wallets | HEADLINE still trading in 2nd half and liquidated in 2nd half:  56.14% [55.10, 57.16] (n=8,833) | over all:  28.15% [27.52, 28.79] | gone (no non-liquidation fill in 2nd half):  51.14%
+  first-half liquidation days  3-5:    20,736 wallets | HEADLINE still trading in 2nd half and liquidated in 2nd half:  70.19% [69.28, 71.01] (n=11,227) | over all:  38.66% [37.99, 39.35] | gone (no non-liquidation fill in 2nd half):  45.86%
+  first-half liquidation days   6+:    12,707 wallets | HEADLINE still trading in 2nd half and liquidated in 2nd half:  86.94% [86.22, 87.61] (n=9,098) | over all:  62.94% [62.15, 63.79] | gone (no non-liquidation fill in 2nd half):  28.40%
+  Of all 177,432 liquidated wallets:  17.17% have liquidation days in both halves (30,469); liquidated in first half 106,541, in second half 101,360.
+
+=== M5: SPACING (forward-looking) ===
+  ALL: liquidation days on or before 24 May: 574,121; followed by another within 1 day  19.81%, within 7 days  49.77% | on or before 1 May: 499,327; within 30 days  65.99%
+  Gap between consecutive liquidation days (wallets with >= 2; cut by the window): quartiles 1 / 4 / 10 days, 418,825 gaps
+
+=== SPLITS (fixed in the plan): M1, M2 (>= 3 days), M5 (7 days) ===
+--- traded < $100k: 119,190 liquidated wallets, unit = days ---
+  M1 share of wallets by count: 1:  54.18% | 2:  18.88% | 3-5:  18.70% | 6-10:   6.10% | 11+:   2.15%   (sum 100.00%)
+  M1 median 1, p90 5, p99 14, max 113; total days 286,755; total liquidated notional $235,095,344
+  M2 wallets with >= 3 days:  26.95% of wallets,  61.79% of all days,  44.67% of liquidated notional
+  M2 wallets with >= 5 days:  11.69% of wallets,  40.46% of all days,  24.59% of liquidated notional
+  M2 wallets with >= 10 days:   2.69% of wallets,  16.98% of all days,   7.49% of liquidated notional
+  traded < $100k: liquidation days on or before 24 May: 274,739; followed by another within 1 day  14.67%, within 7 days  39.54% | on or before 1 May: 236,772; within 30 days  53.33%
+--- traded $100k-$10M: 52,952 liquidated wallets, unit = days ---
+  M1 share of wallets by count: 1:  35.61% | 2:  15.50% | 3-5:  22.47% | 6-10:  13.90% | 11+:  12.53%   (sum 100.00%)
+  M1 median 2, p90 12, p99 37, max 128; total days 270,840; total liquidated notional $2,857,316,528
+  M2 wallets with >= 3 days:  48.89% of wallets,  86.98% of all days,  70.81% of liquidated notional
+  M2 wallets with >= 5 days:  31.69% of wallets,  75.49% of all days,  53.08% of liquidated notional
+  M2 wallets with >= 10 days:  14.34% of wallets,  53.24% of all days,  30.95% of liquidated notional
+  traded $100k-$10M: liquidation days on or before 24 May: 262,045; followed by another within 1 day  24.09%, within 7 days  58.52% | on or before 1 May: 229,934; within 30 days  76.63%
+--- traded > $10M: 5,290 liquidated wallets, unit = days ---
+  M1 share of wallets by count: 1:  25.69% | 2:  15.29% | 3-5:  23.59% | 6-10:  15.77% | 11+:  19.66%   (sum 100.00%)
+  M1 median 3, p90 18, p99 57, max 125; total days 38,662; total liquidated notional $10,556,361,402
+  M2 wallets with >= 3 days:  59.02% of wallets,  92.30% of all days,  79.11% of liquidated notional
+  M2 wallets with >= 5 days:  41.51% of wallets,  84.08% of all days,  69.13% of liquidated notional
+  M2 wallets with >= 10 days:  21.83% of wallets,  66.30% of all days,  50.05% of liquidated notional
+  traded > $10M: liquidation days on or before 24 May: 37,337; followed by another within 1 day  27.66%, within 7 days  63.71% | on or before 1 May: 32,621; within 30 days  82.80%
+--- liquidation fills BTC/ETH only: 46,088 liquidated wallets, unit = days ---
+  M1 share of wallets by count: 1:  61.84% | 2:  17.16% | 3-5:  14.64% | 6-10:   4.42% | 11+:   1.95%   (sum 100.00%)
+  M1 median 1, p90 4, p99 15, max 84; total days 100,157; total liquidated notional $2,554,476,769
+  M2 wallets with >= 3 days:  21.00% of wallets,  55.75% of all days,  56.69% of liquidated notional
+  M2 wallets with >= 5 days:   8.89% of wallets,  37.05% of all days,  40.19% of liquidated notional
+  M2 wallets with >= 10 days:   2.35% of wallets,  18.15% of all days,  21.69% of liquidated notional
+  liquidation fills BTC/ETH only: liquidation days on or before 24 May: 97,633; followed by another within 1 day  16.43%, within 7 days  38.81% | on or before 1 May: 88,700; within 30 days  50.52%
+--- liquidation fills include other coins: 131,344 liquidated wallets, unit = days ---
+  M1 share of wallets by count: 1:  42.86% | 2:  17.97% | 3-5:  21.84% | 6-10:  10.22% | 11+:   7.11%   (sum 100.00%)
+  M1 median 2, p90 8, p99 29, max 128; total days 496,100; total liquidated notional $11,094,296,505
+  M2 wallets with >= 3 days:  39.17% of wallets,  79.14% of all days,  81.41% of liquidated notional
+  M2 wallets with >= 5 days:  21.94% of wallets,  63.67% of all days,  70.71% of liquidated notional
+  M2 wallets with >= 10 days:   8.27% of wallets,  40.39% of all days,  50.75% of liquidated notional
+  liquidation fills include other coins: liquidation days on or before 24 May: 476,488; followed by another within 1 day  20.51%, within 7 days  52.02% | on or before 1 May: 410,627; within 30 days  69.33%
+--- first seen Dec 2025: 64,301 liquidated wallets, unit = days ---
+  M1 share of wallets by count: 1:  39.12% | 2:  17.45% | 3-5:  22.01% | 6-10:  11.52% | 11+:   9.90%   (sum 100.00%)
+  M1 median 2, p90 10, p99 37, max 128; total days 290,521; total liquidated notional $8,666,718,861
+  M2 wallets with >= 3 days:  43.43% of wallets,  83.62% of all days,  81.38% of liquidated notional
+  M2 wallets with >= 5 days:  26.22% of wallets,  70.69% of all days,  71.90% of liquidated notional
+  M2 wallets with >= 10 days:  11.27% of wallets,  49.18% of all days,  54.02% of liquidated notional
+  first seen Dec 2025: liquidation days on or before 24 May: 285,034; followed by another within 1 day  20.71%, within 7 days  52.19% | on or before 1 May: 265,945; within 30 days  70.14%
+--- first seen later: 113,131 liquidated wallets, unit = days ---
+  M1 share of wallets by count: 1:  52.71% | 2:  17.94% | 3-5:  18.81% | 6-10:   7.12% | 11+:   3.43%   (sum 100.00%)
+  M1 median 1, p90 6, p99 19, max 73; total days 305,736; total liquidated notional $4,982,054,413
+  M2 wallets with >= 3 days:  29.35% of wallets,  67.22% of all days,  68.77% of liquidated notional
+  M2 wallets with >= 5 days:  14.19% of wallets,  48.28% of all days,  53.00% of liquidated notional
+  M2 wallets with >= 10 days:   4.16% of wallets,  24.75% of all days,  30.18% of liquidated notional
+  first seen later: liquidation days on or before 24 May: 289,087; followed by another within 1 day  18.93%, within 7 days  47.39% | on or before 1 May: 233,382; within 30 days  61.26%
+
