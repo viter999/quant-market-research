@@ -1,0 +1,31 @@
+CHECK PASS
+  PASS  (a) event count and day count: 827 events flagged; 515 traded on 145 days; 312 skipped (trade still open); 0 dropped (missing candle)
+  PASS  (b) entry and exit candles exist for at least 99% of events: 0 of 515 missing
+  PASS  (c') 1,000 random coin-hour returns match a separate SQL recompute: 1000 compared, max difference 0.00e+00
+  PASS  (d) 20 random events recounted from raw fills by separate code: 20 of 20 match
+
+FADE THE COMEBACK - frozen plan v2. One look. TRAIN only (1 Dec 2025 - 31 May 2026).
+Signal: per coin-hour, 10+ just-liquidated wallets re-enter, 70%+ on one side. Trade: against them, entry +3 min, hold 4h, BTC-relative, cost 0.40%.
+
+VERDICT (4-hour aggregate only): FAIL
+  (1) mean net at 0.40% cost -0.374%, 90% interval [-0.542, -0.207] -> does not hold
+  (2) median gross +0.013% -> holds
+  (3) mean net after dropping the largest 6 events -0.467% -> does not hold
+  Mean net at 0.20% cost -0.174%; at 0.80% cost -0.774%.
+
+ALSO REPORTED (no verdict; none of this can rescue or soften a FAIL)
+  4 hours, all events: n=515 on 145 days | gross mean +0.026% [-0.143, +0.195] | median +0.013% | hit rate 50.3% | net at 0.40% -0.374%
+  1 hour, same events: n=515 on 145 days | gross mean +0.038% [-0.066, +0.148] | median -0.006% | hit rate 49.5% | net at 0.40% -0.362%
+  24 hours, same events: n=514 on 145 days | gross mean -0.073% [-0.449, +0.316] | median -0.355% | hit rate 44.9% | net at 0.40% -0.473%
+  Fade a long crowd (we short): n=332 on 108 days | gross mean +0.018% [-0.170, +0.203] | median -0.011% | hit rate 49.7% | net at 0.40% -0.382%
+  Fade a short crowd (we long): n=183 on 84 days | gross mean +0.040% [-0.345, +0.409] | median +0.021% | hit rate 51.4% | net at 0.40% -0.360%
+  First half (before 1 Mar 2026): n=339 on 78 days | gross mean +0.034% [-0.158, +0.232] | median +0.051% | hit rate 53.4% | net at 0.40% -0.366%
+  Second half: n=176 on 67 days | gross mean +0.011% [-0.332, +0.334] | median -0.126% | hit rate 44.3% | net at 0.40% -0.389%
+  Raw returns (not BTC-relative): n=515 on 145 days | gross mean +0.103% [-0.139, +0.336] | median -0.015% | hit rate 49.1% | net at 0.40% -0.297%
+  Distinct event-hours: 369; unique wallets in traded events: 7,986
+  Events per coin: SOL 151, ETH 148, HYPE 63, ZEC 47, XRP 43, FARTCOIN 31, kPEPE 7, PUMP 5, LIT 4, XPL 3, SUI 3, ASTER 2, MON 2, DOGE 2, TAO 2, LINK 1, AAVE 1
+  Chronic-only subset (3+ liquidation days in prior 30 days; 5+ wallets; from 31 Dec 2025): n=521 on 137 days | gross mean -0.029% [-0.179, +0.120] | median -0.082% | hit rate 45.7% | net at 0.40% -0.429%
+  Baseline A (10+ liquidated wallets on one side, no re-entry condition; trade against the liquidated side): n=2,229 on 181 days | gross mean -0.000% [-0.094, +0.093] | median -0.051% | hit rate 47.7% | net at 0.40% -0.400%
+  Baseline B (same fade in matched non-event hours): gross mean -0.028%; events minus baseline +0.049%
+
+Known limit: the 19 coins were chosen on 5 Nov 2026 using whole-period volume, so the list is not point-in-time.
